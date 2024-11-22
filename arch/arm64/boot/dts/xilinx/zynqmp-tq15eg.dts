@@ -1,5 +1,12 @@
 /dts-v1/;
 
+#include "pl.dtsi"
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/pinctrl-zynqmp.h>
+#include <dt-bindings/phy/phy.h>
+#include <dt-bindings/clock/xlnx-zynqmp-clk.h>
+
 / {
 	compatible = "xlnx,zynqmp";
 	#address-cells = <0x02>;
@@ -9,7 +16,7 @@
 		#address-cells = <0x01>;
 		#size-cells = <0x00>;
 
-		cpu@0 {
+		cpu0: cpu@0 {
 			compatible = "arm,cortex-a53";
 			device_type = "cpu";
 			enable-method = "psci";
@@ -21,7 +28,7 @@
 			phandle = <0x06>;
 		};
 
-		cpu@1 {
+		cpu1: cpu@1 {
 			compatible = "arm,cortex-a53";
 			device_type = "cpu";
 			enable-method = "psci";
@@ -32,7 +39,7 @@
 			phandle = <0x07>;
 		};
 
-		cpu@2 {
+		cpu2: cpu@2 {
 			compatible = "arm,cortex-a53";
 			device_type = "cpu";
 			enable-method = "psci";
@@ -43,7 +50,7 @@
 			phandle = <0x08>;
 		};
 
-		cpu@3 {
+		cpu3: cpu@3 {
 			compatible = "arm,cortex-a53";
 			device_type = "cpu";
 			enable-method = "psci";
@@ -54,7 +61,7 @@
 			phandle = <0x09>;
 		};
 
-		l2-cache {
+		L2: l2-cache {
 			compatible = "cache";
 			cache-level = <0x02>;
 			phandle = <0x03>;
@@ -63,7 +70,7 @@
 		idle-states {
 			entry-method = "psci";
 
-			cpu-sleep-0 {
+			CPU_SLEEP_0: cpu-sleep-0 {
 				compatible = "arm,idle-state";
 				arm,psci-suspend-param = <0x40000000>;
 				local-timer-stop;
@@ -75,7 +82,7 @@
 		};
 	};
 
-	opp-table-cpu {
+	cpu_opp_table: opp-table-cpu {
 		compatible = "operating-points-v2";
 		opp-shared;
 		phandle = <0x01>;
@@ -105,7 +112,7 @@
 		};
 	};
 
-	zynqmp-ipi {
+	zynqmp_ipi: zynqmp-ipi {
 		u-boot,dm-pre-reloc;
 		compatible = "xlnx,zynqmp-ipi-mailbox";
 		interrupt-parent = <0x05>;
@@ -116,7 +123,7 @@
 		ranges;
 		phandle = <0x1d>;
 
-		mailbox@ff9905c0 {
+		ipi_mailbox_pmu1: mailbox@ff9905c0 {
 			u-boot,dm-pre-reloc;
 			reg = <0x00 0xff9905c0 0x00 0x20 0x00 0xff9905e0 0x00 0x20 0x00 0xff990e80 0x00 0x20 0x00 0xff990ea0 0x00 0x20>;
 			reg-names = "local_request_region\0local_response_region\0remote_request_region\0remote_response_region";
@@ -126,7 +133,7 @@
 		};
 	};
 
-	dcc {
+	dcc: dcc {
 		compatible = "arm,dcc";
 		status = "disabled";
 		u-boot,dm-pre-reloc;
@@ -146,8 +153,7 @@
 	};
 
 	firmware {
-
-		zynqmp-firmware {
+		zynqmp_firmware: zynqmp-firmware {
 			compatible = "xlnx,zynqmp-firmware";
 			u-boot,dm-pre-reloc;
 			method = "smc";
@@ -169,7 +175,7 @@
 				#address-cells = <0x01>;
 				#size-cells = <0x01>;
 
-				soc-revision@0 {
+				soc_revision: soc-revision@0 {
 					reg = <0x00 0x04>;
 					phandle = <0x20>;
 				};
@@ -255,31 +261,31 @@
 				};
 			};
 
-			pcap {
+			zynqmp_pcap: pcap {
 				compatible = "xlnx,zynqmp-pcap-fpga";
 				phandle = <0x10>;
 			};
 
-			reset-controller {
+			zynqmp_reset: reset-controller {
 				compatible = "xlnx,zynqmp-reset";
 				#reset-cells = <0x01>;
 				phandle = <0x11>;
 			};
 
-			pinctrl {
+			pinctrl0: pinctrl {
 				compatible = "xlnx,zynqmp-pinctrl";
 				status = "disabled";
 				phandle = <0x31>;
 			};
 
-			gpio {
+			modepin_gpio: gpio {
 				compatible = "xlnx,zynqmp-gpio-modepin";
 				gpio-controller;
 				#gpio-cells = <0x02>;
 				phandle = <0x16>;
 			};
 
-			clock-controller {
+			zynqmp_clk: clock-controller {
 				u-boot,dm-pre-reloc;
 				#clock-cells = <0x01>;
 				compatible = "xlnx,zynqmp-clk";
@@ -300,7 +306,7 @@
 		compatible = "arm,cortex-a53-edac";
 	};
 
-	fpga-full {
+	fpga_full: fpga-full {
 		compatible = "fpga-region";
 		fpga-mgr = <0x10>;
 		#address-cells = <0x02>;
@@ -309,7 +315,7 @@
 		phandle = <0x32>;
 	};
 
-	axi {
+	amba: axi {
 		compatible = "simple-bus";
 		u-boot,dm-pre-reloc;
 		#address-cells = <0x02>;
@@ -317,7 +323,7 @@
 		ranges;
 		phandle = <0x33>;
 
-		can@ff060000 {
+		can0: can@ff060000 {
 			compatible = "xlnx,zynq-can-1.0";
 			status = "disabled";
 			clock-names = "can_clk\0pclk";
@@ -332,7 +338,7 @@
 			phandle = <0x34>;
 		};
 
-		can@ff070000 {
+		can1: can@ff070000 {
 			compatible = "xlnx,zynq-can-1.0";
 			status = "okay";
 			clock-names = "can_clk\0pclk";
@@ -347,7 +353,7 @@
 			phandle = <0x35>;
 		};
 
-		cci@fd6e0000 {
+		cci: cci@fd6e0000 {
 			compatible = "arm,cci-400";
 			status = "okay";
 			reg = <0x00 0xfd6e0000 0x00 0x9000>;
@@ -364,8 +370,8 @@
 			};
 		};
 
-		dma-controller@fd500000 {
-			status = "okay";
+		fpd_dma_chan1: dma-controller@fd500000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xfd500000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -379,8 +385,8 @@
 			phandle = <0x37>;
 		};
 
-		dma-controller@fd510000 {
-			status = "okay";
+		fpd_dma_chan2: dma-controller@fd510000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xfd510000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -394,7 +400,7 @@
 			phandle = <0x38>;
 		};
 
-		dma-controller@fd520000 {
+		fpd_dma_chan3: dma-controller@fd520000 {
 			status = "okay";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xfd520000 0x00 0x1000>;
@@ -409,8 +415,8 @@
 			phandle = <0x39>;
 		};
 
-		dma-controller@fd530000 {
-			status = "okay";
+		fpd_dma_chan4: dma-controller@fd530000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xfd530000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -424,8 +430,8 @@
 			phandle = <0x3a>;
 		};
 
-		dma-controller@fd540000 {
-			status = "okay";
+		fpd_dma_chan5: dma-controller@fd540000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xfd540000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -439,8 +445,8 @@
 			phandle = <0x3b>;
 		};
 
-		dma-controller@fd550000 {
-			status = "okay";
+		fpd_dma_chan6: dma-controller@fd550000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xfd550000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -454,8 +460,8 @@
 			phandle = <0x3c>;
 		};
 
-		dma-controller@fd560000 {
-			status = "okay";
+		fpd_dma_chan7: dma-controller@fd560000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xfd560000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -469,8 +475,8 @@
 			phandle = <0x3d>;
 		};
 
-		dma-controller@fd570000 {
-			status = "okay";
+		fpd_dma_chan8: dma-controller@fd570000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xfd570000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -484,7 +490,7 @@
 			phandle = <0x3e>;
 		};
 
-		interrupt-controller@f9010000 {
+		gic: interrupt-controller@f9010000 {
 			compatible = "arm,gic-400";
 			#interrupt-cells = <0x03>;
 			reg = <0x00 0xf9010000 0x00 0x10000 0x00 0xf9020000 0x00 0x20000 0x00 0xf9040000 0x00 0x20000 0x00 0xf9060000 0x00 0x20000>;
@@ -496,8 +502,8 @@
 			phandle = <0x05>;
 		};
 
-		gpu@fd4b0000 {
-			status = "okay";
+		gpu: gpu@fd4b0000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-mali\0arm,mali-400";
 			reg = <0x00 0xfd4b0000 0x00 0x10000>;
 			interrupt-parent = <0x05>;
@@ -510,8 +516,12 @@
 			phandle = <0x3f>;
 		};
 
-		dma-controller@ffa80000 {
-			status = "okay";
+		/* LPDDMA default allows only secured access. inorder to enable
+		 * These dma channels, Users should ensure that these dma
+		 * Channels are allowed for non secure access.
+		 */
+		lpd_dma_chan1: dma-controller@ffa80000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xffa80000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -524,8 +534,8 @@
 			phandle = <0x40>;
 		};
 
-		dma-controller@ffa90000 {
-			status = "okay";
+		lpd_dma_chan2: dma-controller@ffa90000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xffa90000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -538,8 +548,8 @@
 			phandle = <0x41>;
 		};
 
-		dma-controller@ffaa0000 {
-			status = "okay";
+		lpd_dma_chan3: dma-controller@ffaa0000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xffaa0000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -552,8 +562,8 @@
 			phandle = <0x42>;
 		};
 
-		dma-controller@ffab0000 {
-			status = "okay";
+		lpd_dma_chan4: dma-controller@ffab0000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xffab0000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -566,8 +576,8 @@
 			phandle = <0x43>;
 		};
 
-		dma-controller@ffac0000 {
-			status = "okay";
+		lpd_dma_chan5: dma-controller@ffac0000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xffac0000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -580,8 +590,8 @@
 			phandle = <0x44>;
 		};
 
-		dma-controller@ffad0000 {
-			status = "okay";
+		lpd_dma_chan6: dma-controller@ffad0000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xffad0000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -594,8 +604,8 @@
 			phandle = <0x45>;
 		};
 
-		dma-controller@ffae0000 {
-			status = "okay";
+		lpd_dma_chan7: dma-controller@ffae0000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xffae0000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -607,8 +617,8 @@
 			phandle = <0x46>;
 		};
 
-		dma-controller@ffaf0000 {
-			status = "okay";
+		lpd_dma_chan8: dma-controller@ffaf0000 {
+			status = "disabled";
 			compatible = "xlnx,zynqmp-dma-1.0";
 			reg = <0x00 0xffaf0000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -621,7 +631,7 @@
 			phandle = <0x47>;
 		};
 
-		memory-controller@fd070000 {
+		mc: memory-controller@fd070000 {
 			compatible = "xlnx,zynqmp-ddrc-2.40a";
 			reg = <0x00 0xfd070000 0x00 0x30000>;
 			interrupt-parent = <0x05>;
@@ -629,7 +639,7 @@
 			phandle = <0x48>;
 		};
 
-		nand-controller@ff100000 {
+		nand0: nand-controller@ff100000 {
 			compatible = "xlnx,zynqmp-nand-controller\0arasan,nfc-v3p10";
 			status = "disabled";
 			reg = <0x00 0xff100000 0x00 0x1000>;
@@ -644,7 +654,7 @@
 			phandle = <0x49>;
 		};
 
-		ethernet@ff0b0000 {
+		gem0: ethernet@ff0b0000 {
 			compatible = "xlnx,zynqmp-gem\0cdns,gem";
 			status = "disabled";
 			interrupt-parent = <0x05>;
@@ -662,7 +672,7 @@
 			phandle = <0x4a>;
 		};
 
-		ethernet@ff0c0000 {
+		gem1: ethernet@ff0c0000 {
 			compatible = "xlnx,zynqmp-gem\0cdns,gem";
 			status = "disabled";
 			interrupt-parent = <0x05>;
@@ -680,7 +690,7 @@
 			phandle = <0x4b>;
 		};
 
-		ethernet@ff0d0000 {
+		gem2: ethernet@ff0d0000 {
 			compatible = "xlnx,zynqmp-gem\0cdns,gem";
 			status = "disabled";
 			interrupt-parent = <0x05>;
@@ -698,7 +708,7 @@
 			phandle = <0x4c>;
 		};
 
-		ethernet@ff0e0000 {
+		gem3: ethernet@ff0e0000 {
 			compatible = "xlnx,zynqmp-gem\0cdns,gem";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -719,7 +729,7 @@
 			phandle = <0x4d>;
 		};
 
-		gpio@ff0a0000 {
+		gpio: gpio@ff0a0000 {
 			compatible = "xlnx,zynqmp-gpio-1.0";
 			status = "okay";
 			#gpio-cells = <0x02>;
@@ -737,7 +747,7 @@
 			phandle = <0x4e>;
 		};
 
-		i2c@ff020000 {
+		i2c0: i2c@ff020000 {
 			compatible = "cdns,i2c-r1p14";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -751,7 +761,7 @@
 			phandle = <0x4f>;
 		};
 
-		i2c@ff030000 {
+		i2c1: i2c@ff030000 {
 			compatible = "cdns,i2c-r1p14";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -765,7 +775,7 @@
 			phandle = <0x50>;
 		};
 
-		memory-controller@ff960000 {
+		ocm: memory-controller@ff960000 {
 			compatible = "xlnx,zynqmp-ocmc-1.0";
 			reg = <0x00 0xff960000 0x00 0x1000>;
 			interrupt-parent = <0x05>;
@@ -773,7 +783,7 @@
 			phandle = <0x51>;
 		};
 
-		perf-monitor@ffa00000 {
+		perf_monitor_ocm: perf-monitor@ffa00000 {
 			compatible = "xlnx,axi-perf-monitor";
 			reg = <0x00 0xffa00000 0x00 0x10000>;
 			interrupts = <0x00 0x19 0x04>;
@@ -793,7 +803,7 @@
 			phandle = <0x52>;
 		};
 
-		perf-monitor@fd0b0000 {
+		perf_monitor_ddr: perf-monitor@fd0b0000 {
 			compatible = "xlnx,axi-perf-monitor";
 			reg = <0x00 0xfd0b0000 0x00 0x10000>;
 			interrupts = <0x00 0x7b 0x04>;
@@ -813,7 +823,7 @@
 			phandle = <0x53>;
 		};
 
-		perf-monitor@fd490000 {
+		perf_monitor_cci: perf-monitor@fd490000 {
 			compatible = "xlnx,axi-perf-monitor";
 			reg = <0x00 0xfd490000 0x00 0x10000>;
 			interrupts = <0x00 0x7b 0x04>;
@@ -833,7 +843,7 @@
 			phandle = <0x54>;
 		};
 
-		perf-monitor@ffa10000 {
+		perf_monitor_lpd: perf-monitor@ffa10000 {
 			compatible = "xlnx,axi-perf-monitor";
 			reg = <0x00 0xffa10000 0x00 0x10000>;
 			interrupts = <0x00 0x19 0x04>;
@@ -853,7 +863,7 @@
 			phandle = <0x55>;
 		};
 
-		pcie@fd0e0000 {
+		pcie: pcie@fd0e0000 {
 			compatible = "xlnx,nwl-pcie-2.11";
 			status = "disabled";
 			#address-cells = <0x03>;
@@ -884,7 +894,7 @@
 			};
 		};
 
-		spi@ff0f0000 {
+		qspi: spi@ff0f0000 {
 			u-boot,dm-pre-reloc;
 			compatible = "xlnx,zynqmp-qspi-1.0";
 			status = "okay";
@@ -925,7 +935,7 @@
 			};
 		};
 
-		phy@fd400000 {
+		psgtr: phy@fd400000 {
 			compatible = "xlnx,zynqmp-psgtr-v1.1";
 			status = "okay";
 			reg = <0x00 0xfd400000 0x00 0x40000 0x00 0xfd3d0000 0x00 0x1000>;
@@ -934,7 +944,7 @@
 			phandle = <0x19>;
 		};
 
-		rtc@ffa60000 {
+		rtc: rtc@ffa60000 {
 			compatible = "xlnx,zynqmp-rtc";
 			status = "okay";
 			reg = <0x00 0xffa60000 0x00 0x100>;
@@ -945,7 +955,7 @@
 			phandle = <0x58>;
 		};
 
-		ahci@fd0c0000 {
+		sata: ahci@fd0c0000 {
 			compatible = "ceva,ahci-1v84";
 			status = "okay";
 			reg = <0x00 0xfd0c0000 0x00 0x2000>;
@@ -959,7 +969,7 @@
 			phandle = <0x59>;
 		};
 
-		mmc@ff160000 {
+		sdhci0: mmc@ff160000 {
 			u-boot,dm-pre-reloc;
 			compatible = "xlnx,zynqmp-8.9a\0arasan,sdhci-8.9a";
 			status = "disabled";
@@ -977,7 +987,7 @@
 			phandle = <0x5a>;
 		};
 
-		mmc@ff170000 {
+		sdhci1: mmc@ff170000 {
 			u-boot,dm-pre-reloc;
 			compatible = "xlnx,zynqmp-8.9a\0arasan,sdhci-8.9a";
 			status = "okay";
@@ -997,7 +1007,7 @@
 			phandle = <0x5b>;
 		};
 
-		smmu@fd800000 {
+		smmu: iommu@fd800000 {
 			compatible = "arm,mmu-500";
 			reg = <0x00 0xfd800000 0x00 0x20000>;
 			#iommu-cells = <0x01>;
@@ -1008,7 +1018,7 @@
 			phandle = <0x13>;
 		};
 
-		spi@ff040000 {
+		spi0: spi@ff040000 {
 			compatible = "cdns,spi-r1p6";
 			status = "disabled";
 			interrupt-parent = <0x05>;
@@ -1022,7 +1032,7 @@
 			phandle = <0x5c>;
 		};
 
-		spi@ff050000 {
+		spi1: spi@ff050000 {
 			compatible = "cdns,spi-r1p6";
 			status = "disabled";
 			interrupt-parent = <0x05>;
@@ -1036,7 +1046,7 @@
 			phandle = <0x5d>;
 		};
 
-		timer@ff110000 {
+		ttc0: timer@ff110000 {
 			compatible = "cdns,ttc";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -1048,7 +1058,7 @@
 			phandle = <0x5e>;
 		};
 
-		timer@ff120000 {
+		ttc1: timer@ff120000 {
 			compatible = "cdns,ttc";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -1060,7 +1070,7 @@
 			phandle = <0x5f>;
 		};
 
-		timer@ff130000 {
+		ttc2: timer@ff130000 {
 			compatible = "cdns,ttc";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -1072,7 +1082,7 @@
 			phandle = <0x60>;
 		};
 
-		timer@ff140000 {
+		ttc3: timer@ff140000 {
 			compatible = "cdns,ttc";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -1084,7 +1094,7 @@
 			phandle = <0x61>;
 		};
 
-		serial@ff000000 {
+		uart0: serial@ff000000 {
 			u-boot,dm-pre-reloc;
 			compatible = "xlnx,zynqmp-uart\0cdns,uart-r1p12";
 			status = "okay";
@@ -1100,7 +1110,7 @@
 			phandle = <0x62>;
 		};
 
-		serial@ff010000 {
+		uart1: serial@ff010000 {
 			u-boot,dm-pre-reloc;
 			compatible = "xlnx,zynqmp-uart\0cdns,uart-r1p12";
 			status = "okay";
@@ -1116,7 +1126,7 @@
 			phandle = <0x63>;
 		};
 
-		usb@ff9d0000 {
+		usb0: usb@ff9d0000 {
 			#address-cells = <0x02>;
 			#size-cells = <0x02>;
 			status = "okay";
@@ -1135,7 +1145,7 @@
 			xlnx,usb-reset-mode = <0x00>;
 			phandle = <0x64>;
 
-			usb@fe200000 {
+			dwc3_0: usb@fe200000 {
 				compatible = "snps,dwc3";
 				status = "okay";
 				reg = <0x00 0xfe200000 0x00 0x40000>;
@@ -1152,7 +1162,7 @@
 			};
 		};
 
-		usb@ff9e0000 {
+		usb1: usb@ff9e0000 {
 			#address-cells = <0x02>;
 			#size-cells = <0x02>;
 			status = "disabled";
@@ -1167,7 +1177,7 @@
 			assigned-clocks = <0x04 0x21 0x04 0x22>;
 			phandle = <0x66>;
 
-			usb@fe300000 {
+			dwc3_1: usb@fe300000 {
 				compatible = "snps,dwc3";
 				status = "disabled";
 				reg = <0x00 0xfe300000 0x00 0x40000>;
@@ -1184,7 +1194,7 @@
 			};
 		};
 
-		watchdog@fd4d0000 {
+		watchdog0: watchdog@fd4d0000 {
 			compatible = "cdns,wdt-r1p2";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -1196,7 +1206,7 @@
 			phandle = <0x68>;
 		};
 
-		watchdog@ff150000 {
+		lpd_watchdog: watchdog@ff150000 {
 			compatible = "cdns,wdt-r1p2";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -1207,7 +1217,7 @@
 			phandle = <0x69>;
 		};
 
-		ams@ffa50000 {
+		xilinx_ams: ams@ffa50000 {
 			compatible = "xlnx,zynqmp-ams";
 			status = "okay";
 			interrupt-parent = <0x05>;
@@ -1235,7 +1245,7 @@
 			};
 		};
 
-		dma-controller@fd4c0000 {
+		zynqmp_dpdma: dma-controller@fd4c0000 {
 			compatible = "xlnx,zynqmp-dpdma";
 			status = "okay";
 			reg = <0x00 0xfd4c0000 0x00 0x1000>;
@@ -1251,13 +1261,13 @@
 			phandle = <0x18>;
 		};
 
-		dp-aud@fd4ac000 {
+		zynqmp_dpaud_setting: dp-aud@fd4ac000 {
 			compatible = "xlnx,zynqmp-dpaud-setting\0syscon";
 			reg = <0x00 0xfd4ac000 0x00 0x1000>;
 			phandle = <0x17>;
 		};
 
-		display@fd4a0000 {
+		zynqmp_dpsub: display@fd4a0000 {
 			u-boot,dm-pre-reloc;
 			compatible = "xlnx,zynqmp-dpsub-1.7";
 			status = "okay";
@@ -1282,7 +1292,7 @@
 			i2c-bus {
 			};
 
-			zynqmp-dp-snd-codec0 {
+			zynqmp_dp_snd_codec0: zynqmp-dp-snd-codec0 {
 				compatible = "xlnx,dp-snd-codec";
 				clock-names = "aud_clk";
 				clocks = <0x04 0x11>;
@@ -1290,7 +1300,7 @@
 				phandle = <0x1c>;
 			};
 
-			zynqmp-dp-snd-pcm0 {
+			zynqmp_dp_snd_pcm0: zynqmp-dp-snd-pcm0 {
 				compatible = "xlnx,dp-snd-pcm0";
 				dmas = <0x18 0x04>;
 				dma-names = "tx";
@@ -1298,7 +1308,7 @@
 				phandle = <0x1a>;
 			};
 
-			zynqmp-dp-snd-pcm1 {
+			zynqmp_dp_snd_pcm1: zynqmp-dp-snd-pcm1 {
 				compatible = "xlnx,dp-snd-pcm1";
 				dmas = <0x18 0x05>;
 				dma-names = "tx";
@@ -1306,7 +1316,7 @@
 				phandle = <0x1b>;
 			};
 
-			zynqmp-dp-snd-card {
+			zynqmp_dp_snd_card0: zynqmp-dp-snd-card {
 				compatible = "xlnx,dp-snd-card";
 				xlnx,dp-snd-pcm = <0x1a 0x1b>;
 				xlnx,dp-snd-codec = <0x1c>;
@@ -1316,35 +1326,35 @@
 		};
 	};
 
-	fclk0 {
+	fclk0: fclk0 {
 		status = "okay";
 		compatible = "xlnx,fclk";
 		clocks = <0x04 0x47>;
 		phandle = <0x6f>;
 	};
 
-	fclk1 {
+	fclk1: fclk1 {
 		status = "okay";
 		compatible = "xlnx,fclk";
 		clocks = <0x04 0x48>;
 		phandle = <0x70>;
 	};
 
-	fclk2 {
+	fclk2: fclk2 {
 		status = "okay";
 		compatible = "xlnx,fclk";
 		clocks = <0x04 0x49>;
 		phandle = <0x71>;
 	};
 
-	fclk3 {
+	fclk3: fclk3 {
 		status = "okay";
 		compatible = "xlnx,fclk";
 		clocks = <0x04 0x4a>;
 		phandle = <0x72>;
 	};
 
-	pss_ref_clk {
+	pss_ref_clk: pss_ref_clk {
 		u-boot,dm-pre-reloc;
 		compatible = "fixed-clock";
 		#clock-cells = <0x00>;
@@ -1352,7 +1362,7 @@
 		phandle = <0x0b>;
 	};
 
-	video_clk {
+	video_clk: video_clk {
 		u-boot,dm-pre-reloc;
 		compatible = "fixed-clock";
 		#clock-cells = <0x00>;
@@ -1360,7 +1370,7 @@
 		phandle = <0x0c>;
 	};
 
-	pss_alt_ref_clk {
+	pss_alt_ref_clk: pss_alt_ref_clk {
 		u-boot,dm-pre-reloc;
 		compatible = "fixed-clock";
 		#clock-cells = <0x00>;
@@ -1368,7 +1378,7 @@
 		phandle = <0x0d>;
 	};
 
-	gt_crx_ref_clk {
+	gt_crx_ref_clk: gt_crx_ref_clk {
 		u-boot,dm-pre-reloc;
 		compatible = "fixed-clock";
 		#clock-cells = <0x00>;
@@ -1376,7 +1386,7 @@
 		phandle = <0x0f>;
 	};
 
-	aux_ref_clk {
+	aux_ref_clk: aux_ref_clk {
 		u-boot,dm-pre-reloc;
 		compatible = "fixed-clock";
 		#clock-cells = <0x00>;
