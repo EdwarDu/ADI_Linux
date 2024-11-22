@@ -1545,14 +1545,15 @@
 	mdio: mdio {
 		#address-cells = <1>;
 		#size-cells = <0>;
-		phyc: ethernet-phy@c {
+		phyc: ethernet-phy@21 {
 			#phy-cells = <1>;
 			compatible = "ethernet-phy-id2000.a231";
                         reg = <0xc>;
                         ti,rx-internal-delay = <0x8>;
                         ti,tx-internal-delay = <0xa>;
                         ti,fifo-depth = <0x1>;
-                        ti,rxctrl-strap-worka;
+			ti,dp83867-rxctrl-strap-quirk;
+                        // ti,rxctrl-strap-worka;
 			// reset-gpios = <&tca6416_u97 6 GPIO_ACTIVE_LOW>;
 		};
 	};
