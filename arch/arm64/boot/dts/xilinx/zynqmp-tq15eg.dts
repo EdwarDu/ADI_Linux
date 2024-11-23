@@ -1547,13 +1547,9 @@
 		#size-cells = <0>;
 		phyc: ethernet-phy@21 {
 			#phy-cells = <1>;
-			compatible = "ethernet-phy-id2000.a231";
-                        reg = <0xc>;
-                        ti,rx-internal-delay = <0x8>;
-                        ti,tx-internal-delay = <0xa>;
-                        ti,fifo-depth = <0x1>;
-                        ti,rxctrl-strap-worka;
-			// reset-gpios = <&tca6416_u97 6 GPIO_ACTIVE_LOW>;
+			compatible = "marvell,88e1512";
+                        phy-connection-type = "sgmii";
+                        reg = <0x21>;
 		};
 	};
 };
@@ -1886,6 +1882,7 @@
 	 * removed for supporting UHS mode
 	 */
 	no-1-8-v;
+ 	disable_wp;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sdhci1_default>;
 	xlnx,mio-bank = <1>;
