@@ -1545,11 +1545,11 @@
 	mdio: mdio {
 		#address-cells = <1>;
 		#size-cells = <0>;
-		phyc: ethernet-phy@21 {
+		phyc: ethernet-phy@c {
 			#phy-cells = <1>;
 			compatible = "marvell,88e1512";
                         phy-connection-type = "sgmii";
-                        reg = <0x21>;
+                        reg = <0xc>;
 		};
 	};
 };
