@@ -1875,18 +1875,18 @@
 // 	disable_wp;
 // };
 
-&sdhci1 {
-	status = "okay";
-	/*
-	 * 1.0 revision has level shifter and this property should be
-	 * removed for supporting UHS mode
-	 */
-	no-1-8-v;
- 	disable_wp;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_sdhci1_default>;
-	xlnx,mio-bank = <1>;
-};
+// &sdhci1 {
+// 	status = "okay";
+// 	/*
+// 	 * 1.0 revision has level shifter and this property should be
+// 	 * removed for supporting UHS mode
+// 	 */
+// 	no-1-8-v;
+//  	disable_wp;
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&pinctrl_sdhci1_default>;
+// 	xlnx,mio-bank = <1>;
+// };
 /*
 &uart0 {
 	pinctrl-names = "default";
