@@ -1867,26 +1867,42 @@
 };
 
 /* SD1 with level shifter */
-// &sdhci1 {
-//         status = "okay";
-// 	//pinctrl-names = "default";
-// 	//pinctrl-0 = <&pinctrl_sdhci1_default>;
-// 	no-1-8-v;
-// 	disable_wp;
-// };
+&sdhci1 {
+    no-1-8-v;
+    disable-wp;
+    broken-mmc-highspeed;
+    cap-sd-highspeed;
+    sd-uhs-sdr12;
+    sd-uhs-sdr25;
+    sd-uhs-sdr50;
+    sd-uhs-ddr50;
+    keep-power-in-suspend;
+    status = "okay";
+};
 
-// &sdhci1 {
-// 	status = "okay";
-// 	/*
-// 	 * 1.0 revision has level shifter and this property should be
-// 	 * removed for supporting UHS mode
-// 	 */
-// 	no-1-8-v;
-//  	disable_wp;
-// 	pinctrl-names = "default";
-// 	pinctrl-0 = <&pinctrl_sdhci1_default>;
-// 	xlnx,mio-bank = <1>;
-// };
+&gem3 {
+    status = "okay";
+    phy-handle = <&phy0>;
+    phy-mode = "rgmii-id";
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_gem3_default>;
+    // phy-mode = "sgmii";
+    mdio {
+         #address-cells = <1>;
+         #size-cells = <0>;
+         phy0: phy@0 {
+                #phy-cells = <1>;
+                // compatible = "marvell,88e1512";  // can't have this line
+                device_type = "ethernet-phy";
+                reg = <0>;
+                ti,rx-internal-delay = <0x8>;
+                ti,tx-internal-delay = <0xa>;
+                ti,fifo-depth = <0x1>;
+                ti,rxctrl-strap-worka;
+         };
+    };
+};
+
 /*
 &uart0 {
 	pinctrl-names = "default";
