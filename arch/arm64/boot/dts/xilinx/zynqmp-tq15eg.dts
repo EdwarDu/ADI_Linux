@@ -1536,23 +1536,23 @@
 	pinctrl-0 = <&pinctrl_can1_default>;
 };
 
-&gem3 {
-	status = "okay";
-	phy-handle = <&phyc>;
-	phy-mode = "rgmii-id";
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_gem3_default>;
-	mdio: mdio {
-		#address-cells = <1>;
-		#size-cells = <0>;
-		phyc: ethernet-phy@21 {
-			#phy-cells = <1>;
-			compatible = "marvell,88e1512";
-                        phy-connection-type = "sgmii";
-                        reg = <0xc>;
-		};
-	};
-};
+// &gem3 {
+// 	status = "okay";
+// 	phy-handle = <&phyc>;
+// 	phy-mode = "rgmii-id";
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&pinctrl_gem3_default>;
+// 	mdio: mdio {
+// 		#address-cells = <1>;
+// 		#size-cells = <0>;
+// 		phyc: ethernet-phy@21 {
+// 			#phy-cells = <1>;
+// 			compatible = "marvell,88e1512";
+//                         phy-connection-type = "sgmii";
+//                         reg = <21>;
+// 		};
+// 	};
+// };
 
 &gpio {
 	pinctrl-names = "default";
