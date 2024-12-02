@@ -1,0 +1,434 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Analog Devices ADRV9009
+ * https://wiki.analog.com/resources/eval/user-guides/adrv9009
+ * https://wiki.analog.com/resources/tools-software/linux-drivers/iio-transceiver/adrv9009
+ * https://wiki.analog.com/resources/tools-software/linux-software/adrv9009_advanced_plugin
+ *
+ * hdl_project: <adrv9009/zcu102>
+ * board_revision: <>
+ *
+ * Copyright (C) 2019 Analog Devices Inc.
+ */
+
+// ---- FIXME: Interrupt not fixed ---------
+
+#include "zynqmp-tq15eg.dts"
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/jesd204/adxcvr.h>
+
+&i2c1 {
+	i2c-mux@75 {
+		i2c@0 { /* HPC0 */
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <0>;
+			/* HPC0_IIC */
+			ad7291@2f {
+				compatible = "adi,ad7291";
+				reg = <0x2f>;
+			};
+
+			eeprom@50 {
+				compatible = "at24,24c02";
+				reg = <0x50>;
+			};
+
+		};
+		i2c@1 { /* HPC1 */
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <1>;
+			/* HPC0_IIC */
+			ad7291@2f {
+				compatible = "adi,ad7291";
+				reg = <0x2f>;
+			};
+
+			eeprom@50 {
+				compatible = "at24,24c02";
+				reg = <0x50>;
+			};
+
+		};
+
+	};
+};
+
+/ {
+	fpga_axi: fpga-axi@0 {
+		interrupt-parent = <&gic>;
+		compatible = "simple-bus";
+		#address-cells = <0x1>;
+		#size-cells = <0x1>;
+		ranges = <0 0 0 0xffffffff>;
+
+		inst0_rx_dma: dma@9c400000 {
+			compatible = "adi,axi-dmac-1.00.a";
+			reg = <0x9c400000 0x10000>;
+			#dma-cells = <1>;
+			#clock-cells = <0>;
+			interrupts = <0 109 IRQ_TYPE_LEVEL_HIGH>;
+			clocks = <&zynqmp_clk 73>;
+		};
+
+		inst1_rx_dma: dma@9c500000 {
+			compatible = "adi,axi-dmac-1.00.a";
+			reg = <0x9c500000 0x10000>;
+			#dma-cells = <1>;
+			#clock-cells = <0>;
+			interrupts = <0 109 IRQ_TYPE_LEVEL_HIGH>;
+			clocks = <&zynqmp_clk 73>;
+		};
+
+		inst0_tx_dma: dma@9c420000  {
+			compatible = "adi,axi-dmac-1.00.a";
+			reg = <0x9c420000 0x10000>;
+			#dma-cells = <1>;
+			#clock-cells = <0>;
+			interrupts = <0 108 IRQ_TYPE_LEVEL_HIGH>;
+			clocks = <&zynqmp_clk 73>;
+		};
+
+		inst1_tx_dma: dma@9c520000  {
+			compatible = "adi,axi-dmac-1.00.a";
+			reg = <0x9c520000 0x10000>;
+			#dma-cells = <1>;
+			#clock-cells = <0>;
+			interrupts = <0 108 IRQ_TYPE_LEVEL_HIGH>;
+			clocks = <&zynqmp_clk 73>;
+		};
+
+		inst0_axi_adrv9009_core_rx: axi-adrv9009-rx-hpc@84a00000 {
+			compatible = "adi,axi-adrv9009-rx-1.0";
+			reg = <0x84a00000 0x2000>;
+			dmas = <&inst0_rx_dma 0>;
+			dma-names = "rx";
+			spibus-connected = <&inst0_trx0_adrv9009>;
+			adi,axi-decimation-core-available;
+			decimation-gpios = <&gpio 139 GPIO_ACTIVE_HIGH>;
+		};
+
+		inst1_axi_adrv9009_core_rx: axi-adrv9009-rx-hpc@84b00000 {
+			compatible = "adi,axi-adrv9009-rx-1.0";
+			reg = <0x84b00000 0x2000>;
+			dmas = <&inst1_rx_dma 0>;
+			dma-names = "rx";
+			spibus-connected = <&inst1_trx0_adrv9009>;
+			adi,axi-decimation-core-available;
+			decimation-gpios = <&gpio 171 GPIO_ACTIVE_HIGH>;
+		};
+
+		inst0_axi_adrv9009_core_tx: axi-adrv9009-tx-hpc@84a04000 {
+			compatible = "adi,axi-adrv9009-tx-1.0";
+			reg = <0x84a04000 0x2000>;
+			dmas = <&inst0_tx_dma 0>;
+			dma-names = "tx";
+			clocks = <&inst0_trx0_adrv9009 2>;
+			clock-names = "sampl_clk";
+			spibus-connected = <&inst0_trx0_adrv9009>;
+			//adi,axi-pl-fifo-enable;
+			adi,axi-interpolation-core-available;
+			interpolation-gpios = <&gpio 140 GPIO_ACTIVE_HIGH>;
+		};
+
+		inst1_axi_adrv9009_core_tx: axi-adrv9009-tx-hpc@84b04000 {
+			compatible = "adi,axi-adrv9009-tx-1.0";
+			reg = <0x84b04000 0x2000>;
+			dmas = <&inst1_tx_dma 0>;
+			dma-names = "tx";
+			clocks = <&inst1_trx0_adrv9009 2>;
+			clock-names = "sampl_clk";
+			spibus-connected = <&inst1_trx0_adrv9009>;
+			//adi,axi-pl-fifo-enable;
+			adi,axi-interpolation-core-available;
+			interpolation-gpios = <&gpio 172 GPIO_ACTIVE_HIGH>;
+		};
+
+		inst0_axi_adrv9009_rx_jesd: axi-jesd204-rx@84aa0000 {
+			compatible = "adi,axi-jesd204-rx-1.0";
+			reg = <0x84aa0000 0x1000>;
+
+			interrupts = <0 106 IRQ_TYPE_LEVEL_HIGH>;
+
+			clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_clkgen>, <&inst0_axi_adrv9009_adxcvr_rx 0>;
+			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
+
+			#clock-cells = <0>;
+			clock-output-names = "jesd_rx_lane_clk";
+
+			adi,octets-per-frame = <4>;
+			adi,frames-per-multiframe = <32>;
+		};
+
+		inst1_axi_adrv9009_rx_jesd: axi-jesd204-rx@84ba0000 {
+			compatible = "adi,axi-jesd204-rx-1.0";
+			reg = <0x84ba0000 0x1000>;
+
+			interrupts = <0 106 IRQ_TYPE_LEVEL_HIGH>;
+
+			clocks = <&zynqmp_clk 71>, <&inst1_axi_rx_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx 0>;
+			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
+
+			#clock-cells = <0>;
+			clock-output-names = "jesd_rx_lane_clk";
+
+			adi,octets-per-frame = <4>;
+			adi,frames-per-multiframe = <32>;
+		};
+
+		inst0_axi_adrv9009_tx_jesd: axi-jesd204-tx@84a90000 {
+			compatible = "adi,axi-jesd204-tx-1.0";
+			reg = <0x84a90000 0x1000>;
+
+			interrupts = <0 105 IRQ_TYPE_LEVEL_HIGH>;
+
+			clocks = <&zynqmp_clk 71>, <&axi_tx_clkgen>, <&axi_adrv9009_adxcvr_tx 0>;
+			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
+
+			#clock-cells = <0>;
+			clock-output-names = "jesd_tx_lane_clk";
+
+			adi,octets-per-frame = <2>;
+			adi,frames-per-multiframe = <32>;
+			adi,converter-resolution = <14>;
+			adi,bits-per-sample = <16>;
+			adi,converters-per-device = <4>;
+			adi,control-bits-per-sample = <2>;
+		};
+
+		inst1_axi_adrv9009_tx_jesd: axi-jesd204-tx@84b90000 {
+			compatible = "adi,axi-jesd204-tx-1.0";
+			reg = <0x84b90000 0x1000>;
+
+			interrupts = <0 105 IRQ_TYPE_LEVEL_HIGH>;
+
+			clocks = <&zynqmp_clk 71>, <&inst1_axi_tx_clkgen>, <&inst1_axi_adrv9009_adxcvr_tx 0>;
+			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
+
+			#clock-cells = <0>;
+			clock-output-names = "jesd_tx_lane_clk";
+
+			adi,octets-per-frame = <2>;
+			adi,frames-per-multiframe = <32>;
+			adi,converter-resolution = <14>;
+			adi,bits-per-sample = <16>;
+			adi,converters-per-device = <4>;
+			adi,control-bits-per-sample = <2>;
+		};
+
+		inst0_axi_tx_clkgen: axi-clkgen@83c00000  {
+			compatible = "adi,axi-clkgen-2.00.a";
+			reg = <0x83c00000 0x10000>;
+			#clock-cells = <0>;
+			clocks = <&zynqmp_clk 71>, <&inst0_clk0_ad9528 1>;
+			clock-names = "s_axi_aclk", "clkin1";
+			clock-output-names = "axi_tx_clkgen";
+		};
+
+		inst1_axi_tx_clkgen: axi-clkgen@83d00000  {
+			compatible = "adi,axi-clkgen-2.00.a";
+			reg = <0x83d00000 0x10000>;
+			#clock-cells = <0>;
+			clocks = <&zynqmp_clk 71>, <&inst1_clk0_ad9528 1>;
+			clock-names = "s_axi_aclk", "clkin1";
+			clock-output-names = "axi_tx_clkgen";
+		};
+
+		inst0_axi_rx_clkgen: axi-clkgen@83c10000  {
+			compatible = "adi,axi-clkgen-2.00.a";
+			reg = <0x83c10000 0x10000>;
+			#clock-cells = <0>;
+			clocks = <&zynqmp_clk 71>, <&clk0_ad9528 1>;
+			clock-names = "s_axi_aclk", "clkin1";
+			clock-output-names = "axi_rx_clkgen";
+		};
+
+		inst1_axi_rx_clkgen: axi-clkgen@83d10000  {
+			compatible = "adi,axi-clkgen-2.00.a";
+			reg = <0x83d10000 0x10000>;
+			#clock-cells = <0>;
+			clocks = <&zynqmp_clk 71>, <&inst1_clk0_ad9528 1>;
+			clock-names = "s_axi_aclk", "clkin1";
+			clock-output-names = "axi_rx_clkgen";
+		};
+
+		inst0_axi_adrv9009_adxcvr_rx: axi-adxcvr-rx@84a60000 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			compatible = "adi,axi-adxcvr-1.0";
+			reg = <0x84a60000 0x1000>;
+
+			clocks = <&inst0_clk0_ad9528 1>, <&inst0_axi_rx_clkgen 0>;
+			clock-names = "conv", "div40";
+
+			#clock-cells = <1>;
+			clock-output-names = "rx_gt_clk", "rx_out_clk";
+
+			adi,sys-clk-select = <XCVR_CPLL>;
+			adi,out-clk-select = <XCVR_REFCLK>;
+			adi,use-lpm-enable;
+		};
+
+		inst1_axi_adrv9009_adxcvr_rx: axi-adxcvr-rx@84b60000 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			compatible = "adi,axi-adxcvr-1.0";
+			reg = <0x84b60000 0x1000>;
+
+			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_rx_clkgen 0>;
+			clock-names = "conv", "div40";
+
+			#clock-cells = <1>;
+			clock-output-names = "rx_gt_clk", "rx_out_clk";
+
+			adi,sys-clk-select = <XCVR_CPLL>;
+			adi,out-clk-select = <XCVR_REFCLK>;
+			adi,use-lpm-enable;
+		};
+
+		inst0_axi_adrv9009_adxcvr_tx: axi-adxcvr-tx@84a80000 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			compatible = "adi,axi-adxcvr-1.0";
+			reg = <0x84a80000 0x1000>;
+
+			clocks = <&clk0_ad9528 1>, <&axi_tx_clkgen>;
+			clock-names = "conv", "div40";
+
+			#clock-cells = <1>;
+			clock-output-names = "tx_gt_clk", "tx_out_clk";
+
+			adi,sys-clk-select = <XCVR_QPLL>;
+			adi,out-clk-select = <XCVR_REFCLK>;
+		};
+
+		inst1_axi_adrv9009_adxcvr_tx: axi-adxcvr-tx@84b80000 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			compatible = "adi,axi-adxcvr-1.0";
+			reg = <0x84b80000 0x1000>;
+
+			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_tx_clkgen>;
+			clock-names = "conv", "div40";
+
+			#clock-cells = <1>;
+			clock-output-names = "tx_gt_clk", "tx_out_clk";
+
+			adi,sys-clk-select = <XCVR_QPLL>;
+			adi,out-clk-select = <XCVR_REFCLK>;
+		};
+
+		axi_sysid_0: axi-sysid-0@85000000 {
+			compatible = "adi,axi-sysid-1.00.a";
+			reg = <0x85000000 0x10000>;
+		};
+	};
+};
+
+&spi0 {
+	status = "okay";
+};
+
+&spi1 {
+	status = "okay";
+};
+
+#include "adi-adrv9009-due.dtsi"
+
+
+// inst0_adrv9009_dac_fifo_bypass_s 60
+// inst0_ad9528_reset_b,       // 59
+// inst0_ad9528_sysref_req,    // 58
+// inst0_adrv9009_tx1_enable,    // 57
+// inst0_adrv9009_tx2_enable,    // 56
+// inst0_adrv9009_rx1_enable,    // 55
+// inst0_adrv9009_rx2_enable,    // 54
+// inst0_adrv9009_test,          // 53
+// inst0_adrv9009_reset_b,       // 52
+// inst0_adrv9009_gpint,         // 51
+// inst0_adrv9009_gpio_00,       // 50
+// inst0_adrv9009_gpio_01,       // 49
+// inst0_adrv9009_gpio_02,       // 48
+// inst0_adrv9009_gpio_03,       // 47
+// inst0_adrv9009_gpio_04,       // 46
+// inst0_adrv9009_gpio_05,       // 45
+// inst0_adrv9009_gpio_06,       // 44
+// inst0_adrv9009_gpio_07,       // 43
+// inst0_adrv9009_gpio_15,       // 42
+// inst0_adrv9009_gpio_08,       // 41
+// inst0_adrv9009_gpio_09,       // 40
+// inst0_adrv9009_gpio_10,       // 39
+// inst0_adrv9009_gpio_11,       // 38
+// inst0_adrv9009_gpio_12,       // 37
+// inst0_adrv9009_gpio_14,       // 36
+// inst0_adrv9009_gpio_13,       // 35
+// inst0_adrv9009_gpio_17,       // 34
+// inst0_adrv9009_gpio_16,       // 33
+// inst0_adrv9009_gpio_18}));    // 32 + 78
+
+// inst1_adrv9009_dac_fifo_bypass_s 60
+// inst1_ad9528_reset_b,       // 59
+// inst1_ad9528_sysref_req,    // 58
+// inst1_adrv9009_tx1_enable,    // 57
+// inst1_adrv9009_tx2_enable,    // 56
+// inst1_adrv9009_rx1_enable,    // 55
+// inst1_adrv9009_rx2_enable,    // 54
+// inst1_adrv9009_test,          // 53
+// inst1_adrv9009_reset_b,       // 52
+// inst1_adrv9009_gpint,         // 51
+// inst1_adrv9009_gpio_00,       // 50
+// inst1_adrv9009_gpio_01,       // 49
+// inst1_adrv9009_gpio_02,       // 48
+// inst1_adrv9009_gpio_03,       // 47
+// inst1_adrv9009_gpio_04,       // 46
+// inst1_adrv9009_gpio_05,       // 45
+// inst1_adrv9009_gpio_06,       // 44
+// inst1_adrv9009_gpio_07,       // 43
+// inst1_adrv9009_gpio_15,       // 42
+// inst1_adrv9009_gpio_08,       // 41
+// inst1_adrv9009_gpio_09,       // 40
+// inst1_adrv9009_gpio_10,       // 39
+// inst1_adrv9009_gpio_11,       // 38
+// inst1_adrv9009_gpio_12,       // 37
+// inst1_adrv9009_gpio_14,       // 36
+// inst1_adrv9009_gpio_13,       // 35
+// inst1_adrv9009_gpio_17,       // 34
+// inst1_adrv9009_gpio_16,       // 33
+// inst1_adrv9009_gpio_18}));    // 32 + 78 + 32
+
+&inst0_trx0_adrv9009 {
+	reset-gpios = <&gpio 130 0>;
+	test-gpios = <&gpio 131 0>;
+	sysref-req-gpios = <&gpio 136 0>;
+	rx2-enable-gpios = <&gpio 132 0>;
+	rx1-enable-gpios = <&gpio 133 0>;
+	tx2-enable-gpios = <&gpio 134 0>;
+	tx1-enable-gpios = <&gpio 135 0>;
+};
+
+&inst1_trx0_adrv9009 {
+	reset-gpios = <&gpio 162 0>;
+	test-gpios = <&gpio 163 0>;
+	sysref-req-gpios = <&gpio 168 0>;
+	rx2-enable-gpios = <&gpio 164 0>;
+	rx1-enable-gpios = <&gpio 165 0>;
+	tx2-enable-gpios = <&gpio 166 0>;
+	tx1-enable-gpios = <&gpio 167 0>;
+};
+
+&inst1_clk0_ad9528 {
+	reset-gpios = <&gpio 137 0>;
+};
+
+&inst1_clk0_ad9528 {
+	reset-gpios = <&gpio 169 0>;
+};
+
+&inst0_axi_adrv9009_core_tx {
+	plddrbypass-gpios = <&gpio 138 0>;
+};
+
+&inst1_axi_adrv9009_core_tx {
+	plddrbypass-gpios = <&gpio 170 0>;
+};
