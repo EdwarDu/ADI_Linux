@@ -11,8 +11,6 @@
  * Copyright (C) 2019 Analog Devices Inc.
  */
 
-// ---- FIXME: Interrupt not fixed ---------
-
 #include "zynqmp-tq15eg.dts"
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/jesd204/adxcvr.h>
@@ -68,6 +66,7 @@
 			reg = <0x9c400000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
+                        // ps-13
 			interrupts = <0 109 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&zynqmp_clk 73>;
 		};
@@ -77,7 +76,8 @@
 			reg = <0x9c500000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
-			interrupts = <0 109 IRQ_TYPE_LEVEL_HIGH>;
+                        // ps-6
+			interrupts = <0 102 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&zynqmp_clk 73>;
 		};
 
@@ -86,6 +86,7 @@
 			reg = <0x9c420000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
+                        // ps -12
 			interrupts = <0 108 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&zynqmp_clk 73>;
 		};
@@ -95,7 +96,8 @@
 			reg = <0x9c520000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
-			interrupts = <0 108 IRQ_TYPE_LEVEL_HIGH>;
+                        // ps-5
+			interrupts = <0 101 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&zynqmp_clk 73>;
 		};
 
@@ -149,6 +151,7 @@
 			compatible = "adi,axi-jesd204-rx-1.0";
 			reg = <0x84aa0000 0x1000>;
 
+                        // ps - 10
 			interrupts = <0 106 IRQ_TYPE_LEVEL_HIGH>;
 
 			clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_clkgen>, <&inst0_axi_adrv9009_adxcvr_rx 0>;
@@ -165,7 +168,8 @@
 			compatible = "adi,axi-jesd204-rx-1.0";
 			reg = <0x84ba0000 0x1000>;
 
-			interrupts = <0 106 IRQ_TYPE_LEVEL_HIGH>;
+                        // ps - 3
+			interrupts = <0 99 IRQ_TYPE_LEVEL_HIGH>;
 
 			clocks = <&zynqmp_clk 71>, <&inst1_axi_rx_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
@@ -181,6 +185,7 @@
 			compatible = "adi,axi-jesd204-tx-1.0";
 			reg = <0x84a90000 0x1000>;
 
+                        // ps - 9
 			interrupts = <0 105 IRQ_TYPE_LEVEL_HIGH>;
 
 			clocks = <&zynqmp_clk 71>, <&axi_tx_clkgen>, <&axi_adrv9009_adxcvr_tx 0>;
@@ -201,7 +206,8 @@
 			compatible = "adi,axi-jesd204-tx-1.0";
 			reg = <0x84b90000 0x1000>;
 
-			interrupts = <0 105 IRQ_TYPE_LEVEL_HIGH>;
+                        // ps - 2
+			interrupts = <0 98 IRQ_TYPE_LEVEL_HIGH>;
 
 			clocks = <&zynqmp_clk 71>, <&inst1_axi_tx_clkgen>, <&inst1_axi_adrv9009_adxcvr_tx 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
