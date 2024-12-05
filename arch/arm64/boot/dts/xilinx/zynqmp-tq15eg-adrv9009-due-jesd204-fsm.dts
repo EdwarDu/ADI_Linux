@@ -17,7 +17,7 @@
 
 &inst0_trx0_adrv9009 {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-top-device = <0>; /* This is the TOP device */
 	jesd204-link-ids = <DEFRAMER_LINK_TX FRAMER_LINK_RX>;
 
@@ -30,7 +30,7 @@
 
 &inst1_trx0_adrv9009 {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-top-device = <0>; /* This is the TOP device */
 	jesd204-link-ids = <DEFRAMER_LINK_TX FRAMER_LINK_RX>;
 
@@ -43,43 +43,43 @@
 
 &inst0_axi_adrv9009_core_tx {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs = <&inst0_axi_adrv9009_tx_jesd 0 DEFRAMER_LINK_TX>;
 };
 
 &inst1_axi_adrv9009_core_tx {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs = <&inst1_axi_adrv9009_tx_jesd 0 DEFRAMER_LINK_TX>;
 };
 
 &inst0_axi_adrv9009_rx_jesd {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs = <&inst0_axi_adrv9009_adxcvr_rx 0 FRAMER_LINK_RX>;
 };
 
 &inst1_axi_adrv9009_rx_jesd {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs = <&inst1_axi_adrv9009_adxcvr_rx 0 FRAMER_LINK_RX>;
 };
 
 &inst0_axi_adrv9009_tx_jesd {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs = <&inst0_axi_adrv9009_adxcvr_tx 0 DEFRAMER_LINK_TX>;
 };
 
 &inst1_axi_adrv9009_tx_jesd {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs = <&inst1_axi_adrv9009_adxcvr_tx 0 DEFRAMER_LINK_TX>;
 };
 
 &inst0_axi_adrv9009_adxcvr_rx {
     	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs =  <&inst0_clk0_ad9528 0 FRAMER_LINK_RX>;
 	clocks = <&inst0_clk0_ad9528 1>; /* div40 is controlled by axi_adrv9009_rx_jesd */
 	clock-names = "conv";
@@ -87,7 +87,7 @@
 
 &inst1_axi_adrv9009_adxcvr_rx {
     	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs =  <&inst1_clk0_ad9528 0 FRAMER_LINK_RX>;
 	clocks = <&inst1_clk0_ad9528 1>; /* div40 is controlled by axi_adrv9009_rx_jesd */
 	clock-names = "conv";
@@ -95,7 +95,7 @@
 
 &inst0_axi_adrv9009_adxcvr_tx {
     	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs =  <&inst0_clk0_ad9528 0 DEFRAMER_LINK_TX>;
 	clocks = <&inst0_clk0_ad9528 1>; /* div40 is controlled by axi_adrv9009_tx_jesd */
 	clock-names = "conv";
@@ -103,7 +103,7 @@
 
 &inst1_axi_adrv9009_adxcvr_tx {
     	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-inputs =  <&inst1_clk0_ad9528 0 DEFRAMER_LINK_TX>;
 	clocks = <&inst1_clk0_ad9528 1>; /* div40 is controlled by axi_adrv9009_tx_jesd */
 	clock-names = "conv";
@@ -111,7 +111,7 @@
 
 &inst0_clk0_ad9528 {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-sysref-provider;
 
 	adi,sysref-pattern-mode = <SYSREF_PATTERN_NSHOT>;
@@ -120,7 +120,7 @@
 
 &inst1_clk0_ad9528 {
 	jesd204-device;
-	#jesd204-cells = <4>;
+	#jesd204-cells = <2>;
 	jesd204-sysref-provider;
 
 	adi,sysref-pattern-mode = <SYSREF_PATTERN_NSHOT>;
