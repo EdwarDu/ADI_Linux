@@ -96,6 +96,14 @@
 &inst0_axi_adrv9009_adxcvr_tx {
     	jesd204-device;
 	#jesd204-cells = <4>;
+	jesd204-inputs =  <&inst0_clk0_ad9528 0 DEFRAMER_LINK_TX>;
+	clocks = <&inst0_clk0_ad9528 1>; /* div40 is controlled by axi_adrv9009_tx_jesd */
+	clock-names = "conv";
+};
+
+&inst1_axi_adrv9009_adxcvr_tx {
+    	jesd204-device;
+	#jesd204-cells = <4>;
 	jesd204-inputs =  <&inst1_clk0_ad9528 0 DEFRAMER_LINK_TX>;
 	clocks = <&inst1_clk0_ad9528 1>; /* div40 is controlled by axi_adrv9009_tx_jesd */
 	clock-names = "conv";
