@@ -343,7 +343,7 @@
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
-			clock-output-names = "inst0_rx_gt_clk", "inst1_rx_out_clk";
+			clock-output-names = "inst0_rx_gt_clk", "inst0_rx_out_clk";
 
 			adi,sys-clk-select = <XCVR_CPLL>;
 			adi,out-clk-select = <XCVR_REFCLK>;
@@ -360,7 +360,7 @@
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
-			clock-output-names = "inst0_rx_gt_clk", "inst1_rx_out_clk";
+			clock-output-names = "inst1_rx_gt_clk", "inst1_rx_out_clk";
 
 			adi,sys-clk-select = <XCVR_CPLL>;
 			adi,out-clk-select = <XCVR_REFCLK>;
@@ -427,7 +427,7 @@
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
-			clock-output-names = "inst0_tx_gt_clk", "inst1_tx_out_clk";
+			clock-output-names = "inst1_tx_gt_clk", "inst1_tx_out_clk";
 
 			adi,sys-clk-select = <XCVR_QPLL>;
 			adi,out-clk-select = <XCVR_REFCLK>;
