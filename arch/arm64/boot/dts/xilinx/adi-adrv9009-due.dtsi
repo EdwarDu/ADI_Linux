@@ -475,10 +475,10 @@
 		spi-max-frequency = <10000000>;
 		//adi,spi-3wire-enable;
 
-		clock-output-names = "ad9528-1_out0", "ad9528-1_out1", "ad9528-1_out2",
-			"ad9528-1_out3", "ad9528-1_out4", "ad9528-1_out5", "ad9528-1_out6",
-			"ad9528-1_out7", "ad9528-1_out8", "ad9528-1_out9", "ad9528-1_out10",
-			"ad9528-1_out11", "ad9528-1_out12", "ad9528-1_out13";
+		clock-output-names = "ad9528-2_out0", "ad9528-2_out1", "ad9528-2_out2",
+			"ad9528-2_out3", "ad9528-2_out4", "ad9528-2_out5", "ad9528-2_out6",
+			"ad9528-2_out7", "ad9528-2_out8", "ad9528-2_out9", "ad9528-2_out10",
+			"ad9528-2_out11", "ad9528-2_out12", "ad9528-2_out13";
 		#clock-cells = <1>;
 
 		adi,vcxo-freq = <122880000>;
