@@ -122,7 +122,7 @@
 			"dev_clk", "fmc_clk", "sysref_dev_clk",
 			"sysref_fmc_clk";
 
-		clock-output-names = "rx_sampl_clk", "rx_os_sampl_clk", "tx_sampl_clk";
+		clock-output-names = "inst0_rx_sampl_clk", "inst0_rx_os_sampl_clk", "inst0_tx_sampl_clk";
 		#clock-cells = <1>;
 
 		/* JESD204 */
@@ -571,7 +571,7 @@
 			"dev_clk", "fmc_clk", "sysref_dev_clk",
 			"sysref_fmc_clk";
 
-		clock-output-names = "rx_sampl_clk", "rx_os_sampl_clk", "tx_sampl_clk";
+		clock-output-names = "inst1_rx_sampl_clk", "inst1_rx_os_sampl_clk", "inst1_tx_sampl_clk";
 		#clock-cells = <1>;
 
 		/* JESD204 */
