@@ -116,13 +116,13 @@
 
 		/* Clocks */
 		clocks = <&inst0_axi_adrv9009_rx_jesd>, <&inst0_axi_adrv9009_tx_jesd>,
-                         <&inst0_clk0_ad9528 13>,
+			<&inst0_axi_adrv9009_rx_os_jesd>, <&inst0_clk0_ad9528 13>,
 			<&inst0_clk0_ad9528 1>, <&inst0_clk0_ad9528 12>, <&inst0_clk0_ad9528 3>;
-		clock-names = "jesd_rx_clk", "jesd_tx_clk",
-                              "dev_clk", "fmc_clk", "sysref_dev_clk",
-                              "sysref_fmc_clk";
+		clock-names = "jesd_rx_clk", "jesd_tx_clk", "jesd_rx_os_clk",
+			"dev_clk", "fmc_clk", "sysref_dev_clk",
+			"sysref_fmc_clk";
 
-		clock-output-names = "rx_sampl_clk", "tx_sampl_clk";
+		clock-output-names = "rx_sampl_clk", "rx_os_sampl_clk", "tx_sampl_clk";
 		#clock-cells = <1>;
 
 		/* JESD204 */
@@ -146,6 +146,26 @@
 		adi,jesd204-framer-a-syncb-in-lvds-mode = <1>;
 		adi,jesd204-framer-a-syncb-in-lvds-pn-invert = <0>;
 		adi,jesd204-framer-a-enable-manual-lane-xbar = <0>;
+
+		/* JESD204 OBS */
+		adi,jesd204-framer-b-bank-id = <0>;
+		adi,jesd204-framer-b-device-id = <0>;
+		adi,jesd204-framer-b-lane0-id = <0>;
+		adi,jesd204-framer-b-m = <2>;
+		adi,jesd204-framer-b-k = <32>;
+		adi,jesd204-framer-b-f = <2>;
+		adi,jesd204-framer-b-np = <16>;
+		adi,jesd204-framer-b-scramble = <1>;
+		adi,jesd204-framer-b-external-sysref = <1>;
+		adi,jesd204-framer-b-serializer-lanes-enabled = <0x0C>;
+		adi,jesd204-framer-b-serializer-lane-crossbar = <0xE4>;
+		adi,jesd204-framer-b-lmfc-offset = <31>;
+		adi,jesd204-framer-b-new-sysref-on-relink = <0>;
+		adi,jesd204-framer-b-syncb-in-select = <1>;
+		adi,jesd204-framer-b-over-sample = <0>;
+		adi,jesd204-framer-b-syncb-in-lvds-mode = <1>;
+		adi,jesd204-framer-b-syncb-in-lvds-pn-invert = <0>;
+		adi,jesd204-framer-b-enable-manual-lane-xbar = <0>;
 
 		/* JESD204 TX */
 		adi,jesd204-deframer-a-bank-id = <0>;
@@ -209,6 +229,34 @@
 
 		adi,rx-settings-framer-sel = <0>;
 		adi,rx-settings-rx-channels = <3>;
+
+		/* ORX */
+
+		adi,orx-profile-rx-fir-gain_db = <6>;
+		adi,orx-profile-rx-fir-num-fir-coefs = <24>;
+		adi,orx-profile-rx-fir-coefs = /bits/ 16  <(-10) (7) (-10) (-12) (6) (-12) (16) (-16) (1) (63) (-431) (17235) (-431) (63) (1) (-16) (16) (-12) (6) (-12) (-10) (7) (-10) (0)>;
+		adi,orx-profile-rx-fir-decimation = <1>;
+		adi,orx-profile-rx-dec5-decimation = <4>;
+		adi,orx-profile-rhb1-decimation = <2>;
+		adi,orx-profile-orx-output-rate_khz = <245760>;
+		adi,orx-profile-rf-bandwidth_hz = <200000000>;
+		adi,orx-profile-rx-bbf3d-bcorner_khz = <225000>;
+		adi,orx-profile-orx-low-pass-adc-profile = /bits/ 16  <185 141 172 90 1280 942 1332 90 1368 46 1016 19 48 48 37 208 0 0 0 0 52 0 7 6 42 0 7 6 42 0 25 27 0 0 25 27 0 0 165 44 31 905>;
+		adi,orx-profile-orx-band-pass-adc-profile = /bits/ 16  <0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0>;
+		adi,orx-profile-orx-ddc-mode = <0>;
+		adi,orx-profile-orx-merge-filter = /bits/ 16  <0 0 0 0 0 0 0 0 0 0 0 0>;
+
+		adi,orx-gain-control-gain-mode = <0>;
+		adi,orx-gain-control-orx1-gain-index = <255>;
+		adi,orx-gain-control-orx2-gain-index = <255>;
+		adi,orx-gain-control-orx1-max-gain-index = <255>;
+		adi,orx-gain-control-orx1-min-gain-index = <195>;
+		adi,orx-gain-control-orx2-max-gain-index = <255>;
+		adi,orx-gain-control-orx2-min-gain-index = <195>;
+
+		adi,obs-settings-framer-sel = <1>;
+		adi,obs-settings-obs-rx-channels-enable = <1>;
+		adi,obs-settings-obs-rx-lo-source = <0>;
 
 		/* TX */
 
@@ -353,9 +401,26 @@
 		adi,aux-dac-resolution11 = <0>;
 		adi,aux-dac-values11 = <0>;
 
+		adi,arm-gpio-config-orx1-tx-sel0-pin-gpio-pin-sel = <0>;
+		adi,arm-gpio-config-orx1-tx-sel0-pin-polarity = <0>;
+		adi,arm-gpio-config-orx1-tx-sel0-pin-enable = <0>;
+
+		adi,arm-gpio-config-orx1-tx-sel1-pin-gpio-pin-sel = <0>;
+		adi,arm-gpio-config-orx1-tx-sel1-pin-polarity = <0>;
+		adi,arm-gpio-config-orx1-tx-sel1-pin-enable = <0>;
+		adi,arm-gpio-config-orx2-tx-sel0-pin-gpio-pin-sel = <0>;
+		adi,arm-gpio-config-orx2-tx-sel0-pin-polarity = <0>;
+		adi,arm-gpio-config-orx2-tx-sel0-pin-enable = <0>;
+
+		adi,arm-gpio-config-orx2-tx-sel1-pin-gpio-pin-sel = <0>;
+		adi,arm-gpio-config-orx2-tx-sel1-pin-polarity = <0>;
+		adi,arm-gpio-config-orx2-tx-sel1-pin-enable = <0>;
 		adi,arm-gpio-config-en-tx-tracking-cals-gpio-pin-sel = <0>;
 		adi,arm-gpio-config-en-tx-tracking-cals-polarity = <0>;
 		adi,arm-gpio-config-en-tx-tracking-cals-enable = <0>;
+
+		adi,orx-lo-cfg-disable-aux-pll-relocking = <0>;
+		adi,orx-lo-cfg-gpio-select = <19>;
 
 		adi,fhm-config-fhm-gpio-pin = <0>;
 		adi,fhm-config-fhm-min-freq_mhz = <2400>;
@@ -500,13 +565,13 @@
 
 		/* Clocks */
 		clocks = <&inst1_axi_adrv9009_rx_jesd>, <&inst1_axi_adrv9009_tx_jesd>,
-                         <&inst1_clk0_ad9528 13>,
+			<&inst1_axi_adrv9009_rx_os_jesd>, <&inst1_clk0_ad9528 13>,
 			<&inst1_clk0_ad9528 1>, <&inst1_clk0_ad9528 12>, <&inst1_clk0_ad9528 3>;
-		clock-names = "jesd_rx_clk", "jesd_tx_clk",
-                              "dev_clk", "fmc_clk", "sysref_dev_clk",
-                              "sysref_fmc_clk";
+		clock-names = "jesd_rx_clk", "jesd_tx_clk", "jesd_rx_os_clk",
+			"dev_clk", "fmc_clk", "sysref_dev_clk",
+			"sysref_fmc_clk";
 
-		clock-output-names = "rx_sampl_clk", "tx_sampl_clk";
+		clock-output-names = "rx_sampl_clk", "rx_os_sampl_clk", "tx_sampl_clk";
 		#clock-cells = <1>;
 
 		/* JESD204 */
@@ -530,6 +595,26 @@
 		adi,jesd204-framer-a-syncb-in-lvds-mode = <1>;
 		adi,jesd204-framer-a-syncb-in-lvds-pn-invert = <0>;
 		adi,jesd204-framer-a-enable-manual-lane-xbar = <0>;
+
+		/* JESD204 OBS */
+		adi,jesd204-framer-b-bank-id = <0>;
+		adi,jesd204-framer-b-device-id = <0>;
+		adi,jesd204-framer-b-lane0-id = <0>;
+		adi,jesd204-framer-b-m = <2>;
+		adi,jesd204-framer-b-k = <32>;
+		adi,jesd204-framer-b-f = <2>;
+		adi,jesd204-framer-b-np = <16>;
+		adi,jesd204-framer-b-scramble = <1>;
+		adi,jesd204-framer-b-external-sysref = <1>;
+		adi,jesd204-framer-b-serializer-lanes-enabled = <0x0C>;
+		adi,jesd204-framer-b-serializer-lane-crossbar = <0xE4>;
+		adi,jesd204-framer-b-lmfc-offset = <31>;
+		adi,jesd204-framer-b-new-sysref-on-relink = <0>;
+		adi,jesd204-framer-b-syncb-in-select = <1>;
+		adi,jesd204-framer-b-over-sample = <0>;
+		adi,jesd204-framer-b-syncb-in-lvds-mode = <1>;
+		adi,jesd204-framer-b-syncb-in-lvds-pn-invert = <0>;
+		adi,jesd204-framer-b-enable-manual-lane-xbar = <0>;
 
 		/* JESD204 TX */
 		adi,jesd204-deframer-a-bank-id = <0>;
@@ -593,6 +678,34 @@
 
 		adi,rx-settings-framer-sel = <0>;
 		adi,rx-settings-rx-channels = <3>;
+
+		/* ORX */
+
+		adi,orx-profile-rx-fir-gain_db = <6>;
+		adi,orx-profile-rx-fir-num-fir-coefs = <24>;
+		adi,orx-profile-rx-fir-coefs = /bits/ 16  <(-10) (7) (-10) (-12) (6) (-12) (16) (-16) (1) (63) (-431) (17235) (-431) (63) (1) (-16) (16) (-12) (6) (-12) (-10) (7) (-10) (0)>;
+		adi,orx-profile-rx-fir-decimation = <1>;
+		adi,orx-profile-rx-dec5-decimation = <4>;
+		adi,orx-profile-rhb1-decimation = <2>;
+		adi,orx-profile-orx-output-rate_khz = <245760>;
+		adi,orx-profile-rf-bandwidth_hz = <200000000>;
+		adi,orx-profile-rx-bbf3d-bcorner_khz = <225000>;
+		adi,orx-profile-orx-low-pass-adc-profile = /bits/ 16  <185 141 172 90 1280 942 1332 90 1368 46 1016 19 48 48 37 208 0 0 0 0 52 0 7 6 42 0 7 6 42 0 25 27 0 0 25 27 0 0 165 44 31 905>;
+		adi,orx-profile-orx-band-pass-adc-profile = /bits/ 16  <0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0>;
+		adi,orx-profile-orx-ddc-mode = <0>;
+		adi,orx-profile-orx-merge-filter = /bits/ 16  <0 0 0 0 0 0 0 0 0 0 0 0>;
+
+		adi,orx-gain-control-gain-mode = <0>;
+		adi,orx-gain-control-orx1-gain-index = <255>;
+		adi,orx-gain-control-orx2-gain-index = <255>;
+		adi,orx-gain-control-orx1-max-gain-index = <255>;
+		adi,orx-gain-control-orx1-min-gain-index = <195>;
+		adi,orx-gain-control-orx2-max-gain-index = <255>;
+		adi,orx-gain-control-orx2-min-gain-index = <195>;
+
+		adi,obs-settings-framer-sel = <1>;
+		adi,obs-settings-obs-rx-channels-enable = <1>;
+		adi,obs-settings-obs-rx-lo-source = <0>;
 
 		/* TX */
 
@@ -737,9 +850,26 @@
 		adi,aux-dac-resolution11 = <0>;
 		adi,aux-dac-values11 = <0>;
 
+		adi,arm-gpio-config-orx1-tx-sel0-pin-gpio-pin-sel = <0>;
+		adi,arm-gpio-config-orx1-tx-sel0-pin-polarity = <0>;
+		adi,arm-gpio-config-orx1-tx-sel0-pin-enable = <0>;
+
+		adi,arm-gpio-config-orx1-tx-sel1-pin-gpio-pin-sel = <0>;
+		adi,arm-gpio-config-orx1-tx-sel1-pin-polarity = <0>;
+		adi,arm-gpio-config-orx1-tx-sel1-pin-enable = <0>;
+		adi,arm-gpio-config-orx2-tx-sel0-pin-gpio-pin-sel = <0>;
+		adi,arm-gpio-config-orx2-tx-sel0-pin-polarity = <0>;
+		adi,arm-gpio-config-orx2-tx-sel0-pin-enable = <0>;
+
+		adi,arm-gpio-config-orx2-tx-sel1-pin-gpio-pin-sel = <0>;
+		adi,arm-gpio-config-orx2-tx-sel1-pin-polarity = <0>;
+		adi,arm-gpio-config-orx2-tx-sel1-pin-enable = <0>;
 		adi,arm-gpio-config-en-tx-tracking-cals-gpio-pin-sel = <0>;
 		adi,arm-gpio-config-en-tx-tracking-cals-polarity = <0>;
 		adi,arm-gpio-config-en-tx-tracking-cals-enable = <0>;
+
+		adi,orx-lo-cfg-disable-aux-pll-relocking = <0>;
+		adi,orx-lo-cfg-gpio-select = <19>;
 
 		adi,fhm-config-fhm-gpio-pin = <0>;
 		adi,fhm-config-fhm-min-freq_mhz = <2400>;
