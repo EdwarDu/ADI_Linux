@@ -101,7 +101,7 @@
 		};
 	};
 
-	inst0_trx0_adrv9009: adrv9009-phy@1 {
+	inst0_trx0_adrv9009: adrv9009-phy-1@1 {
 		compatible = "adrv9009";
 		reg = <1>;
 
@@ -465,7 +465,7 @@
 };
 
 &spi1 {
-	inst1_clk0_ad9528: ad9528-1@0 {
+	inst1_clk0_ad9528: ad9528-2@0 {
 		compatible = "adi,ad9528";
 		reg = <0>;
 
@@ -550,7 +550,7 @@
 		};
 	};
 
-	inst1_trx0_adrv9009: adrv9009-phy@1 {
+	inst1_trx0_adrv9009: adrv9009-phy-2@1 {
 		compatible = "adrv9009";
 		reg = <1>;
 
