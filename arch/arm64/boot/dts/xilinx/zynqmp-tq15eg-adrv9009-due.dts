@@ -66,7 +66,7 @@
 			reg = <0x9c400000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
-                        // ps-13
+                        // ps-13 PS-8 ~ 15 mapped to 104 - 111
 			interrupts = <0 109 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&zynqmp_clk 73>;
 		};
@@ -76,8 +76,8 @@
 			reg = <0x9c500000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
-                        // ps-6
-			interrupts = <0 102 IRQ_TYPE_LEVEL_HIGH>;
+                        // ps-6 PS0-7 mappe to 121-128 - 32 = 89 - 96
+			interrupts = <0 95 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&zynqmp_clk 73>;
 		};
 
@@ -97,7 +97,7 @@
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps -4 
-			interrupts = <0 100 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <0 93 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&zynqmp_clk 73>;
 		};
 
@@ -117,7 +117,7 @@
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps-5
-			interrupts = <0 101 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <0 94 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&zynqmp_clk 73>;
 		};
 
@@ -207,7 +207,7 @@
 			reg = <0x84ba0000 0x1000>;
 
                         // ps - 3
-			interrupts = <0 99 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <0 92 IRQ_TYPE_LEVEL_HIGH>;
 
 			clocks = <&zynqmp_clk 71>, <&inst1_axi_rx_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
@@ -245,7 +245,7 @@
 			reg = <0x84b90000 0x1000>;
 
                         // ps - 2
-			interrupts = <0 98 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <0 91 IRQ_TYPE_LEVEL_HIGH>;
 
 			clocks = <&zynqmp_clk 71>, <&inst1_axi_tx_clkgen>, <&inst1_axi_adrv9009_adxcvr_tx 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
@@ -284,7 +284,7 @@
 			reg = <0x84bb0000 0x1000>;
 
                         // ps - 1 
-			interrupts = <0 97 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <0 90 IRQ_TYPE_LEVEL_HIGH>;
 
 			// clocks = <&zynqmp_clk 71>, <&axi_rx_os_clkgen>, <&axi_adrv9009_adxcvr_rx_os 0>;
 			clocks = <&zynqmp_clk 71>, <&inst1_axi_rx_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx_os 0>;
