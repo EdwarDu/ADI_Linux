@@ -121,7 +121,7 @@
 			clocks = <&zynqmp_clk 73>;
 		};
 
-		inst0_axi_adrv9009_core_rx: axi-adrv9009-rx-hpc@84a00000 {
+		inst0_axi_adrv9009_core_rx: axi-adrv9009-rx-hpc-1@84a00000 {
 			compatible = "adi,axi-adrv9009-rx-1.0";
 			reg = <0x84a00000 0x2000>;
 			dmas = <&inst0_rx_dma 0>;
@@ -131,7 +131,7 @@
 			decimation-gpios = <&gpio 139 GPIO_ACTIVE_HIGH>;
 		};
 
-		inst1_axi_adrv9009_core_rx: axi-adrv9009-rx-hpc@84b00000 {
+		inst1_axi_adrv9009_core_rx: axi-adrv9009-rx-hpc-2@84b00000 {
 			compatible = "adi,axi-adrv9009-rx-1.0";
 			reg = <0x84b00000 0x2000>;
 			dmas = <&inst1_rx_dma 0>;
@@ -141,7 +141,7 @@
 			decimation-gpios = <&gpio 171 GPIO_ACTIVE_HIGH>;
 		};
 
-		inst0_axi_adrv9009_core_rx_obs: axi-adrv9009-rx-obs-hpc@84a08000 {
+		inst0_axi_adrv9009_core_rx_obs: axi-adrv9009-rx-obs-hpc-1@84a08000 {
 			compatible = "adi,axi-adrv9009-obs-1.0";
 			reg = <0x84a08000 0x1000>;
 			dmas = <&inst0_rx_obs_dma 0>;
@@ -150,7 +150,7 @@
 			clock-names = "sampl_clk";
 		};
 
-		inst1_axi_adrv9009_core_rx_obs: axi-adrv9009-rx-obs-hpc@84b08000 {
+		inst1_axi_adrv9009_core_rx_obs: axi-adrv9009-rx-obs-hpc-2@84b08000 {
 			compatible = "adi,axi-adrv9009-obs-1.0";
 			reg = <0x84b08000 0x1000>;
 			dmas = <&inst1_rx_obs_dma 0>;
@@ -159,7 +159,7 @@
 			clock-names = "sampl_clk";
 		};
 
-		inst0_axi_adrv9009_core_tx: axi-adrv9009-tx-hpc@84a04000 {
+		inst0_axi_adrv9009_core_tx: axi-adrv9009-tx-hpc-1@84a04000 {
 			compatible = "adi,axi-adrv9009-tx-1.0";
 			reg = <0x84a04000 0x2000>;
 			dmas = <&inst0_tx_dma 0>;
@@ -172,7 +172,7 @@
 			interpolation-gpios = <&gpio 140 GPIO_ACTIVE_HIGH>;
 		};
 
-		inst1_axi_adrv9009_core_tx: axi-adrv9009-tx-hpc@84b04000 {
+		inst1_axi_adrv9009_core_tx: axi-adrv9009-tx-hpc-2@84b04000 {
 			compatible = "adi,axi-adrv9009-tx-1.0";
 			reg = <0x84b04000 0x2000>;
 			dmas = <&inst1_tx_dma 0>;
