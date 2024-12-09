@@ -561,7 +561,7 @@
 		spi-max-frequency = <25000000>;
 
 		interrupt-parent = <&gpio>;
-		interrupts = <129 IRQ_TYPE_EDGE_RISING>;
+		interrupts = <161 IRQ_TYPE_EDGE_RISING>;
 
 		/* Clocks */
 		clocks = <&inst1_axi_adrv9009_rx_jesd>, <&inst1_axi_adrv9009_tx_jesd>,
