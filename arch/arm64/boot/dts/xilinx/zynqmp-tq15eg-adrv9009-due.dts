@@ -168,7 +168,7 @@
                         // ps - 8
 			interrupts = <0 104 IRQ_TYPE_LEVEL_HIGH>;
 
-			clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_os_clkgen 0>, <&inst0_axi_adrv9009_adxcvr_rx_os 0>;
+			clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_os_clkgen>, <&inst0_axi_adrv9009_adxcvr_rx_os 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
@@ -228,7 +228,7 @@
 			compatible = "adi,axi-adxcvr-1.0";
 			reg = <0x84a50000 0x1000>;
 
-			clocks = <&inst0_clk0_ad9528 1>, <&inst0_axi_rx_os_clkgen 0>;
+			clocks = <&inst0_clk0_ad9528 1>, <&inst0_axi_rx_os_clkgen>;
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
@@ -245,7 +245,7 @@
 			compatible = "adi,axi-adxcvr-1.0";
 			reg = <0x84a80000 0x1000>;
 
-			clocks = <&inst0_clk0_ad9528 1>, <&inst0_axi_tx_clkgen 0>;
+			clocks = <&inst0_clk0_ad9528 1>, <&inst0_axi_tx_clkgen>;
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
@@ -362,7 +362,7 @@
                         // ps - 1 
 			interrupts = <0 90 IRQ_TYPE_LEVEL_HIGH>;
 
-			clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_os_clkgen 1>, <&inst1_axi_adrv9009_adxcvr_rx_os 0>;
+			clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_os_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx_os 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
@@ -413,7 +413,7 @@
 			compatible = "adi,axi-adxcvr-1.0";
 			reg = <0x84b50000 0x1000>;
 
-			clocks = <&inst1_clk0_ad9528 1>, <&inst0_axi_rx_os_clkgen 1>;
+			clocks = <&inst1_clk0_ad9528 1>, <&inst0_axi_rx_os_clkgen>;
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
