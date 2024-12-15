@@ -161,9 +161,11 @@
 
 			interrupts = <0 104 IRQ_TYPE_LEVEL_HIGH>;
 
-			clocks = <&zynqmp_clk 71>, <&axi_rx_clkgen>, <&axi_adrv9009_adxcvr_rx_os 0>;
+			// clocks = <&zynqmp_clk 71>, <&axi_rx_clkgen>, <&axi_adrv9009_adxcvr_rx_os 0>;
+			clocks = <&zynqmp_clk 71>, <&axi_adrv9009_adxcvr_rx_os 0>;
+			clock-names = "s_axi_aclk", "lane_clk";
 			//  clocks = <&zynqmp_clk 71>, <&axi_rx_os_clkgen>, <&axi_adrv9009_adxcvr_rx_os 0>;
-			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
+			// clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
 			clock-output-names = "jesd_rx_os_lane_clk";
@@ -222,9 +224,11 @@
 			compatible = "adi,axi-adxcvr-1.0";
 			reg = <0x84a50000 0x1000>;
 
-			clocks = <&clk0_ad9528 1>, <&axi_rx_clkgen>;
+			clocks = <&clk0_ad9528 1>;
+			clock-names = "conv";
+			// clocks = <&clk0_ad9528 1>, <&axi_rx_clkgen>;
 			// clocks = <&clk0_ad9528 1>, <&axi_rx_os_clkgen>;
-			clock-names = "conv", "div40";
+			// clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
 			clock-output-names = "rx_os_gt_clk", "rx_os_out_clk";
