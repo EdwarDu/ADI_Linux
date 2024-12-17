@@ -559,7 +559,7 @@
 	};
 
 	inst1_trx0_adrv9009: adrv9009-phy-2@1 {
-		compatible = "adrv9009";
+		compatible = "adrv9009-x2";
 		reg = <1>;
 
 		#address-cells = <1>;
