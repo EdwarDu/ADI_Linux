@@ -63,7 +63,7 @@
 
 		inst0_rx_dma: dma@9c400000 {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c400000 0x10000>;
+			reg = <0x9c400000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps-13 PS-8 ~ 15 mapped to 104 - 111
@@ -73,7 +73,7 @@
 
 		inst0_rx_obs_dma: dma@9c440000 {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c440000 0x10000>;
+			reg = <0x9c440000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps -11
@@ -83,7 +83,7 @@
 
 		inst0_tx_dma: dma@9c420000  {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c420000 0x10000>;
+			reg = <0x9c420000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps -12
@@ -259,7 +259,7 @@
 
 		inst1_rx_dma: dma@9c500000 {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c500000 0x10000>;
+			reg = <0x9c500000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps-6 PS0-7 mappe to 121-128 - 32 = 89 - 96
@@ -269,7 +269,7 @@
 
 		inst1_rx_obs_dma: dma@9c540000 {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c540000 0x10000>;
+			reg = <0x9c540000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps -4 
@@ -279,7 +279,7 @@
 
 		inst1_tx_dma: dma@9c520000  {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c520000 0x10000>;
+			reg = <0x9c520000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps-5
