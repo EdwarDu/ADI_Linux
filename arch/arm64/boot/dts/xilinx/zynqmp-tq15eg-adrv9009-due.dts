@@ -168,9 +168,7 @@
                         // ps - 8
 			interrupts = <0 104 IRQ_TYPE_LEVEL_HIGH>;
 
-			// clocks = <&zynqmp_clk 71>, <&inst0_axi_tx_clkgen>, <&inst0_axi_adrv9009_adxcvr_rx_os 0>;
-			// clock-names = "s_axi_aclk", "device_clk", "lane_clk";
-			clocks = <&zynqmp_clk 71>, <&inst0_axi_tx_clkgen>, <&inst0_axi_adrv9009_adxcvr_rx_os 0>;
+			clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_os_clkgen>, <&inst0_axi_adrv9009_adxcvr_rx_os 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
@@ -198,14 +196,14 @@
 			clock-output-names = "inst0_axi_rx_clkgen";
 		};
                 
-		// inst0_axi_rx_os_clkgen: axi-clkgen@83c20000  {
-		// 	compatible = "adi,axi-clkgen-2.00.a";
-		// 	reg = <0x83c20000 0x10000>;
-		// 	#clock-cells = <0>;
-		// 	clocks = <&zynqmp_clk 71>, <&inst0_clk0_ad9528 1>;
-		// 	clock-names = "s_axi_aclk", "clkin1";
-		// 	clock-output-names = "inst0_axi_rx_os_clkgen";
-		// };
+		inst0_axi_rx_os_clkgen: axi-clkgen@83c20000  {
+			compatible = "adi,axi-clkgen-2.00.a";
+			reg = <0x83c20000 0x10000>;
+			#clock-cells = <0>;
+			clocks = <&zynqmp_clk 71>, <&inst0_clk0_ad9528 1>;
+			clock-names = "s_axi_aclk", "clkin1";
+			clock-output-names = "inst0_axi_rx_os_clkgen";
+		};
 
 		inst0_axi_adrv9009_adxcvr_rx: axi-adxcvr-rx@84a60000 {
 			#address-cells = <1>;
@@ -343,7 +341,7 @@
                         // ps - 2
 			interrupts = <0 91 IRQ_TYPE_LEVEL_HIGH>;
 
-			clocks = <&zynqmp_clk 71>, <&inst1_axi_tx_clkgen>, <&inst1_axi_adrv9009_adxcvr_tx 0>;
+			clocks = <&zynqmp_clk 71>, <&inst0_axi_tx_clkgen>, <&inst1_axi_adrv9009_adxcvr_tx 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
@@ -364,10 +362,7 @@
                         // ps - 1 
 			interrupts = <0 90 IRQ_TYPE_LEVEL_HIGH>;
 
-			// clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_os_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx_os 0>;
-			// clock-names = "s_axi_aclk", "device_clk", "lane_clk";
-
-			clocks = <&zynqmp_clk 71>, <&inst1_axi_tx_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx_os 0>;
+			clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_os_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx_os 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
@@ -377,14 +372,14 @@
 			adi,frames-per-multiframe = <32>;
 		};
 
-		inst1_axi_tx_clkgen: axi-clkgen@83d00000  {
-			compatible = "adi,axi-clkgen-2.00.a";
-			reg = <0x83d00000 0x10000>;
-			#clock-cells = <0>;
-			clocks = <&zynqmp_clk 71>, <&inst1_clk0_ad9528 1>;
-			clock-names = "s_axi_aclk", "clkin1";
-			clock-output-names = "inst1_axi_tx_clkgen";
-		};
+		// inst1_axi_tx_clkgen: axi-clkgen@83d00000  {
+		// 	compatible = "adi,axi-clkgen-2.00.a";
+		// 	reg = <0x83d00000 0x10000>;
+		// 	#clock-cells = <0>;
+		// 	clocks = <&zynqmp_clk 71>, <&inst1_clk0_ad9528 1>;
+		// 	clock-names = "s_axi_aclk", "clkin1";
+		// 	clock-output-names = "inst1_axi_tx_clkgen";
+		// };
 
 		inst1_axi_rx_clkgen: axi-clkgen@83d10000  {
 			compatible = "adi,axi-clkgen-2.00.a";

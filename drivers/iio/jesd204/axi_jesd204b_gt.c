@@ -1095,6 +1095,7 @@ static int jesd204b_gt_probe(struct platform_device *pdev)
 
 	st->buf_virt = dma_alloc_coherent(&pdev->dev, PAGE_ALIGN(st->bin.size),
 					  &st->buf_phys, GFP_KERNEL);
+        dev_warn(&pdev->dev, "DUBUG: JESD Created DMA memory at %p\n", st->buf_phys);
 
 	if (st->buf_virt == NULL) {
 		dev_err(&pdev->dev, "Not enough dma memory for device\n");
