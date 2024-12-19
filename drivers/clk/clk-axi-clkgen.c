@@ -585,6 +585,7 @@ static int axi_clkgen_probe(struct platform_device *pdev)
 	unsigned int i;
 	int ret;
 
+        dev_warn(&pdev->dev, "DUBUG ******** PROBING\n");
 	dflt_limits = device_get_match_data(&pdev->dev);
 	if (!dflt_limits)
 		return -ENODEV;

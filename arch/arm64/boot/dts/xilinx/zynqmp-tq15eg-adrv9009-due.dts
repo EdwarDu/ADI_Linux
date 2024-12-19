@@ -324,7 +324,8 @@
                         // ps - 3
 			interrupts = <0 92 IRQ_TYPE_LEVEL_HIGH>;
 
-			clocks = <&zynqmp_clk 71>, <&inst1_axi_rx_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx 0>;
+			// clocks = <&zynqmp_clk 71>, <&inst1_axi_rx_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx 0>;
+			clocks = <&zynqmp_clk 71>, <&inst1_axi_tx_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
@@ -341,7 +342,7 @@
                         // ps - 2
 			interrupts = <0 91 IRQ_TYPE_LEVEL_HIGH>;
 
-			clocks = <&zynqmp_clk 71>, <&inst0_axi_tx_clkgen>, <&inst1_axi_adrv9009_adxcvr_tx 0>;
+			clocks = <&zynqmp_clk 71>, <&inst1_axi_tx_clkgen>, <&inst1_axi_adrv9009_adxcvr_tx 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
@@ -362,7 +363,7 @@
                         // ps - 1 
 			interrupts = <0 90 IRQ_TYPE_LEVEL_HIGH>;
 
-			clocks = <&zynqmp_clk 71>, <&inst0_axi_rx_os_clkgen>, <&inst1_axi_adrv9009_adxcvr_rx_os 0>;
+			clocks = <&zynqmp_clk 71>, <&inst1_axi_tx_clkgen 1>, <&inst1_axi_adrv9009_adxcvr_rx_os 0>;
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
@@ -372,23 +373,23 @@
 			adi,frames-per-multiframe = <32>;
 		};
 
-		// inst1_axi_tx_clkgen: axi-clkgen@83d00000  {
-		// 	compatible = "adi,axi-clkgen-2.00.a";
-		// 	reg = <0x83d00000 0x10000>;
-		// 	#clock-cells = <0>;
-		// 	clocks = <&zynqmp_clk 71>, <&inst1_clk0_ad9528 1>;
-		// 	clock-names = "s_axi_aclk", "clkin1";
-		// 	clock-output-names = "inst1_axi_tx_clkgen";
-		// };
-
-		inst1_axi_rx_clkgen: axi-clkgen@83d10000  {
+		inst1_axi_tx_clkgen: axi-clkgen@83d00000  {
 			compatible = "adi,axi-clkgen-2.00.a";
-			reg = <0x83d10000 0x10000>;
+			reg = <0x83d00000 0x10000>;
 			#clock-cells = <0>;
 			clocks = <&zynqmp_clk 71>, <&inst1_clk0_ad9528 1>;
 			clock-names = "s_axi_aclk", "clkin1";
-			clock-output-names = "inst1_axi_rx_clkgen";
+			clock-output-names = "inst1_axi_tx_clkgen";
 		};
+
+		// inst1_axi_rx_clkgen: axi-clkgen@83d10000  {
+		// 	compatible = "adi,axi-clkgen-2.00.a";
+		// 	reg = <0x83d10000 0x10000>;
+		// 	#clock-cells = <0>;
+		// 	clocks = <&zynqmp_clk 71>, <&inst1_clk0_ad9528 1>;
+		// 	clock-names = "s_axi_aclk", "clkin1";
+		// 	clock-output-names = "inst1_axi_rx_clkgen";
+		// };
 
 		inst1_axi_adrv9009_adxcvr_rx: axi-adxcvr-rx@84b60000 {
 			#address-cells = <1>;
@@ -396,7 +397,8 @@
 			compatible = "adi,axi-adxcvr-1.0";
 			reg = <0x84b60000 0x1000>;
 
-			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_rx_clkgen 0>;
+			// clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_rx_clkgen 0>;
+			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_tx_clkgen 0>;
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
@@ -413,7 +415,7 @@
 			compatible = "adi,axi-adxcvr-1.0";
 			reg = <0x84b50000 0x1000>;
 
-			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_tx_clkgen>;
+			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_tx_clkgen 1>;
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
@@ -430,7 +432,7 @@
 			compatible = "adi,axi-adxcvr-1.0";
 			reg = <0x84b80000 0x1000>;
 
-			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_tx_clkgen>;
+			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_tx_clkgen 0>;
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
