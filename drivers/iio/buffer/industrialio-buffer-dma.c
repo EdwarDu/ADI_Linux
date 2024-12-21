@@ -342,7 +342,7 @@ int iio_dma_buffer_enable(struct iio_buffer *buffer,
 	mutex_lock(&queue->lock);
 	queue->active = true;
 
-	printk(KERNEL_INFO "DUBUG: dma_buffer_enable for %s\n", indio_dev->name);
+	printk("DUBUG: dma_buffer_enable for %s\n", indio_dev->name);
 	/**
 	 * If no buffer blocks are allocated when we start streaming go into
 	 * fileio mode.
