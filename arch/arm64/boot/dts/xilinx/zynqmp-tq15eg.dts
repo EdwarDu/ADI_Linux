@@ -741,7 +741,7 @@
 			reg = <0x00 0xff0a0000 0x00 0x1000>;
 			power-domains = <0x12 0x2e>;
 			clocks = <0x04 0x1f>;
-			emio-gpio-width = <0x20>;
+			emio-gpio-width = <95>;
 			gpio-mask-high = <0x00>;
 			gpio-mask-low = <0x5600>;
 			phandle = <0x4e>;
