@@ -913,13 +913,11 @@ static int jesd204b_gt_probe(struct platform_device *pdev)
 	const struct of_device_id *of_id =
 			of_match_device(jesd204b_gt_of_match, &pdev->dev);
 
-        dev_warn(&pdev->dev, "DUBUG: JESD GT PROBING\n");
 	st = devm_kzalloc(&pdev->dev, sizeof(*st), GFP_KERNEL);
 	if (!st)
 		return -ENOMEM;
 
 	ret = of_get_child_count(np);
-        dev_warn(&pdev->dev, "DUBUG: child count: %d, MAX:%d\n", ret, MAX_NUM_LINKS);
 
 	if (ret > MAX_NUM_LINKS)
 		return -EINVAL;
@@ -1098,7 +1096,6 @@ static int jesd204b_gt_probe(struct platform_device *pdev)
 
 	st->buf_virt = dma_alloc_coherent(&pdev->dev, PAGE_ALIGN(st->bin.size),
 					  &st->buf_phys, GFP_KERNEL);
-        dev_warn(&pdev->dev, "DUBUG: JESD Created DMA memory at %p\n", st->buf_phys);
 
 	if (st->buf_virt == NULL) {
 		dev_err(&pdev->dev, "Not enough dma memory for device\n");
