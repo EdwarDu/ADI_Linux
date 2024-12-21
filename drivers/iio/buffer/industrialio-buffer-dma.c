@@ -263,6 +263,7 @@ static int iio_dma_buffer_fileio_alloc(struct iio_dma_buffer_queue *queue,
 	size_t size = queue->buffer.bytes_per_datum * queue->buffer.length;
 	struct iio_dma_buffer_block *block;
 
+	
 	block = iio_dma_buffer_alloc_block(queue, size);
 	if (!block)
 		return -ENOMEM;
@@ -341,6 +342,7 @@ int iio_dma_buffer_enable(struct iio_buffer *buffer,
 	mutex_lock(&queue->lock);
 	queue->active = true;
 
+	printk(KERNEL_INFO "DUBUG: dma_buffer_enable for %s\n", indio_dev->name);
 	/**
 	 * If no buffer blocks are allocated when we start streaming go into
 	 * fileio mode.
