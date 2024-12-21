@@ -913,11 +913,14 @@ static int jesd204b_gt_probe(struct platform_device *pdev)
 	const struct of_device_id *of_id =
 			of_match_device(jesd204b_gt_of_match, &pdev->dev);
 
+        dev_warn(&pdev->dev, "DUBUG: JESD GT PROBING\n");
 	st = devm_kzalloc(&pdev->dev, sizeof(*st), GFP_KERNEL);
 	if (!st)
 		return -ENOMEM;
 
 	ret = of_get_child_count(np);
+        dev_warn(&pdev->dev, "DUBUG: child count: %d, MAX:%d\n", ret, MAX_NUM_LINKS);
+
 	if (ret > MAX_NUM_LINKS)
 		return -EINVAL;
 
