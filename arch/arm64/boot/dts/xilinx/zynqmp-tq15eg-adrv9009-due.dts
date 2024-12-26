@@ -720,7 +720,7 @@
                         xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
                         xlnx,use-parity = <0x0>;
                 };
-                hier_UARTs_axi_uartlite_14: serial@b0100000 {
+                hier_UARTs_axi_uartlite_14: serial@a0100000 {
                         clock-names = "s_axi_aclk";
                         clocks = <&zynqmp_clk 72>;
                         compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -737,7 +737,7 @@
                         xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
                         xlnx,use-parity = <0x0>;
                 };
-                hier_UARTs_axi_uartlite_15: serial@b0110000 {
+                hier_UARTs_axi_uartlite_15: serial@a0110000 {
                         clock-names = "s_axi_aclk";
                         clocks = <&zynqmp_clk 72>;
                         compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
