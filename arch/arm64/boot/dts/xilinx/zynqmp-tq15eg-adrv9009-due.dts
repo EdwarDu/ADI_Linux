@@ -332,7 +332,7 @@
 
 		inst1_axi_adrv9009_core_rx_obs: axi-adrv9009-rx-obs-hpc-2@84b08000 {
 			compatible = "adi,axi-adrv9009-obs-1.0";
-			reg = <0x84b08000 0x1000>;
+			reg = <0x0 0x84b08000 0x0 0x1000>;
 			dmas = <&inst1_rx_obs_dma 0>;
 			dma-names = "rx";
 			clocks = <&inst1_trx0_adrv9009 1>;
