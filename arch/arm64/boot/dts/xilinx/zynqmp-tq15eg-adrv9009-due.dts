@@ -57,13 +57,13 @@
 	fpga_axi: fpga-axi@0 {
 		interrupt-parent = <&gic>;
 		compatible = "simple-bus";
-		#address-cells = <0x2>;
-		#size-cells = <0x2>;
-		// ranges = <0 0 0 0xffffffff>;
+		#address-cells = <0x1>;
+		#size-cells = <0x1>;
+		ranges = <0 0 0 0xffffffff>;
 
 		inst0_tx_dma: dma@9c420000  {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c420000 0x0 0x10000>;
+			reg = <0x9c420000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps -12
@@ -73,7 +73,7 @@
 
 		inst0_rx_dma: dma@9c400000 {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c400000 0x0 0x10000>;
+			reg = <0x9c400000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps-13 PS-8 ~ 15 mapped to 104 - 111
@@ -83,7 +83,7 @@
 
 		inst0_rx_obs_dma: dma@9c440000 {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c440000 0x0 0x10000>;
+			reg = <0x9c440000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps -11
@@ -93,7 +93,7 @@
 
 		inst0_axi_adrv9009_core_tx: axi-adrv9009-tx-hpc-1@84a04000 {
 			compatible = "adi,axi-adrv9009-tx-1.0";
-			reg = <0x0 0x84a04000 0x0 0x2000>;
+			reg = <0x84a04000 0x2000>;
 			dmas = <&inst0_tx_dma 0>;
 			dma-names = "tx";
 			clocks = <&inst0_trx0_adrv9009 2>;
@@ -106,7 +106,7 @@
 
 		inst0_axi_adrv9009_core_rx: axi-adrv9009-rx-hpc-1@84a00000 {
 			compatible = "adi,axi-adrv9009-rx-1.0";
-			reg = <0x0 0x84a00000 0x0 0x2000>;
+			reg = <0x84a00000 0x2000>;
 			dmas = <&inst0_rx_dma 0>;
 			dma-names = "rx";
 			spibus-connected = <&inst0_trx0_adrv9009>;
@@ -116,7 +116,7 @@
 
 		inst0_axi_adrv9009_core_rx_obs: axi-adrv9009-rx-obs-hpc-1@84a08000 {
 			compatible = "adi,axi-adrv9009-obs-1.0";
-			reg = <0x0 0x84a08000 0x0 0x1000>;
+			reg = <0x84a08000 0x1000>;
 			dmas = <&inst0_rx_obs_dma 0>;
 			dma-names = "rx";
 			clocks = <&inst0_trx0_adrv9009 1>;
@@ -125,7 +125,7 @@
 
 		inst0_axi_adrv9009_tx_jesd: axi-jesd204-tx@84a90000 {
 			compatible = "adi,axi-jesd204-tx-1.0";
-			reg = <0x0 0x84a90000 0x0 0x1000>;
+			reg = <0x84a90000 0x1000>;
 
                         // ps - 9
 			interrupts = <0 105 IRQ_TYPE_LEVEL_HIGH>;
@@ -146,7 +146,7 @@
 
 		inst0_axi_adrv9009_rx_jesd: axi-jesd204-rx@84aa0000 {
 			compatible = "adi,axi-jesd204-rx-1.0";
-			reg = <0x0 0x84aa0000 0x0 0x1000>;
+			reg = <0x84aa0000 0x1000>;
 
                         // ps - 10
 			interrupts = <0 106 IRQ_TYPE_LEVEL_HIGH>;
@@ -163,7 +163,7 @@
 
 		inst0_axi_adrv9009_rx_os_jesd: axi-jesd204-rx-os@84ab0000 {
 			compatible = "adi,axi-jesd204-rx-1.0";
-			reg = <0x0 0x84ab0000 0x0 0x1000>;
+			reg = <0x84ab0000 0x1000>;
 
                         // ps - 8
 			interrupts = <0 104 IRQ_TYPE_LEVEL_HIGH>;
@@ -181,7 +181,7 @@
 
 		inst0_axi_tx_clkgen: axi-clkgen@83c00000  {
 			compatible = "adi,axi-clkgen-2.00.a";
-			reg = <0x0 0x83c00000 0x0 0x10000>;
+			reg = <0x83c00000 0x10000>;
 			#clock-cells = <0>;
 			clocks = <&zynqmp_clk 71>, <&inst0_clk0_ad9528 1>;
 			clock-names = "s_axi_aclk", "clkin1";
@@ -190,7 +190,7 @@
 
 		inst0_axi_rx_clkgen: axi-clkgen@83c10000  {
 			compatible = "adi,axi-clkgen-2.00.a";
-			reg = <0x0 0x83c10000 0x0 0x10000>;
+			reg = <0x83c10000 0x10000>;
 			#clock-cells = <0>;
 			clocks = <&zynqmp_clk 71>, <&inst0_clk0_ad9528 1>;
 			clock-names = "s_axi_aclk", "clkin1";
@@ -199,7 +199,7 @@
 
 		// inst0_axi_rx_os_clkgen: axi-clkgen@83c20000  {
 		// 	compatible = "adi,axi-clkgen-2.00.a";
-		// 	reg = <0x0 0x83c20000 0x10000>;
+		// 	reg = <0x83c20000 0x10000>;
 		// 	#clock-cells = <0>;
 		// 	clocks = <&zynqmp_clk 71>, <&inst0_clk0_ad9528 1>;
 		// 	clock-names = "s_axi_aclk", "clkin1";
@@ -207,10 +207,10 @@
 		// };
 
 		inst0_axi_adrv9009_adxcvr_tx: axi-adxcvr-tx@84a80000 {
-			// #address-cells = <1>;
-			// #size-cells = <0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			compatible = "adi,axi-adxcvr-1.0";
-			reg = <0x0 0x84a80000 0x0 0x1000>;
+			reg = <0x84a80000 0x1000>;
 
 			clocks = <&inst0_clk0_ad9528 1>, <&inst0_axi_tx_clkgen>;
 			clock-names = "conv", "div40";
@@ -223,10 +223,10 @@
 		};
 
 		inst0_axi_adrv9009_adxcvr_rx: axi-adxcvr-rx@84a60000 {
-			// #address-cells = <1>;
-			// #size-cells = <0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			compatible = "adi,axi-adxcvr-1.0";
-			reg = <0x0 0x84a60000 0x0 0x1000>;
+			reg = <0x84a60000 0x1000>;
 
 			clocks = <&inst0_clk0_ad9528 1>, <&inst0_axi_rx_clkgen 0>;
 			clock-names = "conv", "div40";
@@ -240,10 +240,10 @@
 		};
 
 		inst0_axi_adrv9009_adxcvr_rx_os: axi-adxcvr-rx-os@84a50000 {
-			// #address-cells = <1>;
-			// #size-cells = <0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			compatible = "adi,axi-adxcvr-1.0";
-			reg = <0x0 0x84a50000 0x0 0x1000>;
+			reg = <0x84a50000 0x1000>;
 
 			clocks = <&inst0_clk0_ad9528 1>, <&inst0_axi_tx_clkgen>;
 			clock-names = "conv", "div40";
@@ -258,7 +258,7 @@
 
 		inst1_tx_dma: dma@9c520000  {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c520000 0x0 0x10000>;
+			reg = <0x9c520000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps-5
@@ -268,7 +268,7 @@
 
 		inst1_rx_dma: dma@9c500000 {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c500000 0x0 0x10000>;
+			reg = <0x9c500000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps-6 PS0-7 mappe to 121-128 - 32 = 89 - 96
@@ -278,7 +278,7 @@
 
 		inst1_rx_obs_dma: dma@9c540000 {
 			compatible = "adi,axi-dmac-1.00.a";
-			reg = <0x0 0x9c540000 0x0 0x10000>;
+			reg = <0x9c540000 0x10000>;
 			#dma-cells = <1>;
 			#clock-cells = <0>;
                         // ps -4 
@@ -289,7 +289,7 @@
 
 		inst1_axi_adrv9009_core_tx: axi-adrv9009-tx-hpc-2@84b04000 {
 			compatible = "adi,axi-adrv9009-tx-1.0";
-			reg = <0x0 0x84b04000 0x0 0x2000>;
+			reg = <0x84b04000 0x2000>;
 			dmas = <&inst1_tx_dma 0>;
 			dma-names = "tx";
 			clocks = <&inst1_trx0_adrv9009 2>;
@@ -302,7 +302,7 @@
 
 		inst1_axi_adrv9009_core_rx: axi-adrv9009-rx-hpc-2@84b00000 {
 			compatible = "adi,axi-adrv9009-rx-1.0";
-			reg = <0x0 0x84b00000 0x0 0x2000>;
+			reg = <0x84b00000 0x2000>;
 			dmas = <&inst1_rx_dma 0>;
 			dma-names = "rx";
 			spibus-connected = <&inst1_trx0_adrv9009>;
@@ -312,7 +312,7 @@
 
 		inst1_axi_adrv9009_core_rx_obs: axi-adrv9009-rx-obs-hpc-2@84b08000 {
 			compatible = "adi,axi-adrv9009-obs-1.0";
-			reg = <0x0 0x84b08000 0x0 0x1000>;
+			reg = <0x84b08000 0x1000>;
 			dmas = <&inst1_rx_obs_dma 0>;
 			dma-names = "rx";
 			clocks = <&inst1_trx0_adrv9009 1>;
@@ -321,7 +321,7 @@
 
 		inst1_axi_adrv9009_tx_jesd: axi-jesd204-tx@84b90000 {
 			compatible = "adi,axi-jesd204-tx-1.0";
-			reg = <0x0 0x84b90000 0x0 0x1000>;
+			reg = <0x84b90000 0x1000>;
 
                         // ps - 2
 			interrupts = <0 91 IRQ_TYPE_LEVEL_HIGH>;
@@ -342,7 +342,7 @@
 
 		inst1_axi_adrv9009_rx_jesd: axi-jesd204-rx@84ba0000 {
 			compatible = "adi,axi-jesd204-rx-1.0";
-			reg = <0x0 0x84ba0000 0x0 0x1000>;
+			reg = <0x84ba0000 0x1000>;
 
                         // ps - 3
 			interrupts = <0 92 IRQ_TYPE_LEVEL_HIGH>;
@@ -359,7 +359,7 @@
 
 		inst1_axi_adrv9009_rx_os_jesd: axi-jesd204-rx-os@84bb0000 {
 			compatible = "adi,axi-jesd204-rx-1.0";
-			reg = <0x0 0x84bb0000 0x0 0x1000>;
+			reg = <0x84bb0000 0x1000>;
 
                         // ps - 1 
 			interrupts = <0 90 IRQ_TYPE_LEVEL_HIGH>;
@@ -376,7 +376,7 @@
 
 		inst1_axi_tx_clkgen: axi-clkgen@83d00000  {
 			compatible = "adi,axi-clkgen-2.00.a";
-			reg = <0x0 0x83d00000 0x0 0x10000>;
+			reg = <0x83d00000 0x10000>;
 			#clock-cells = <0>;
 			clocks = <&zynqmp_clk 71>, <&inst1_clk0_ad9528 1>;
 			clock-names = "s_axi_aclk", "clkin1";
@@ -385,7 +385,7 @@
 
 		inst1_axi_rx_clkgen: axi-clkgen@83d10000  {
 			compatible = "adi,axi-clkgen-2.00.a";
-			reg = <0x0 0x83d10000 0x0 0x10000>;
+			reg = <0x83d10000 0x10000>;
 			#clock-cells = <0>;
 			clocks = <&zynqmp_clk 71>, <&inst1_clk0_ad9528 1>;
 			clock-names = "s_axi_aclk", "clkin1";
@@ -393,10 +393,10 @@
 		};
 
 		inst1_axi_adrv9009_adxcvr_tx: axi-adxcvr-tx@84b80000 {
-			// #address-cells = <1>;
-			// #size-cells = <0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			compatible = "adi,axi-adxcvr-1.0";
-			reg = <0x0 0x84b80000 0x0 0x1000>;
+			reg = <0x84b80000 0x1000>;
 
 			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_tx_clkgen>;
 			clock-names = "conv", "div40";
@@ -409,10 +409,10 @@
 		};
 
 		inst1_axi_adrv9009_adxcvr_rx: axi-adxcvr-rx@84b60000 {
-			// #address-cells = <1>;
-			// #size-cells = <0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			compatible = "adi,axi-adxcvr-1.0";
-			reg = <0x0 0x84b60000 0x0 0x1000>;
+			reg = <0x84b60000 0x1000>;
 
 			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_rx_clkgen 0>;
 			clock-names = "conv", "div40";
@@ -426,10 +426,10 @@
 		};
 
 		inst1_axi_adrv9009_adxcvr_rx_os: axi-adxcvr-rx-os@84b50000 {
-			// #address-cells = <1>;
-			// #size-cells = <0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			compatible = "adi,axi-adxcvr-1.0";
-			reg = <0x0 0x84b50000 0x0 0x1000>;
+			reg = <0x84b50000 0x1000>;
 
 			clocks = <&inst1_clk0_ad9528 1>, <&inst1_axi_tx_clkgen>;
 			clock-names = "conv", "div40";
@@ -444,7 +444,7 @@
 
 		axi_sysid_0: axi-sysid-0@85000000 {
 			compatible = "adi,axi-sysid-1.00.a";
-			reg = <0x0 0x85000000 0x0 0x10000>;
+			reg = <0x85000000 0x10000>;
 		};
 
                 hier_UARTs_axi_intc_0: interrupt-controller@a0010000 {
@@ -456,7 +456,7 @@
                         interrupt-names = "irq";
                         interrupt-parent = <&gic>;
                         interrupts = <0 89 4>;
-                        reg = <0x0 0xa0010000 0x0 0x4000>;
+                        reg = <0xa0010000 0x4000>;
                         xlnx,kind-of-intr = <0xffff>;
                         xlnx,num-intr-inputs = <0x10>;
                 };
@@ -466,7 +466,7 @@
                         clocks = <&zynqmp_clk 72>;
                         compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
                         gpio-controller ;
-                        reg = <0x0 0xa0000000 0x0 0x4000>;
+                        reg = <0xa0000000 0x4000>;
                         xlnx,all-inputs = <0x0>;
                         xlnx,all-inputs-2 = <0x0>;
                         xlnx,all-outputs = <0x1>;
@@ -490,7 +490,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <0 0>;
                         port-number = <1>;
-                        reg = <0x0 0xa0020000 0x0 0x4000>;
+                        reg = <0xa0020000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -507,7 +507,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <1 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <2>;
-                        reg = <0x0 0xa0030000 0x0 0x4000>;
+                        reg = <0xa0030000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -524,7 +524,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <2 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <3>;
-                        reg = <0x0 0xa0040000 0x0 0x4000>;
+                        reg = <0xa0040000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -541,7 +541,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <3 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <4>;
-                        reg = <0x0 0xa0050000 0x0 0x4000>;
+                        reg = <0xa0050000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -558,7 +558,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <4 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <5>;
-                        reg = <0x0 0xa0060000 0x0 0x4000>;
+                        reg = <0xa0060000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -575,7 +575,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <5 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <6>;
-                        reg = <0x0 0xa0070000 0x0 0x4000>;
+                        reg = <0xa0070000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -592,7 +592,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <6 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <7>;
-                        reg = <0x0 0xa0080000 0x0 0x4000>;
+                        reg = <0xa0080000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -609,7 +609,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <7 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <8>;
-                        reg = <0x0 0xa0090000 0x0 0x4000>;
+                        reg = <0xa0090000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -626,7 +626,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <8 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <9>;
-                        reg = <0x0 0xa00a0000 0x0 0x4000>;
+                        reg = <0xa00a0000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -643,7 +643,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <9 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <10>;
-                        reg = <0x0 0xa00b0000 0x0 0x4000>;
+                        reg = <0xa00b0000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -660,7 +660,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <10 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <11>;
-                        reg = <0x0 0xa00c0000 0x0 0x4000>;
+                        reg = <0xa00c0000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -678,7 +678,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <11 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <12>;
-                        reg = <0x0 0xa00d0000 0x0 0x4000>;
+                        reg = <0xa00d0000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -696,7 +696,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <12 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <13>;
-                        reg = <0x0 0xa00e0000 0x0 0x4000>;
+                        reg = <0xa00e0000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -713,7 +713,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <13 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <14>;
-                        reg = <0x0 0xa00f0000 0x0 0x4000>;
+                        reg = <0xa00f0000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -730,7 +730,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <14 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <15>;
-                        reg = <0x0 0xa0100000 0x0 0x4000>;
+                        reg = <0xa0100000 0x4000>;
                         xlnx,baudrate = <0x1c200>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
@@ -747,7 +747,7 @@
                         interrupt-parent = <&hier_UARTs_axi_intc_0>;
                         interrupts = <15 0 IRQ_TYPE_LEVEL_HIGH>;
                         port-number = <16>;
-                        reg = <0x0 0xa0110000 0x0 0x4000>;
+                        reg = <0xa0110000 0x4000>;
                         xlnx,baudrate = <0x70800>;
                         xlnx,data-bits = <0x8>;
                         xlnx,odd-parity = <0x0>;
