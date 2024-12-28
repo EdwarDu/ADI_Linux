@@ -489,7 +489,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <0 0>;
+			interrupts =<0 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <1>;
 			reg = <0xa0020000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -506,7 +506,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <1 0>;
+			interrupts =<1 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <2>;
 			reg = <0xa0030000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -523,7 +523,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <2 0>;
+			interrupts =<2 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <3>;
 			reg = <0xa0040000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -540,7 +540,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <3 0>;
+			interrupts =<3 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <4>;
 			reg = <0xa0050000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -557,7 +557,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <4 0>;
+			interrupts =<4 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <5>;
 			reg = <0xa0060000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -574,7 +574,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <5 0>;
+			interrupts =<5 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <6>;
 			reg = <0xa0070000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -591,7 +591,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <6 0>;
+			interrupts =<6 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <7>;
 			reg = <0xa0080000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -608,7 +608,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <7 0>;
+			interrupts =<7 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <8>;
 			reg = <0xa0090000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -625,7 +625,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <8 0>;
+			interrupts =<8 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <9>;
 			reg = <0xa00a0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -642,7 +642,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <9 0>;
+			interrupts =<9 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <10>;
 			reg = <0xa00b0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -659,7 +659,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <10 0>;
+			interrupts =<10 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <11>;
 			reg = <0xa00c0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -676,7 +676,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <11 0>;
+			interrupts =<11 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <12>;
 			reg = <0xa00d0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -693,7 +693,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <12 0>;
+			interrupts =<12 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <13>;
 			reg = <0xa00e0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -710,7 +710,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <13 0>;
+			interrupts =<13 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <14>;
 			reg = <0xa00f0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -727,7 +727,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <14 0>;
+			interrupts =<14 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <15>;
 			reg = <0xa0100000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
@@ -744,7 +744,7 @@
 			device_type = "serial";
 			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
-			interrupts = <15 0>;
+			interrupts =<15 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <16>;
 			reg = <0xa0110000 0x4000>;
 			xlnx,baudrate = <0x70800>;
