@@ -801,14 +801,14 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-
-        dma_proxy {
-            compatible ="xlnx,dma_proxy";
-            dmas = <&hier_FFT_axi_dma_0 0  &hier_FFT_axi_dma_0 1>;
-            dma-names = "dma_proxy_tx", "dma_proxy_rx";
-            dma-coherent;
-        };
 	};
+
+    dma_proxy {
+        compatible ="xlnx,dma_proxy";
+        dmas = <&hier_FFT_axi_dma_0 0  &hier_FFT_axi_dma_0 1>;
+        dma-names = "dma_proxy_tx", "dma_proxy_rx";
+        dma-coherent;
+    };
 };
 
 &spi0 {
