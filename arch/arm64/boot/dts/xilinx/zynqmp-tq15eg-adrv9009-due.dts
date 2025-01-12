@@ -492,6 +492,7 @@
 				xlnx,include-dre ;
                 dma-coherent;
 			};
+            dma-coherent;
 		};
 		hier_FFT_axi_gpio_fft_cfg: gpio@a0130000 {
 			#gpio-cells = <2>;
