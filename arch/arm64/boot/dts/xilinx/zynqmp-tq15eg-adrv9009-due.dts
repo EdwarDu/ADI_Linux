@@ -60,7 +60,7 @@
        ranges;
 
        reserved: buffer@0 {
-          no-map;
+          // no-map;
           reg = <0x0 0x70000000 0x0 0x10000000>;
        };
     };
@@ -474,6 +474,7 @@
 			reg = <0xa0120000 0x10000>;
 			xlnx,addrwidth = <0x20>;
 			xlnx,sg-length-width = <0xe>;
+            dma-coherent;
 			dma-channel@a0120000 {
 				compatible = "xlnx,axi-dma-mm2s-channel";
 				dma-channels = <0x1>;
@@ -492,7 +493,6 @@
 				xlnx,include-dre ;
                 dma-coherent;
 			};
-            dma-coherent;
 		};
 		hier_FFT_axi_gpio_fft_cfg: gpio@a0130000 {
 			#gpio-cells = <2>;
