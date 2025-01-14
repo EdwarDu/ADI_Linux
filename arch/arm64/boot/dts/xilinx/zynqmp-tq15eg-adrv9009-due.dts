@@ -61,7 +61,7 @@
 
        reserved: buffer@0 {
           // compatible = "shared-dma-pool";
-          reusable;
+          // reusable;
           // no-map;
           reg = <0x0 0x70000000 0x0 0x10000000>;
           // linux,cma-default;
