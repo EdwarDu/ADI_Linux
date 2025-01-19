@@ -476,7 +476,7 @@
 			interrupt-names = "mm2s_introut", "s2mm_introut";
 			interrupt-parent = <&gic>;
 			interrupts = <0 110 4 0 111 4>;
-			reg = <0x0 0xa0120000 0x0 0x10000>;
+			reg = <0xa0120000 0x10000>;
 			xlnx,addrwidth = <0x20>;
 			xlnx,sg-length-width = <0x17>;
             dma-coherent;
@@ -624,7 +624,7 @@
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
 			current-speed = <115200>;
 			device_type = "serial";
-			interrupt-names = "interrupt";
+			interrupt-names ="interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<4 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <5>;
@@ -829,6 +829,29 @@
         dmas = <&hier_FFT_axi_dma_0 0  &hier_FFT_axi_dma_0 1>;
         dma-names = "dma_proxy_tx", "dma_proxy_rx";
         dma-coherent;
+    };
+
+    __symbols__ {
+        fft_dma_rx = "/fpga-axi@0/dma@a0120000/dma-channel@a0120030";
+        fft_dma_tx = "/fpga-axi@0/dma@a0120000/dma-channel@a0120000";
+        uartlite_1 = "/fpga-axi@0/serial@a0020000";
+        uartlite_2 = "/fpga-axi@0/serial@a0030000";
+        uartlite_3 = "/fpga-axi@0/serial@a0040000";
+        uartlite_4 = "/fpga-axi@0/serial@a0050000";
+        uartlite_5 = "/fpga-axi@0/serial@a0060000";
+        uartlite_6 = "/fpga-axi@0/serial@a0070000";
+        uartlite_7 = "/fpga-axi@0/serial@a0080000";
+        uartlite_8 = "/fpga-axi@0/serial@a0090000";
+        uartlite_9 = "/fpga-axi@0/serial@a00a0000";
+        uartlite_10 = "/fpga-axi@0/serial@a00b0000";
+        uartlite_11 = "/fpga-axi@0/serial@a00c0000";
+        uartlite_12 = "/fpga-axi@0/serial@a00d0000";
+        uartlite_13 = "/fpga-axi@0/serial@a00e0000";
+        uartlite_14 = "/fpga-axi@0/serial@a00f0000";
+        uartlite_15 = "/fpga-axi@0/serial@a0100000";
+        uartlite_16 = "/fpga-axi@0/serial@a0110000";
+        gpio_out = "/fpga-axi@0/gpio@a0000000";
+        fft_ctrl_gpio = "/fpga-axi@0/gpio@a0130000";
     };
 };
 
