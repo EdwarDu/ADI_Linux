@@ -26,7 +26,7 @@
 
 &fpga_axi {
 
-	adc_trigger: pwm@0x44b00000 {
+	adc_trigger: pwm@44b00000 {
 		compatible = "adi,axi-pwmgen-2.00.a";
 		reg = <0x44b00000 0x1000>;
 		label = "adc_conversion_trigger";
@@ -35,7 +35,7 @@
 	};
 
 	spi_engine: spi@44a00000 {
-		compatible = "adi,axi-spi-engine-1.00.a";
+		compatible = "adi,legacy-axi-spi-engine-1.00.a";
 		reg = <0x44a00000 0x10000>;
 		interrupt-parent = <&intc>;
 		interrupts = <0 56 IRQ_TYPE_LEVEL_HIGH>;
@@ -76,7 +76,7 @@
 		clocks = <&clkc 16>;
 	};
 
-	spi_clk: axi-clkgen@0x44a70000 {
+	spi_clk: axi-clkgen@44a70000 {
 		compatible = "adi,axi-clkgen-2.00.a";
 		reg = <0x44a70000 0x10000>;
 		#clock-cells = <0>;

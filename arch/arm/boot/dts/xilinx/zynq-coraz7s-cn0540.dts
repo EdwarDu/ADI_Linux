@@ -119,7 +119,7 @@
 	};
 
 	axi_spi_engine_0: spi@44a00000 {
-		compatible = "adi,axi-spi-engine-1.00.a";
+		compatible = "adi,legacy-axi-spi-engine-1.00.a";
 		reg = <0x44a00000 0x10000>;
 		interrupt-parent = <&intc>;
 		interrupts = <0 56 IRQ_TYPE_LEVEL_HIGH>;
@@ -149,7 +149,7 @@
 		};
 	};
 
-	spi_clk: axi-clkgen@0x44a70000 {
+	spi_clk: axi-clkgen@44a70000 {
 		compatible = "adi,axi-clkgen-2.00.a";
 		reg = <0x44a70000 0x10000>;
 		#clock-cells = <0>;

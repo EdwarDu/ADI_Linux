@@ -23,7 +23,7 @@
 #include <linux/iio/triggered_buffer.h>
 #include <linux/iio/adc/ad_sigma_delta.h>
 
-#include <linux/spi/spi-engine.h>
+#include <linux/spi/legacy-spi-engine.h>
 
 #include <asm/unaligned.h>
 
@@ -340,6 +340,7 @@ int ad_sd_calibrate(struct ad_sigma_delta *sigma_delta,
 out:
 	sigma_delta->keep_cs_asserted = false;
 	ad_sigma_delta_set_mode(sigma_delta, AD_SD_MODE_IDLE);
+	ad_sigma_delta_disable_one(sigma_delta, channel);
 	sigma_delta->bus_locked = false;
 	spi_bus_unlock(sigma_delta->spi->master);
 
@@ -391,7 +392,9 @@ int ad_sigma_delta_single_conversion(struct iio_dev *indio_dev,
 	if (ret)
 		return ret;
 
-	ad_sigma_delta_set_channel(sigma_delta, chan->address);
+	ret = ad_sigma_delta_set_channel(sigma_delta, chan->address);
+	if (ret)
+		goto out_release;
 
 	spi_bus_lock(sigma_delta->spi->master);
 	sigma_delta->bus_locked = true;
@@ -432,6 +435,7 @@ out_unlock:
 	sigma_delta->keep_cs_asserted = false;
 	sigma_delta->bus_locked = false;
 	spi_bus_unlock(sigma_delta->spi->master);
+out_release:
 	iio_device_release_direct_mode(indio_dev);
 
 	if (ret)
@@ -491,8 +495,8 @@ static void ad_sd_prepare_and_enable_spi_engine_msg(struct ad_sigma_delta *sigma
 	}
 	spi_message_add_tail(&t[1], &m);
 
-	spi_engine_offload_load_msg(sigma_delta->spi, &m);
-	spi_engine_offload_enable(sigma_delta->spi, true);
+	legacy_spi_engine_offload_load_msg(sigma_delta->spi, &m);
+	legacy_spi_engine_offload_enable(sigma_delta->spi, true);
 }
 
 static int ad_sd_buffer_postenable(struct iio_dev *indio_dev)
@@ -578,7 +582,7 @@ static int ad_sd_buffer_postdisable(struct iio_dev *indio_dev)
 	struct ad_sigma_delta *sigma_delta = iio_device_get_drvdata(indio_dev);
 
 	if (iio_device_get_current_mode(indio_dev) == INDIO_BUFFER_HARDWARE) {
-		spi_engine_offload_enable(sigma_delta->spi, false);
+		legacy_spi_engine_offload_enable(sigma_delta->spi, false);
 	} else {
 		reinit_completion(&sigma_delta->completion);
 		wait_for_completion_timeout(&sigma_delta->completion, HZ);
@@ -804,7 +808,7 @@ int devm_ad_sd_setup_buffer_and_trigger(struct device *dev, struct iio_dev *indi
 	struct ad_sigma_delta *sigma_delta = iio_device_get_drvdata(indio_dev);
 	int ret;
 
-	if (spi_engine_offload_supported(sigma_delta->spi))
+	if (legacy_spi_engine_offload_supported(sigma_delta->spi))
 		indio_dev->modes |= INDIO_BUFFER_HARDWARE;
 
 	sigma_delta->slots = devm_kcalloc(dev, sigma_delta->num_slots,
@@ -859,10 +863,15 @@ int ad_sd_init(struct ad_sigma_delta *sigma_delta, struct iio_dev *indio_dev,
 
 	spin_lock_init(&sigma_delta->irq_lock);
 
-	if (info->irq_line)
-		sigma_delta->irq_line = info->irq_line;
-	else
+	if (info->has_named_irqs) {
+		sigma_delta->irq_line = fwnode_irq_get_byname(dev_fwnode(&spi->dev),
+							      "rdy");
+		if (sigma_delta->irq_line < 0)
+			return dev_err_probe(&spi->dev, sigma_delta->irq_line,
+					     "Interrupt 'rdy' is required\n");
+	} else {
 		sigma_delta->irq_line = spi->irq;
+	}
 
 	sigma_delta->rdy_gpiod = devm_gpiod_get_optional(&spi->dev, "rdy", GPIOD_IN);
 	if (IS_ERR(sigma_delta->rdy_gpiod))

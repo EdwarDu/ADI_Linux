@@ -63,6 +63,7 @@
 
 		rx_dma: rx-dmac@9c400000 {
 			#dma-cells = <1>;
+			dma-coherent;
 			compatible = "adi,axi-dmac-1.00.a";
 			reg = <0x9c400000 0x1000>;
 			interrupts = <0 109 IRQ_TYPE_LEVEL_HIGH>;
@@ -120,9 +121,9 @@
 	adc0_ad9694: ad9694@0 {
 		compatible = "adi,ad9694";
 
-		powerdown-gpios = <&gpio 116 0>;
-		fastdetect-a-gpios = <&gpio 113 0>;
-		fastdetect-b-gpios = <&gpio 114 0>;
+		powerdown-gpios = <&gpio 110 0>;
+		fastdetect-a-gpios = <&gpio 111 0>;
+		fastdetect-b-gpios = <&gpio 112 0>;
 
 		spi-cpol;
 		spi-cpha;
