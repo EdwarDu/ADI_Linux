@@ -201,6 +201,7 @@ struct adf4030_state {
 	bool bsync_autoalign_theshold_en;
 	unsigned int num_channels;
 	bool adc_enabled;
+	bool spi_3wire_en;
 
 	u8 vals[3] __aligned(IIO_DMA_MINALIGN);
 };
@@ -218,10 +219,10 @@ static const struct reg_sequence adf4030_reg_default[] = {
 	{0x62, 0x4C}, {0x61, 0x05}, {0x60, 0x2B}, {0x5F, 0x5D}, {0x5E, 0x32},
 	{0x5D, 0x10}, {0x5C, 0x1E}, {0x5B, 0xC9}, {0x5A, 0x17}, {0x59, 0x49},
 	{0x58, 0x53}, {0x57, 0x45}, {0x56, 0x7D}, {0x55, 0x01}, {0x54, 0x90},
-	{0x53, 0x19}, {0x52, 0xE8}, {0x50, 0xE8}, {0x4E, 0xE8}, {0x4C, 0xE8},
-	{0x4A, 0xE8}, {0x48, 0xE8}, {0x46, 0xE8}, {0x44, 0xE8}, {0x42, 0xE8},
-	{0x40, 0xE8}, {0x3C, 0xFF}, {0x3B, 0xFC}, {0x37, 0x02}, {0x35, 0x05},
-	{0x34, 0x2D}, {0x33, 0x1D}, {0x32, 0x1D}, {0x31, 0x45}, {0x16, 0x06},
+	{0x53, 0x19}, {0x52, 0xE9}, {0x50, 0xE9}, {0x4E, 0xE9}, {0x4C, 0xE9},
+	{0x4A, 0xE9}, {0x48, 0xE9}, {0x46, 0xE9}, {0x44, 0xE9}, {0x42, 0xE9},
+	{0x40, 0xE9}, {0x3C, 0xFF}, {0x3B, 0xFC}, {0x37, 0x02}, {0x35, 0x05},
+	{0x34, 0x24}, {0x33, 0x1D}, {0x32, 0x1D}, {0x31, 0x45}, {0x16, 0x06},
 	{0x11, 0x1F}, {0x10, 0x1F}
 };
 
@@ -334,13 +335,13 @@ static int adf4030_chan_dir_set(const struct adf4030_state *st,
 
 	/* EN_DRIVE */
 	if (chan->num > 7)
-		regmap_update_bits(st->regmap, ADF4030_REG(0x13),
-				   BIT(chan->num - 8),
-				   chan->channel_output_en ? BIT(chan->num - 8) : 0);
+		ret = regmap_update_bits(st->regmap, ADF4030_REG(0x13),
+					 BIT(chan->num - 8),
+					 chan->channel_output_en ? BIT(chan->num - 8) : 0);
 	else
-		regmap_update_bits(st->regmap, ADF4030_REG(0x12),
-				   BIT(chan->num),
-				   chan->channel_output_en ? BIT(chan->num) : 0);
+		ret = regmap_update_bits(st->regmap, ADF4030_REG(0x12),
+					 BIT(chan->num),
+					 chan->channel_output_en ? BIT(chan->num) : 0);
 	if (ret)
 		return ret;
 
@@ -1073,6 +1074,7 @@ static int adf4030_startup(struct adf4030_state *st, u32 ref_input_freq_hz,
 	struct device *dev = &st->spi->dev;
 	u32 rdiv, ndiv, odiv, regval, coreclk;
 	int ret;
+	bool en = true;
 
 	ret = regmap_set_bits(st->regmap, ADF4030_REG(0xFF),
 			      ADF4030_SOFTRESET_CHIP_MSK);
@@ -1081,11 +1083,14 @@ static int adf4030_startup(struct adf4030_state *st, u32 ref_input_freq_hz,
 
 	fsleep(10);
 
+	if (st->spi->mode & SPI_3WIRE || st->spi_3wire_en)
+		en = false;
+
 	/* Enable SDO and ADDRESS_ASCENSION */
 	ret = regmap_write(st->regmap, ADF4030_REG(0x00),
-			   FIELD_PREP(ADF4030_SDO_ACTIVE_MSK, 1) |
+			   FIELD_PREP(ADF4030_SDO_ACTIVE_MSK, en) |
 			   FIELD_PREP(ADF4030_ADDRESS_ASCENSION_MSK, 1) |
-			   FIELD_PREP(ADF4030_SDO_ACTIVE_R_MSK, 1) |
+			   FIELD_PREP(ADF4030_SDO_ACTIVE_R_MSK, en) |
 			   FIELD_PREP(ADF4030_ADDRESS_ASCENSION_R_MSK, 1));
 	if (ret)
 		return ret;
@@ -1105,10 +1110,6 @@ static int adf4030_startup(struct adf4030_state *st, u32 ref_input_freq_hz,
 	if (regval != 0xAD)
 		return dev_err_probe(dev, -EIO,
 				     "Failed SPI write/read verify test REG_0x0A=0x%X\n", regval);
-
-	ret = regmap_read(st->regmap, ADF4030_REG(0xBB), &regval);
-	if (ret)
-		return ret;
 
 	/* Set default registers */
 	ret = regmap_multi_reg_write(st->regmap, adf4030_reg_default,
@@ -1226,6 +1227,9 @@ static int adf4030_parse_fw(struct adf4030_state *st)
 	struct device *dev = &st->spi->dev;
 	unsigned int i, cnt = 0;
 	int ret;
+
+	st->spi_3wire_en = device_property_read_bool(dev,
+						     "adi,spi-3wire-enable");
 
 	ret = device_property_read_u32(dev, "adi,vco-frequency-hz",
 				       &st->vco_freq);

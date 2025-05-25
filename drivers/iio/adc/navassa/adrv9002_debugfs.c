@@ -1551,6 +1551,9 @@ void adrv9002_debugfs_create(struct adrv9002_rf_phy *phy, struct dentry *d)
 				   &phy->port_switch.maxFreqPortB_Hz);
 	}
 
+	debugfs_create_bool("mcs_pulse_external", 0600, d, &phy->mcs_pulse_external);
+	debugfs_create_bool("mcs_trigger_external", 0600, d, &phy->mcs_trigger_external);
+
 	for (chan = 0; chan < phy->chip->n_tx; chan++) {
 		struct adrv9002_tx_chan *tx = &phy->tx_channels[chan];
 
@@ -1612,7 +1615,7 @@ void adrv9002_debugfs_create(struct adrv9002_rf_phy *phy, struct dentry *d)
 		debugfs_create_file(attr, 0600, d, &tx->channel, &adrv9002_mcs_delays_fops);
 	}
 
-	for (chan = 0; chan < ARRAY_SIZE(phy->rx_channels); chan++) {
+	for (chan = 0; chan < phy->chip->n_rx; chan++) {
 		struct adrv9002_rx_chan *rx = &phy->rx_channels[chan];
 
 		sprintf(attr, "rx%d_adc_type", chan);

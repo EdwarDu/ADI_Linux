@@ -5,6 +5,7 @@
  * Copyright 2022 Analog Devices Inc.
  */
 #include <linux/device.h>
+#include <linux/errno.h>
 #include <linux/gpio/consumer.h>
 #include <linux/kernel.h>
 #include <linux/of.h>
@@ -616,6 +617,20 @@ static int adrv9002_parse_dpd(const struct adrv9002_rf_phy *phy,
 	if (!of_property_read_bool(node, "adi,dpd"))
 		return 0;
 
+	/*
+	 * Ignore DPD if the chip does not support it. The only reason this is not returning
+	 * an error is for backward compatibility with older device tree files for adrv9003 which
+	 * might wrongly enable DPD. And some users might have just copy pasted those DTs but
+	 * don't really care or use DPD and so, it would be cumbersome to start failing to probe all
+	 * of the sudden. Therefore, just warn about this and ignore it (and let user remove the
+	 * property).
+	 */
+	if (!phy->chip->has_dpd) {
+		dev_warn(&phy->spi->dev, "DPD not supported on this device (%s)! Ignoring....\n",
+			 phy->chip->name);
+		return 0;
+	}
+
 	tx->dpd_init = devm_kzalloc(&phy->spi->dev, sizeof(*tx->dpd_init), GFP_KERNEL);
 	if (!tx->dpd_init)
 		return -ENOMEM;
@@ -1137,6 +1152,11 @@ static int adrv9002_parse_rx_dt(struct adrv9002_rf_phy *phy,
 	int ret;
 	u32 min_gain, max_gain;
 
+	if (channel >= phy->chip->n_rx) {
+		dev_err(&phy->spi->dev, "RX%d not supported for this device\n", channel + 1);
+		return -EINVAL;
+	}
+
 	ret = adrv9002_parse_rx_agc_dt(phy, node, rx);
 	if (ret)
 		return ret;
@@ -1373,6 +1393,17 @@ int adrv9002_parse_dt(struct adrv9002_rf_phy *phy)
 					   phy->dev_clkout_div, false);
 	if (ret)
 		return ret;
+
+	phy->mcs_pulse_external = of_property_read_bool(parent, "adi,mcs-pulse-external");
+	phy->mcs_trigger_external = of_property_read_bool(parent, "adi,mcs-trigger-external");
+
+	/*
+	 * The below settings don't make sense but everything should still be fully functional...
+	 * Hence, just spit out a Warning and move on...
+	 */
+	if (phy->mcs_trigger_external && phy->mcs_pulse_external)
+		dev_warn(&phy->spi->dev,
+			 "MCS trigger set to external but the MCS pulses are also external. Ignoring...\n");
 
 	ret = adrv9002_parse_port_switch(phy, parent);
 	if (ret)
