@@ -468,7 +468,7 @@
 		};
 
 
-		// hier_FFT_axi_dma_0: dma@a0120000 {
+		// hier_FFT_axi_dma_0: dma@b0120000 {
 		// 	#dma-cells = <1>;
 		// 	clock-names = "m_axi_mm2s_aclk", "m_axi_s2mm_aclk", "s_axi_lite_aclk";
 		// 	clocks = <&zynqmp_clk 72>, <&zynqmp_clk 72>, <&zynqmp_clk 72>;
@@ -480,14 +480,14 @@
 		// 	xlnx,addrwidth = <0x20>;
 		// 	xlnx,sg-length-width = <0x17>;
         //     dma-coherent;
-		// 	dma-channel@a0120000 {
+		// 	dma-channel@b0120000 {
 		// 		compatible = "xlnx,axi-dma-mm2s-channel";
 		// 		dma-channels = <0x1>;
 		// 		interrupts = <0 110 4>;
 		// 		xlnx,datawidth = <0x80>;
 		// 		xlnx,device-id = <0x0>;
 		// 	};
-		// 	dma-channel@a0120030 {
+		// 	dma-channel@b0120030 {
 		// 		compatible = "xlnx,axi-dma-s2mm-channel";
 		// 		dma-channels = <0x1>;
 		// 		interrupts = <0 111 4>;
@@ -496,7 +496,7 @@
 		// 	};
 		// };
 
-		// hier_FFT_axi_gpio_fft_cfg: gpio@a0130000 {
+		// hier_FFT_axi_gpio_fft_cfg: gpio@b0130000 {
 		// 	#gpio-cells = <2>;
 		// 	clock-names = "s_axi_aclk";
 		// 	clocks = <&zynqmp_clk 72>;
@@ -517,7 +517,7 @@
 		// 	xlnx,tri-default-2 = <0xFFFFFFFF>;
 		// };
 
-		hier_UARTs_axi_gpio_0: gpio@a0000000 {
+		hier_UARTs_axi_gpio_0: gpio@b0000000 {
 			#gpio-cells = <2>;
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
@@ -537,7 +537,7 @@
 			xlnx,tri-default = <0xFFFFFFFF>;
 			xlnx,tri-default-2 = <0xFFFFFFFF>;
 		};
-		hier_UARTs_axi_intc_0: interrupt-controller@a0010000 {
+		hier_UARTs_axi_intc_0: interrupt-controller@b0010000 {
 			#interrupt-cells = <2>;
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
@@ -550,7 +550,7 @@
 			xlnx,kind-of-intr = <0xffff>;
 			xlnx,num-intr-inputs = <0x10>;
 		};
-		hier_UARTs_axi_uartlite_00: serial@a0020000 {
+		hier_UARTs_axi_uartlite_00: serial@b0020000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -567,7 +567,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_01: serial@a0030000 {
+		hier_UARTs_axi_uartlite_01: serial@b0030000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -584,7 +584,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_02: serial@a0040000 {
+		hier_UARTs_axi_uartlite_02: serial@b0040000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -601,7 +601,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_03: serial@a0050000 {
+		hier_UARTs_axi_uartlite_03: serial@b0050000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -618,7 +618,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_04: serial@a0060000 {
+		hier_UARTs_axi_uartlite_04: serial@b0060000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -635,7 +635,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_05: serial@a0070000 {
+		hier_UARTs_axi_uartlite_05: serial@b0070000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -652,7 +652,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_06: serial@a0080000 {
+		hier_UARTs_axi_uartlite_06: serial@b0080000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -669,7 +669,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_07: serial@a0090000 {
+		hier_UARTs_axi_uartlite_07: serial@b0090000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -686,7 +686,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_08: serial@a00a0000 {
+		hier_UARTs_axi_uartlite_08: serial@b00a0000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -703,7 +703,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_09: serial@a00b0000 {
+		hier_UARTs_axi_uartlite_09: serial@b00b0000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -720,7 +720,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_10: serial@a00c0000 {
+		hier_UARTs_axi_uartlite_10: serial@b00c0000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -737,7 +737,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_11: serial@a00d0000 {
+		hier_UARTs_axi_uartlite_11: serial@b00d0000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -754,7 +754,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_12: serial@a00e0000 {
+		hier_UARTs_axi_uartlite_12: serial@b00e0000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -771,7 +771,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_13: serial@a00f0000 {
+		hier_UARTs_axi_uartlite_13: serial@b00f0000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -788,7 +788,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_14: serial@a0100000 {
+		hier_UARTs_axi_uartlite_14: serial@b0100000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -805,7 +805,7 @@
 			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
 			xlnx,use-parity = <0x0>;
 		};
-		hier_UARTs_axi_uartlite_15: serial@a0110000 {
+		hier_UARTs_axi_uartlite_15: serial@b0110000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
@@ -832,26 +832,26 @@
     // };
 
     __symbols__ {
-        fft_dma_rx = "/fpga-axi@0/dma@a0120000/dma-channel@a0120030";
-        fft_dma_tx = "/fpga-axi@0/dma@a0120000/dma-channel@a0120000";
-        uartlite_1 = "/fpga-axi@0/serial@a0020000";
-        uartlite_2 = "/fpga-axi@0/serial@a0030000";
-        uartlite_3 = "/fpga-axi@0/serial@a0040000";
-        uartlite_4 = "/fpga-axi@0/serial@a0050000";
-        uartlite_5 = "/fpga-axi@0/serial@a0060000";
-        uartlite_6 = "/fpga-axi@0/serial@a0070000";
-        uartlite_7 = "/fpga-axi@0/serial@a0080000";
-        uartlite_8 = "/fpga-axi@0/serial@a0090000";
-        uartlite_9 = "/fpga-axi@0/serial@a00a0000";
-        uartlite_10 = "/fpga-axi@0/serial@a00b0000";
-        uartlite_11 = "/fpga-axi@0/serial@a00c0000";
-        uartlite_12 = "/fpga-axi@0/serial@a00d0000";
-        uartlite_13 = "/fpga-axi@0/serial@a00e0000";
-        uartlite_14 = "/fpga-axi@0/serial@a00f0000";
-        uartlite_15 = "/fpga-axi@0/serial@a0100000";
-        uartlite_16 = "/fpga-axi@0/serial@a0110000";
-        gpio_out = "/fpga-axi@0/gpio@a0000000";
-        // fft_ctrl_gpio = "/fpga-axi@0/gpio@a0130000";
+//        fft_dma_rx = "/fpga-axi@0/dma@b0120000/dma-channel@b0120030";
+//        fft_dma_tx = "/fpga-axi@0/dma@b0120000/dma-channel@b0120000";
+        uartlite_1 = "/fpga-axi@0/serial@b0020000";
+        uartlite_2 = "/fpga-axi@0/serial@b0030000";
+        uartlite_3 = "/fpga-axi@0/serial@b0040000";
+        uartlite_4 = "/fpga-axi@0/serial@b0050000";
+        uartlite_5 = "/fpga-axi@0/serial@b0060000";
+        uartlite_6 = "/fpga-axi@0/serial@b0070000";
+        uartlite_7 = "/fpga-axi@0/serial@b0080000";
+        uartlite_8 = "/fpga-axi@0/serial@b0090000";
+        uartlite_9 = "/fpga-axi@0/serial@b00a0000";
+        uartlite_10 = "/fpga-axi@0/serial@b00b0000";
+        uartlite_11 = "/fpga-axi@0/serial@b00c0000";
+        uartlite_12 = "/fpga-axi@0/serial@b00d0000";
+        uartlite_13 = "/fpga-axi@0/serial@b00e0000";
+        uartlite_14 = "/fpga-axi@0/serial@b00f0000";
+        uartlite_15 = "/fpga-axi@0/serial@b0100000";
+        uartlite_16 = "/fpga-axi@0/serial@b0110000";
+        gpio_out = "/fpga-axi@0/gpio@b0000000";
+        // fft_ctrl_gpio = "/fpga-axi@0/gpio@b0130000";
     };
 };
 
