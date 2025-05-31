@@ -476,7 +476,7 @@
 		// 	interrupt-names = "mm2s_introut", "s2mm_introut";
 		// 	interrupt-parent = <&gic>;
 		// 	interrupts = <0 110 4 0 111 4>;
-		// 	reg = <0xa0120000 0x10000>;
+		// 	reg = <0xb0120000 0x10000>;
 		// 	xlnx,addrwidth = <0x20>;
 		// 	xlnx,sg-length-width = <0x17>;
         //     dma-coherent;
@@ -502,7 +502,7 @@
 		// 	clocks = <&zynqmp_clk 72>;
 		// 	compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
 		// 	gpio-controller ;
-		// 	reg = <0xa0130000 0x10000>;
+		// 	reg = <0xb0130000 0x10000>;
 		// 	xlnx,all-inputs = <0x0>;
 		// 	xlnx,all-inputs-2 = <0x0>;
 		// 	xlnx,all-outputs = <0x0>;
@@ -523,7 +523,7 @@
 			clocks = <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
 			gpio-controller ;
-			reg = <0xa0000000 0x4000>;
+			reg = <0xb0000000 0x4000>;
 			xlnx,all-inputs = <0x0>;
 			xlnx,all-inputs-2 = <0x0>;
 			xlnx,all-outputs = <0x0>;
@@ -546,7 +546,7 @@
 			interrupt-names = "irq";
 			interrupt-parent = <&gic>;
 			interrupts = <0 89 4>;
-			reg = <0xa0010000 0x10000>;
+			reg = <0xb0010000 0x10000>;
 			xlnx,kind-of-intr = <0xffff>;
 			xlnx,num-intr-inputs = <0x10>;
 		};
@@ -560,7 +560,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<0 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <1>;
-			reg = <0xa0020000 0x4000>;
+			reg = <0xb0020000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -577,7 +577,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<1 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <2>;
-			reg = <0xa0030000 0x4000>;
+			reg = <0xb0030000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -594,7 +594,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<2 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <3>;
-			reg = <0xa0040000 0x4000>;
+			reg = <0xb0040000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -611,7 +611,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<3 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <4>;
-			reg = <0xa0050000 0x4000>;
+			reg = <0xb0050000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -628,7 +628,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<4 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <5>;
-			reg = <0xa0060000 0x4000>;
+			reg = <0xb0060000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -645,7 +645,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<5 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <6>;
-			reg = <0xa0070000 0x4000>;
+			reg = <0xb0070000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -662,7 +662,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<6 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <7>;
-			reg = <0xa0080000 0x4000>;
+			reg = <0xb0080000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -679,7 +679,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<7 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <8>;
-			reg = <0xa0090000 0x4000>;
+			reg = <0xb0090000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -696,7 +696,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<8 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <9>;
-			reg = <0xa00a0000 0x4000>;
+			reg = <0xb00a0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -713,7 +713,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<9 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <10>;
-			reg = <0xa00b0000 0x4000>;
+			reg = <0xb00b0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -730,7 +730,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<10 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <11>;
-			reg = <0xa00c0000 0x4000>;
+			reg = <0xb00c0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -747,7 +747,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<11 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <12>;
-			reg = <0xa00d0000 0x4000>;
+			reg = <0xb00d0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -764,7 +764,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<12 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <13>;
-			reg = <0xa00e0000 0x4000>;
+			reg = <0xb00e0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -781,7 +781,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<13 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <14>;
-			reg = <0xa00f0000 0x4000>;
+			reg = <0xb00f0000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -798,7 +798,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<14 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <15>;
-			reg = <0xa0100000 0x4000>;
+			reg = <0xb0100000 0x4000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
@@ -815,7 +815,7 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<15 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <16>;
-			reg = <0xa0110000 0x4000>;
+			reg = <0xb0110000 0x4000>;
 			xlnx,baudrate = <0x70800>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
