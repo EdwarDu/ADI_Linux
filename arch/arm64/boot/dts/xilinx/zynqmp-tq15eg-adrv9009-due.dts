@@ -332,7 +332,7 @@
 
 		inst1_axi_adrv9009_core_rx_obs: axi-adrv9009-rx-obs-hpc-2@84b08000 {
 			compatible = "adi,axi-adrv9009-obs-1.0";
-			reg = <0x0 0x84b08000 0x0 0x1000>;
+			reg = <0x84b08000 0x1000>;
 			dmas = <&inst1_rx_obs_dma 0>;
 			dma-names = "rx";
 			clocks = <&inst1_trx0_adrv9009 1>;
@@ -517,26 +517,6 @@
 		// 	xlnx,tri-default-2 = <0xFFFFFFFF>;
 		// };
 
-		hier_UARTs_axi_gpio_0: gpio@b0000000 {
-			#gpio-cells = <2>;
-			clock-names = "s_axi_aclk";
-			clocks = <&zynqmp_clk 72>;
-			compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
-			gpio-controller ;
-			reg = <0xb0000000 0x4000>;
-			xlnx,all-inputs = <0x0>;
-			xlnx,all-inputs-2 = <0x0>;
-			xlnx,all-outputs = <0x0>;
-			xlnx,all-outputs-2 = <0x0>;
-			xlnx,dout-default = <0x00000000>;
-			xlnx,dout-default-2 = <0x00000000>;
-			xlnx,gpio-width = <0x10>;
-			xlnx,gpio2-width = <0x20>;
-			xlnx,interrupt-present = <0x0>;
-			xlnx,is-dual = <0x0>;
-			xlnx,tri-default = <0xFFFFFFFF>;
-			xlnx,tri-default-2 = <0xFFFFFFFF>;
-		};
 		hier_UARTs_axi_intc_0: interrupt-controller@b0010000 {
 			#interrupt-cells = <2>;
 			clock-names = "s_axi_aclk";
@@ -550,6 +530,26 @@
 			xlnx,kind-of-intr = <0xffff>;
 			xlnx,num-intr-inputs = <0x10>;
 		};
+		hier_UARTs_axi_gpio_0: gpio@b0000000 {
+			#gpio-cells = <2>;
+			clock-names = "s_axi_aclk";
+			clocks = <&zynqmp_clk 72>;
+			compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
+			gpio-controller ;
+			reg = <0xb0000000 0x10000>;
+			xlnx,all-inputs = <0x0>;
+			xlnx,all-inputs-2 = <0x0>;
+			xlnx,all-outputs = <0x0>;
+			xlnx,all-outputs-2 = <0x0>;
+			xlnx,dout-default = <0x00000000>;
+			xlnx,dout-default-2 = <0x00000000>;
+			xlnx,gpio-width = <0x10>;
+			xlnx,gpio2-width = <0x20>;
+			xlnx,interrupt-present = <0x0>;
+			xlnx,is-dual = <0x0>;
+			xlnx,tri-default = <0xFFFFFFFF>;
+			xlnx,tri-default-2 = <0xFFFFFFFF>;
+		};
 		hier_UARTs_axi_uartlite_00: serial@b0020000 {
 			clock-names = "s_axi_aclk";
 			clocks = <&zynqmp_clk 72>;
@@ -560,11 +560,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<0 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <1>;
-			reg = <0xb0020000 0x4000>;
+			reg = <0xb0020000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_01: serial@b0030000 {
@@ -577,11 +577,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<1 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <2>;
-			reg = <0xb0030000 0x4000>;
+			reg = <0xb0030000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_02: serial@b0040000 {
@@ -594,11 +594,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<2 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <3>;
-			reg = <0xb0040000 0x4000>;
+			reg = <0xb0040000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_03: serial@b0050000 {
@@ -611,11 +611,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<3 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <4>;
-			reg = <0xb0050000 0x4000>;
+			reg = <0xb0050000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_04: serial@b0060000 {
@@ -624,15 +624,15 @@
 			compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
 			current-speed = <115200>;
 			device_type = "serial";
-			interrupt-names ="interrupt";
+			interrupt-names = "interrupt";
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<4 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <5>;
-			reg = <0xb0060000 0x4000>;
+			reg = <0xb0060000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_05: serial@b0070000 {
@@ -645,11 +645,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<5 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <6>;
-			reg = <0xb0070000 0x4000>;
+			reg = <0xb0070000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_06: serial@b0080000 {
@@ -662,11 +662,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<6 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <7>;
-			reg = <0xb0080000 0x4000>;
+			reg = <0xb0080000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_07: serial@b0090000 {
@@ -679,11 +679,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<7 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <8>;
-			reg = <0xb0090000 0x4000>;
+			reg = <0xb0090000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_08: serial@b00a0000 {
@@ -696,11 +696,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<8 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <9>;
-			reg = <0xb00a0000 0x4000>;
+			reg = <0xb00a0000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_09: serial@b00b0000 {
@@ -713,11 +713,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<9 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <10>;
-			reg = <0xb00b0000 0x4000>;
+			reg = <0xb00b0000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_10: serial@b00c0000 {
@@ -730,11 +730,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<10 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <11>;
-			reg = <0xb00c0000 0x4000>;
+			reg = <0xb00c0000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_11: serial@b00d0000 {
@@ -747,11 +747,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<11 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <12>;
-			reg = <0xb00d0000 0x4000>;
+			reg = <0xb00d0000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_12: serial@b00e0000 {
@@ -764,11 +764,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<12 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <13>;
-			reg = <0xb00e0000 0x4000>;
+			reg = <0xb00e0000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_13: serial@b00f0000 {
@@ -781,11 +781,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<13 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <14>;
-			reg = <0xb00f0000 0x4000>;
+			reg = <0xb00f0000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_14: serial@b0100000 {
@@ -798,11 +798,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<14 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <15>;
-			reg = <0xb0100000 0x4000>;
+			reg = <0xb0100000 0x10000>;
 			xlnx,baudrate = <0x1c200>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 		hier_UARTs_axi_uartlite_15: serial@b0110000 {
@@ -815,11 +815,11 @@
 			interrupt-parent = <&hier_UARTs_axi_intc_0>;
 			interrupts =<15 IRQ_TYPE_LEVEL_HIGH>;
 			port-number = <16>;
-			reg = <0xb0110000 0x4000>;
+			reg = <0xb0110000 0x10000>;
 			xlnx,baudrate = <0x70800>;
 			xlnx,data-bits = <0x8>;
 			xlnx,odd-parity = <0x0>;
-			xlnx,s-axi-aclk-freq-hz-d = "249.997498";
+			xlnx,s-axi-aclk-freq-hz-d = <0xfa>;
 			xlnx,use-parity = <0x0>;
 		};
 	};
