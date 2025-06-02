@@ -54,26 +54,6 @@
 };
 
 / {
-    reserved-memory {
-       #address-cells = <2>;
-       #size-cells = <2>;
-       ranges;
-
-       reserved: buffer@0 {
-          // compatible = "shared-dma-pool";
-          // reusable;
-          no-map;
-          // 64K * 2
-          reg = <0x0 0x70000000 0x0 0x00020000>;
-          // linux,cma-default;
-       };
-    };
-
-    reserved-driver@0 {
-       compatible = "xlnx,reserved-memory";
-       memory-region = <&reserved>;
-    };
-
 	fpga_axi: fpga-axi@0 {
 		interrupt-parent = <&gic>;
 		compatible = "simple-bus";

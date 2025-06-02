@@ -238,6 +238,34 @@
 		adi,rx-settings-framer-sel = <0>;
 		adi,rx-settings-rx-channels = <3>;
 
+		/* ORX */
+
+		adi,orx-profile-rx-fir-gain_db = <6>;
+		adi,orx-profile-rx-fir-num-fir-coefs = <24>;
+		adi,orx-profile-rx-fir-coefs = /bits/ 16  <(-10) (7) (-10) (-12) (6) (-12) (16) (-16) (1) (63) (-431) (17235) (-431) (63) (1) (-16) (16) (-12) (6) (-12) (-10) (7) (-10) (0)>;
+		adi,orx-profile-rx-fir-decimation = <1>;
+		adi,orx-profile-rx-dec5-decimation = <4>;
+		adi,orx-profile-rhb1-decimation = <2>;
+		adi,orx-profile-orx-output-rate_khz = <245760>;
+		adi,orx-profile-rf-bandwidth_hz = <200000000>;
+		adi,orx-profile-rx-bbf3d-bcorner_khz = <225000>;
+		adi,orx-profile-orx-low-pass-adc-profile = /bits/ 16  <185 141 172 90 1280 942 1332 90 1368 46 1016 19 48 48 37 208 0 0 0 0 52 0 7 6 42 0 7 6 42 0 25 27 0 0 25 27 0 0 165 44 31 905>;
+		adi,orx-profile-orx-band-pass-adc-profile = /bits/ 16  <0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0>;
+		adi,orx-profile-orx-ddc-mode = <0>;
+		adi,orx-profile-orx-merge-filter = /bits/ 16  <0 0 0 0 0 0 0 0 0 0 0 0>;
+
+		adi,orx-gain-control-gain-mode = <0>;
+		adi,orx-gain-control-orx1-gain-index = <255>;
+		adi,orx-gain-control-orx2-gain-index = <255>;
+		adi,orx-gain-control-orx1-max-gain-index = <255>;
+		adi,orx-gain-control-orx1-min-gain-index = <195>;
+		adi,orx-gain-control-orx2-max-gain-index = <255>;
+		adi,orx-gain-control-orx2-min-gain-index = <195>;
+
+		adi,obs-settings-framer-sel = <1>;
+		adi,obs-settings-obs-rx-channels-enable = <1>;
+		adi,obs-settings-obs-rx-lo-source = <0>;
+
 		/* TX */
 
 		adi,tx-profile-tx-fir-gain_db = <6>;
