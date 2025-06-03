@@ -447,56 +447,52 @@
 			reg = <0x85000000 0x10000>;
 		};
 
-
-		// hier_FFT_axi_dma_0: dma@b0120000 {
-		// 	#dma-cells = <1>;
-		// 	clock-names = "m_axi_mm2s_aclk", "m_axi_s2mm_aclk", "s_axi_lite_aclk";
-		// 	clocks = <&zynqmp_clk 72>, <&zynqmp_clk 72>, <&zynqmp_clk 72>;
-		// 	compatible = "xlnx,axi-dma-7.1", "xlnx,axi-dma-1.00.a";
-		// 	interrupt-names = "mm2s_introut", "s2mm_introut";
-		// 	interrupt-parent = <&gic>;
-		// 	interrupts = <0 110 4 0 111 4>;
-		// 	reg = <0xb0120000 0x10000>;
-		// 	xlnx,addrwidth = <0x20>;
-		// 	xlnx,sg-length-width = <0x17>;
-        //     dma-coherent;
-		// 	dma-channel@b0120000 {
-		// 		compatible = "xlnx,axi-dma-mm2s-channel";
-		// 		dma-channels = <0x1>;
-		// 		interrupts = <0 110 4>;
-		// 		xlnx,datawidth = <0x80>;
-		// 		xlnx,device-id = <0x0>;
-		// 	};
-		// 	dma-channel@b0120030 {
-		// 		compatible = "xlnx,axi-dma-s2mm-channel";
-		// 		dma-channels = <0x1>;
-		// 		interrupts = <0 111 4>;
-		// 		xlnx,datawidth = <0x20>;
-		// 		xlnx,device-id = <0x0>;
-		// 	};
-		// };
-
-		// hier_FFT_axi_gpio_fft_cfg: gpio@b0130000 {
-		// 	#gpio-cells = <2>;
-		// 	clock-names = "s_axi_aclk";
-		// 	clocks = <&zynqmp_clk 72>;
-		// 	compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
-		// 	gpio-controller ;
-		// 	reg = <0xb0130000 0x10000>;
-		// 	xlnx,all-inputs = <0x0>;
-		// 	xlnx,all-inputs-2 = <0x0>;
-		// 	xlnx,all-outputs = <0x0>;
-		// 	xlnx,all-outputs-2 = <0x0>;
-		// 	xlnx,dout-default = <0x00000000>;
-		// 	xlnx,dout-default-2 = <0x00000000>;
-		// 	xlnx,gpio-width = <0x18>;
-		// 	xlnx,gpio2-width = <0x20>;
-		// 	xlnx,interrupt-present = <0x0>;
-		// 	xlnx,is-dual = <0x0>;
-		// 	xlnx,tri-default = <0xFFFFFFFF>;
-		// 	xlnx,tri-default-2 = <0xFFFFFFFF>;
-		// };
-
+		hier_FFT_CO_axi_dma_fft: dma@b0120000 {
+			#dma-cells = <1>;
+			clock-names = "m_axi_mm2s_aclk", "m_axi_s2mm_aclk", "s_axi_lite_aclk";
+			clocks = <&zynqmp_clk 72>, <&zynqmp_clk 72>, <&zynqmp_clk 72>;
+			compatible = "xlnx,axi-dma-7.1", "xlnx,axi-dma-1.00.a";
+			interrupt-names = "mm2s_introut", "s2mm_introut";
+			interrupt-parent = <&gic>;
+			interrupts = <0 110 4 0 111 4>;
+			reg = <0xb0120000 0x10000>;
+			xlnx,addrwidth = <0x20>;
+			xlnx,sg-length-width = <0xe>;
+			dma-channel@b0120000 {
+				compatible = "xlnx,axi-dma-mm2s-channel";
+				dma-channels = <0x1>;
+				interrupts = <0 110 4>;
+				xlnx,datawidth = <0x20>;
+				xlnx,device-id = <0x0>;
+			};
+			dma-channel@b0120030 {
+				compatible = "xlnx,axi-dma-s2mm-channel";
+				dma-channels = <0x1>;
+				interrupts = <0 111 4>;
+				xlnx,datawidth = <0x20>;
+				xlnx,device-id = <0x0>;
+			};
+		};
+		hier_FFT_CO_axi_gpio_fft_config: gpio@b0130000 {
+			#gpio-cells = <2>;
+			clock-names = "s_axi_aclk";
+			clocks = <&zynqmp_clk 72>;
+			compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
+			gpio-controller ;
+			reg = <0xb0130000 0x10000>;
+			xlnx,all-inputs = <0x0>;
+			xlnx,all-inputs-2 = <0x0>;
+			xlnx,all-outputs = <0x1>;
+			xlnx,all-outputs-2 = <0x0>;
+			xlnx,dout-default = <0x00000000>;
+			xlnx,dout-default-2 = <0x00000000>;
+			xlnx,gpio-width = <0x10>;
+			xlnx,gpio2-width = <0x20>;
+			xlnx,interrupt-present = <0x0>;
+			xlnx,is-dual = <0x0>;
+			xlnx,tri-default = <0xFFFFFFFF>;
+			xlnx,tri-default-2 = <0xFFFFFFFF>;
+		};
 		hier_UARTs_axi_intc_0: interrupt-controller@b0010000 {
 			#interrupt-cells = <2>;
 			clock-names = "s_axi_aclk";
