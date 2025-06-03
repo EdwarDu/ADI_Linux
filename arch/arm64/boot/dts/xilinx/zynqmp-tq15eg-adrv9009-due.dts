@@ -800,16 +800,17 @@
 		};
 	};
 
-    // dma_proxy {
-    //     compatible ="xlnx,dma_proxy";
-    //     dmas = <&hier_FFT_axi_dma_0 0  &hier_FFT_axi_dma_0 1>;
-    //     dma-names = "dma_proxy_tx", "dma_proxy_rx";
-    //     dma-coherent;
-    // };
+    dma_proxy {
+      compatible ="xlnx,dma_proxy";
+      dmas = <&hier_FFT_CO_axi_dma_fft 0  &hier_FFT_CO_axi_dma_fft 1>;
+      dma-names = "dma_proxy_tx", "dma_proxy_rx";  
+      dma-coherent;
+    } ;
 
     __symbols__ {
-//        fft_dma_rx = "/fpga-axi@0/dma@b0120000/dma-channel@b0120030";
-//        fft_dma_tx = "/fpga-axi@0/dma@b0120000/dma-channel@b0120000";
+        fft_dma_rx = "/fpga-axi@0/dma@b0120000/dma-channel@b0120030";
+        fft_dma_tx = "/fpga-axi@0/dma@b0120000/dma-channel@b0120000";
+        fft_ctrl_gpio = "/fpga-axi@0/gpio@b0130000";
         uartlite_1 = "/fpga-axi@0/serial@b0020000";
         uartlite_2 = "/fpga-axi@0/serial@b0030000";
         uartlite_3 = "/fpga-axi@0/serial@b0040000";
@@ -827,7 +828,6 @@
         uartlite_15 = "/fpga-axi@0/serial@b0100000";
         uartlite_16 = "/fpga-axi@0/serial@b0110000";
         gpio_out = "/fpga-axi@0/gpio@b0000000";
-        // fft_ctrl_gpio = "/fpga-axi@0/gpio@b0130000";
     };
 };
 
