@@ -446,7 +446,6 @@
 			compatible = "adi,axi-sysid-1.00.a";
 			reg = <0x85000000 0x10000>;
 		};
-
 		hier_FFT_CO_axi_dma_fft: dma@b0120000 {
 			#dma-cells = <1>;
 			clock-names = "m_axi_mm2s_aclk", "m_axi_s2mm_aclk", "s_axi_lite_aclk";
@@ -457,7 +456,7 @@
 			interrupts = <0 110 4 0 111 4>;
 			reg = <0xb0120000 0x10000>;
 			xlnx,addrwidth = <0x20>;
-			xlnx,sg-length-width = <0xe>;
+			xlnx,sg-length-width = <0x14>;
 			dma-channel@b0120000 {
 				compatible = "xlnx,axi-dma-mm2s-channel";
 				dma-channels = <0x1>;
@@ -799,13 +798,6 @@
 			xlnx,use-parity = <0x0>;
 		};
 	};
-
-    dma_proxy {
-      compatible ="xlnx,dma_proxy";
-      dmas = <&hier_FFT_CO_axi_dma_fft 0  &hier_FFT_CO_axi_dma_fft 1>;
-      dma-names = "dma_proxy_tx", "dma_proxy_rx";  
-      dma-coherent;
-    } ;
 
     __symbols__ {
         fft_dma_rx = "/fpga-axi@0/dma@b0120000/dma-channel@b0120030";
