@@ -446,17 +446,19 @@
 			compatible = "adi,axi-sysid-1.00.a";
 			reg = <0x85000000 0x10000>;
 		};
+
 		hier_FFT_CO_axi_dma_fft: dma@b0120000 {
 			#dma-cells = <1>;
-			clock-names = "m_axi_mm2s_aclk", "m_axi_s2mm_aclk", "s_axi_lite_aclk";
-			clocks = <&zynqmp_clk 72>, <&zynqmp_clk 72>, <&zynqmp_clk 72>;
+			clock-names = "m_axi_mm2s_aclk", "m_axi_s2mm_aclk", "m_axi_sg_aclk", "s_axi_lite_aclk";
+			clocks = <&zynqmp_clk 72>, <&zynqmp_clk 72>, <&zynqmp_clk 72>, <&zynqmp_clk 72>;
 			compatible = "xlnx,axi-dma-7.1", "xlnx,axi-dma-1.00.a";
 			interrupt-names = "mm2s_introut", "s2mm_introut";
 			interrupt-parent = <&gic>;
 			interrupts = <0 110 4 0 111 4>;
 			reg = <0xb0120000 0x10000>;
 			xlnx,addrwidth = <0x20>;
-			xlnx,sg-length-width = <0x14>;
+			xlnx,include-sg ;
+			xlnx,sg-length-width = <0x18>;
 			dma-channel@b0120000 {
 				compatible = "xlnx,axi-dma-mm2s-channel";
 				dma-channels = <0x1>;
