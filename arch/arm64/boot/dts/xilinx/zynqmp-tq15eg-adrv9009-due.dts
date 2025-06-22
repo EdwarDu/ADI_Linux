@@ -447,6 +447,31 @@
 			reg = <0x85000000 0x10000>;
 		};
 
+		hier_FFT_CO_axi_intc_DPU: interrupt-controller@b0140000 {
+			#interrupt-cells = <2>;
+			clock-names = "s_axi_aclk";
+			clocks = <&zynqmp_clk 72>;
+			compatible = "xlnx,axi-intc-4.1", "xlnx,xps-intc-1.00.a";
+			interrupt-controller ;
+			interrupt-names = "irq";
+			interrupt-parent = <&gic>;
+			interrupts = <0 96 4>;
+			reg = <0xb0140000 0x10000>;
+			xlnx,kind-of-intr = <0x0>;
+			xlnx,num-intr-inputs = <0x3>;
+		};
+		hier_FFT_CO_dpuczdx8g_0: dpuczdx8g@500000000 {
+            #address-cells = <2>
+            #size-cells = <1>
+			clock-names = "dpu_2x_clk", "m_axi_dpu_aclk";
+			clocks = <&zynqmp_clk 73>, <&zynqmp_clk 72>;
+			compatible = "xlnx,dpuczdx8g-4.1";
+			interrupt-names = "dpu0_interrupt", "dpu1_interrupt", "sfm_interrupt";
+			interrupt-parent = <&hier_FFT_CO_axi_intc_DPU>;
+			interrupts = <0 2 1 2 2 2>;
+			reg = <0x00000005 0x00000000 0x0 0x1000000>;
+		};
+
 		hier_FFT_CO_axi_dma_fft: dma@b0120000 {
 			#dma-cells = <1>;
 			clock-names = "m_axi_mm2s_aclk", "m_axi_s2mm_aclk", "m_axi_sg_aclk", "s_axi_lite_aclk";
@@ -474,6 +499,7 @@
 				xlnx,device-id = <0x0>;
 			};
 		};
+
 		hier_FFT_CO_axi_gpio_fft_config: gpio@b0130000 {
 			#gpio-cells = <2>;
 			clock-names = "s_axi_aclk";
