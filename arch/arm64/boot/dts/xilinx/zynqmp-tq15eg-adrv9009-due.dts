@@ -461,8 +461,8 @@
 			xlnx,num-intr-inputs = <0x3>;
 		};
 		hier_FFT_CO_dpuczdx8g_0: dpuczdx8g@500000000 {
-            #address-cells = <2>
-            #size-cells = <1>
+            #address-cells = <2>;
+            #size-cells = <2>;
 			clock-names = "dpu_2x_clk", "m_axi_dpu_aclk";
 			clocks = <&zynqmp_clk 73>, <&zynqmp_clk 72>;
 			compatible = "xlnx,dpuczdx8g-4.1";
