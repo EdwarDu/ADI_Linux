@@ -907,30 +907,12 @@
 			iommus = <0x13 0x873>;
 			power-domains = <0x12 0x2d>;
 			clocks = <0x04 0x35 0x04 0x1f>;
-			is-dual = <0x01>;
-			spi-rx-bus-width = <0x04>;
-			spi-tx-bus-width = <0x04>;
 			phandle = <0x56>;
 
 			flash@0 {
 				spi-tx-bus-width = <0x04>;
 				spi-rx-bus-width = <0x04>;
 				phandle = <0x57>;
-
-				partition@0 {
-					label = "qspi-boot";
-					reg = <0x00 0x100000>;
-				};
-
-				partition@1 {
-					label = "qspi-kernel";
-					reg = <0x100000 0x1600000>;
-				};
-
-				partition@2 {
-					label = "qspi-bootenv";
-					reg = <0x1700000 0x40000>;
-				};
 			};
 		};
 
@@ -1824,32 +1806,29 @@
 &qspi {
     status = "okay";
 	is-dual = <1>;
+    num-cs = <2>;
+
 	flash@0 {
-		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
+		// compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
+		compatible = "jedec,spi-nor"; /* 32MB */
 		#address-cells = <1>;
 		#size-cells = <1>;
-		// reg = <0x0>;
-		// spi-tx-bus-width = <1>;
-		reg = <0>, <1>;
+		reg = <0x0>, <0x1>;
 		parallel-memories = /bits/ 64 <0x2000000 0x2000000>; /* 32MB */
 		spi-tx-bus-width = <4>;
 		spi-rx-bus-width = <4>; /* FIXME also DUAL configuration possible */
 		spi-max-frequency = <108000000>; /* Based on DC1 spec */
-		partition@qspi-fsbl-uboot { /* for testing purpose */
-			label = "qspi-fsbl-uboot";
-			reg = <0x0 0x100000>;
+		partition@qspi-boot { /* for testing purpose */
+			label = "qspi-boot";
+			reg = <0x0 0x2000000>;
 		};
-		partition@qspi-linux { /* for testing purpose */
-			label = "qspi-linux";
-			reg = <0x100000 0x500000>;
+		partition@qspi-fit-image { /* for testing purpose */
+			label = "qspi-fit-image";
+			reg = <0x2000000 0x1e80000>;
 		};
-		partition@qspi-device-tree { /* for testing purpose */
-			label = "qspi-device-tree";
-			reg = <0x600000 0x20000>;
-		};
-		partition@qspi-rootfs { /* for testing purpose */
-			label = "qspi-rootfs";
-			reg = <0x620000 0x5E0000>;
+		partition@qspi-bootscr { /* for testing purpose */
+			label = "qspi-bootscr";
+			reg = <0x3E80000 0x180000>;
 		};
 	};
 };
