@@ -27,7 +27,7 @@
 	is-decoded-cs = <1>;
 };
 
-/* probably note used anyway */
+/* probably not used anyway */
 &i2c1 {
 	i2c-mux@75 {
 		inst0_fmc_i2c: i2c@0 { /* HPC0 */
@@ -176,7 +176,7 @@
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
-			clock-output-names = "rx_gt_clk", "rx_out_clk";
+			clock-output-names = "inst0_rx_gt_clk", "inst0_rx_out_clk";
 
 			adi,sys-clk-select = <XCVR_CPLL>;
 			adi,out-clk-select = <XCVR_REFCLK>;
@@ -193,7 +193,7 @@
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
-			clock-output-names = "rx_os_gt_clk", "rx_os_out_clk";
+			clock-output-names = "inst0_rx_os_gt_clk", "inst0_rx_os_out_clk";
 
 			adi,sys-clk-select = <XCVR_CPLL>;
 			adi,out-clk-select = <XCVR_REFCLK>;
@@ -210,7 +210,7 @@
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
-			clock-output-names = "tx_gt_clk", "tx_out_clk";
+			clock-output-names = "inst0_tx_gt_clk", "inst0_tx_out_clk";
 
 			adi,sys-clk-select = <XCVR_QPLL>;
 			adi,out-clk-select = <XCVR_REFCLK>;
@@ -227,7 +227,7 @@
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
-			clock-output-names = "jesd_rx_lane_clk";
+			clock-output-names = "inst0_jesd_rx_lane_clk";
 
 			adi,octets-per-frame = <4>;
 			adi,frames-per-multiframe = <32>;
@@ -244,7 +244,7 @@
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
-			clock-output-names = "jesd_rx_os_lane_clk";
+			clock-output-names = "inst0_jesd_rx_os_lane_clk";
 
 			adi,octets-per-frame = <4>;
 			adi,frames-per-multiframe = <32>;
@@ -261,7 +261,7 @@
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
-			clock-output-names = "jesd_tx_lane_clk";
+			clock-output-names = "inst0_jesd_tx_lane_clk";
 
 			adi,octets-per-frame = <2>;
 			adi,frames-per-multiframe = <32>;
@@ -381,7 +381,7 @@
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
-			clock-output-names = "rx_gt_clk", "rx_out_clk";
+			clock-output-names = "inst1_rx_gt_clk", "inst1_rx_out_clk";
 
 			adi,sys-clk-select = <XCVR_CPLL>;
 			adi,out-clk-select = <XCVR_REFCLK>;
@@ -398,7 +398,7 @@
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
-			clock-output-names = "rx_os_gt_clk", "rx_os_out_clk";
+			clock-output-names = "inst1_rx_os_gt_clk", "inst1_rx_os_out_clk";
 
 			adi,sys-clk-select = <XCVR_CPLL>;
 			adi,out-clk-select = <XCVR_REFCLK>;
@@ -415,7 +415,7 @@
 			clock-names = "conv", "div40";
 
 			#clock-cells = <1>;
-			clock-output-names = "tx_gt_clk", "tx_out_clk";
+			clock-output-names = "inst1_tx_gt_clk", "inst1_tx_out_clk";
 
 			adi,sys-clk-select = <XCVR_QPLL>;
 			adi,out-clk-select = <XCVR_REFCLK>;
@@ -432,7 +432,7 @@
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
-			clock-output-names = "jesd_rx_lane_clk";
+			clock-output-names = "inst1_jesd_rx_lane_clk";
 
 			adi,octets-per-frame = <4>;
 			adi,frames-per-multiframe = <32>;
@@ -449,7 +449,7 @@
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
-			clock-output-names = "jesd_rx_os_lane_clk";
+			clock-output-names = "inst1_jesd_rx_os_lane_clk";
 
 			adi,octets-per-frame = <4>;
 			adi,frames-per-multiframe = <32>;
@@ -466,7 +466,7 @@
 			clock-names = "s_axi_aclk", "device_clk", "lane_clk";
 
 			#clock-cells = <0>;
-			clock-output-names = "jesd_tx_lane_clk";
+			clock-output-names = "inst1_jesd_tx_lane_clk";
 
 			adi,octets-per-frame = <2>;
 			adi,frames-per-multiframe = <32>;

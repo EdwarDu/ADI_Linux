@@ -33,7 +33,7 @@
 		/* SPI Setup */
 		spi-max-frequency = <25000000>;
 
-		clock-output-names = "rx_sampl_clk", "rx_os_sampl_clk", "tx_sampl_clk";
+		clock-output-names = "inst0_rx_sampl_clk", "inst0_rx_os_sampl_clk", "inst0_tx_sampl_clk";
 		#clock-cells = <1>;
 
 		/* JESD204 */
@@ -384,7 +384,7 @@
 		/* SPI Setup */
 		spi-max-frequency = <25000000>;
 
-		clock-output-names = "rx_sampl_clk", "rx_os_sampl_clk", "tx_sampl_clk";
+		clock-output-names = "inst0_rx_sampl_clk", "inst0_rx_os_sampl_clk", "inst0_tx_sampl_clk";
 		#clock-cells = <1>;
 
 		/* JESD204 */
@@ -757,13 +757,13 @@
 		adi,high-performance-mode-clock-dist-enable;
 
 		clock-output-names =
-			"hmc7044_fmc_out0_DEV_REFCLK_C", "hmc7044_fmc_out1_DEV_SYSREF_C",
-			"hmc7044_fmc_out2_DEV_REFCLK_D", "hmc7044_fmc_out3_DEV_SYSREF_D",
-			"hmc7044_fmc_out4_JESD_REFCLK_TX_OBS_CD", "hmc7044_fmc_out5_JESD_REFCLK_RX_CD",
-			"hmc7044_fmc_out6_FPGA_SYSREF_TX_OBS_CD","hmc7044_fmc_out7_FPGA_SYSREF_RX_CD",
-			"hmc7044_fmc_out8_CORE_CLK_TX_OBS_CD", "hmc7044_fmc_out9_CORE_CLK_RX_CD",
-			"hmc7044_fmc_out10", "hmc7044_fmc_out11",
-			"hmc7044_fmc_out12", "hmc7044_fmc_out13";
+			"inst0_hmc7044_fmc_out0_DEV_REFCLK_C", "inst0_hmc7044_fmc_out1_DEV_SYSREF_C",
+			"inst0_hmc7044_fmc_out2_DEV_REFCLK_D", "inst0_hmc7044_fmc_out3_DEV_SYSREF_D",
+			"inst0_hmc7044_fmc_out4_JESD_REFCLK_TX_OBS_CD", "inst0_hmc7044_fmc_out5_JESD_REFCLK_RX_CD",
+			"inst0_hmc7044_fmc_out6_FPGA_SYSREF_TX_OBS_CD","inst0_hmc7044_fmc_out7_FPGA_SYSREF_RX_CD",
+			"inst0_hmc7044_fmc_out8_CORE_CLK_TX_OBS_CD", "inst0_hmc7044_fmc_out9_CORE_CLK_RX_CD",
+			"inst0_hmc7044_fmc_out10", "inst0_hmc7044_fmc_out11",
+			"inst0_hmc7044_fmc_out12", "inst0_hmc7044_fmc_out13";
 
 		inst0_hmc7044_fmc_c0: channel@0 {
 			reg = <0>;
@@ -855,7 +855,7 @@
 		/* SPI Setup */
 		spi-max-frequency = <25000000>;
 
-		clock-output-names = "rx_sampl_clk", "rx_os_sampl_clk", "tx_sampl_clk";
+		clock-output-names = "inst1_rx_sampl_clk", "inst1_rx_os_sampl_clk", "inst1_tx_sampl_clk";
 		#clock-cells = <1>;
 
 		/* JESD204 */
@@ -1206,7 +1206,7 @@
 		/* SPI Setup */
 		spi-max-frequency = <25000000>;
 
-		clock-output-names = "rx_sampl_clk", "rx_os_sampl_clk", "tx_sampl_clk";
+		clock-output-names = "inst1_rx_sampl_clk", "inst1_rx_os_sampl_clk", "inst1_tx_sampl_clk";
 		#clock-cells = <1>;
 
 		/* JESD204 */
@@ -1579,13 +1579,13 @@
 		adi,high-performance-mode-clock-dist-enable;
 
 		clock-output-names =
-			"hmc7044_fmc_out0_DEV_REFCLK_C", "hmc7044_fmc_out1_DEV_SYSREF_C",
-			"hmc7044_fmc_out2_DEV_REFCLK_D", "hmc7044_fmc_out3_DEV_SYSREF_D",
-			"hmc7044_fmc_out4_JESD_REFCLK_TX_OBS_CD", "hmc7044_fmc_out5_JESD_REFCLK_RX_CD",
-			"hmc7044_fmc_out6_FPGA_SYSREF_TX_OBS_CD","hmc7044_fmc_out7_FPGA_SYSREF_RX_CD",
-			"hmc7044_fmc_out8_CORE_CLK_TX_OBS_CD", "hmc7044_fmc_out9_CORE_CLK_RX_CD",
-			"hmc7044_fmc_out10", "hmc7044_fmc_out11",
-			"hmc7044_fmc_out12", "hmc7044_fmc_out13";
+			"inst1_hmc7044_fmc_out0_DEV_REFCLK_C", "inst1_hmc7044_fmc_out1_DEV_SYSREF_C",
+			"inst1_hmc7044_fmc_out2_DEV_REFCLK_D", "inst1_hmc7044_fmc_out3_DEV_SYSREF_D",
+			"inst1_hmc7044_fmc_out4_JESD_REFCLK_TX_OBS_CD", "inst1_hmc7044_fmc_out5_JESD_REFCLK_RX_CD",
+			"inst1_hmc7044_fmc_out6_FPGA_SYSREF_TX_OBS_CD","inst1_hmc7044_fmc_out7_FPGA_SYSREF_RX_CD",
+			"inst1_hmc7044_fmc_out8_CORE_CLK_TX_OBS_CD", "inst1_hmc7044_fmc_out9_CORE_CLK_RX_CD",
+			"inst1_hmc7044_fmc_out10", "inst1_hmc7044_fmc_out11",
+			"inst1_hmc7044_fmc_out12", "inst1_hmc7044_fmc_out13";
 
 		inst1_hmc7044_fmc_c0: channel@0 {
 			reg = <0>;
