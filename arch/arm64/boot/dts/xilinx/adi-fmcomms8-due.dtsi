@@ -23,7 +23,7 @@
 };
 
 &inst0_fmc_spi {
-	inst0_trx2_adrv9009: adrv9009-phy-c@0 {
+	inst0_trx2_adrv9009: adrv9009-phy-c-1@0 {
 		compatible = "adrv9009-x2";
 		reg = <0>;
 
@@ -374,7 +374,7 @@
 		adi,tx-pa-protection-tx2-peak-threshold = <140>;
 	};
 
-	inst0_trx3_adrv9009: adrv9009-phy-d@1 {
+	inst0_trx3_adrv9009: adrv9009-phy-d-1@1 {
 		compatible = "adrv9009";
 		reg = <1>;
 
@@ -725,7 +725,7 @@
 		adi,tx-pa-protection-tx2-peak-threshold = <140>;
 	};
 
-	inst0_hmc7044_fmc: hmc7044-fmc@2 {
+	inst0_hmc7044_fmc: hmc7044-fmc-1@2 {
 		#address-cells = <1>;
 		#size-cells = <0>;
 		#clock-cells = <1>;
@@ -845,7 +845,7 @@
 };
 
 &inst1_fmc_spi {
-	inst1_trx2_adrv9009: adrv9009-phy-c@0 {
+	inst1_trx2_adrv9009: adrv9009-phy-c-2@0 {
 		compatible = "adrv9009-x2";
 		reg = <0>;
 
@@ -1196,7 +1196,7 @@
 		adi,tx-pa-protection-tx2-peak-threshold = <140>;
 	};
 
-	inst1_trx3_adrv9009: adrv9009-phy-d@1 {
+	inst1_trx3_adrv9009: adrv9009-phy-d-2@1 {
 		compatible = "adrv9009";
 		reg = <1>;
 
@@ -1547,7 +1547,7 @@
 		adi,tx-pa-protection-tx2-peak-threshold = <140>;
 	};
 
-	inst1_hmc7044_fmc: hmc7044-fmc@2 {
+	inst1_hmc7044_fmc: hmc7044-fmc-2@2 {
 		#address-cells = <1>;
 		#size-cells = <0>;
 		#clock-cells = <1>;
