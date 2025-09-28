@@ -1897,6 +1897,19 @@
 };
 */
 
+/* ULPI SMSC USB3320 */
+&usb0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_usb0_default>;
+};
+
+&dwc3_0 {
+	dr_mode = "host";
+	snps,usb3_lpm_capable;
+	phy-names = "usb3-phy";
+	phys = <&lane2 4 0 2 26000000>;
+};
+
 &zynqmp_dpsub {
 	//status = "disabled";
 	status = "okay";
