@@ -919,10 +919,35 @@
 		psgtr: phy@fd400000 {
 			compatible = "xlnx,zynqmp-psgtr-v1.1";
 			status = "okay";
-			reg = <0x00 0xfd400000 0x00 0x40000 0x00 0xfd3d0000 0x00 0x1000>;
-			reg-names = "serdes\0siou";
-			#phy-cells = <0x04>;
-			phandle = <0x19>;
+			reg = <0x0 0xfd400000 0x0 0x40000>,
+			      <0x0 0xfd3d0000 0x0 0x1000>;
+			reg-names = "serdes", "siou";
+			nvmem-cells = <&soc_revision>;
+			nvmem-cell-names = "soc_revision";
+			resets = <&zynqmp_reset 16>, <&zynqmp_reset 59>,
+				 <&zynqmp_reset 60>, <&zynqmp_reset 61>,
+				 <&zynqmp_reset 62>, <&zynqmp_reset 63>,
+				 <&zynqmp_reset 64>, <&zynqmp_reset 3>,
+				 <&zynqmp_reset 29>, <&zynqmp_reset 30>,
+				 <&zynqmp_reset 31>, <&zynqmp_reset 32>;
+			reset-names = "sata_rst", "usb0_crst", "usb1_crst",
+				      "usb0_hibrst", "usb1_hibrst", "usb0_apbrst",
+				      "usb1_apbrst", "dp_rst", "gem0_rst",
+				      "gem1_rst", "gem2_rst", "gem3_rst";
+			lane0: lane0 {
+				#phy-cells = <4>;
+			};
+			lane1: lane1 {
+				#phy-cells = <4>;
+			};
+			lane2: lane2 {
+				#phy-cells = <4>;
+			};
+			lane3: lane3 {
+				#phy-cells = <4>;
+			};
+
+            phandle = <0x19>;
 		};
 
 		rtc: rtc@ffa60000 {
@@ -1107,71 +1132,63 @@
 			phandle = <0x63>;
 		};
 
-		usb0: usb@ff9d0000 {
-			#address-cells = <0x02>;
-			#size-cells = <0x02>;
-			status = "okay";
-			compatible = "xlnx,zynqmp-dwc3";
-			reg = <0x00 0xff9d0000 0x00 0x100>;
-			clock-names = "bus_clk\0ref_clk";
-			power-domains = <0x12 0x16>;
-			resets = <0x11 0x3b 0x11 0x3d 0x11 0x3f>;
-			reset-names = "usb_crst\0usb_hibrst\0usb_apbrst";
-			reset-gpios = <0x16 0x01 0x01>;
-			ranges;
-			clocks = <0x04 0x20 0x04 0x22>;
-			assigned-clocks = <0x04 0x20 0x04 0x22>;
-			xlnx,tz-nonsecure = <0x01>;
-			xlnx,usb-polarity = <0x00>;
-			xlnx,usb-reset-mode = <0x00>;
-			phandle = <0x64>;
 
-			dwc3_0: usb@fe200000 {
+		usb0: usb0@ff9d0000 {
+			#address-cells = <2>;
+			#size-cells = <2>;
+			status = "disabled";
+			compatible = "xlnx,zynqmp-dwc3";
+			reg = <0x0 0xff9d0000 0x0 0x100>;
+			clock-names = "bus_clk", "ref_clk";
+			power-domains = <&zynqmp_firmware 22>;
+			ranges;
+			nvmem-cells = <&soc_revision>;
+			nvmem-cell-names = "soc_revision";
+
+			dwc3_0: dwc3@fe200000 {
 				compatible = "snps,dwc3";
-				status = "okay";
-				reg = <0x00 0xfe200000 0x00 0x40000>;
-				interrupt-parent = <0x05>;
-				interrupt-names = "dwc_usb3\0otg\0hiber";
-				interrupts = <0x00 0x41 0x04 0x00 0x45 0x04 0x00 0x4b 0x04>;
-				iommus = <0x13 0x860>;
+				status = "disabled";
+				reg = <0x0 0xfe200000 0x0 0x40000>;
+				interrupt-parent = <&gic>;
+				interrupt-names = "dwc_usb3", "otg", "hiber";
+				interrupts = <0 65 4>, <0 69 4>, <0 75 4>;
+				#stream-id-cells = <1>;
+				iommus = <&smmu 0x860>;
 				snps,quirk-frame-length-adjustment = <0x20>;
-				clock-names = "ref";
+				snps,refclk_fladj;
+				snps,enable_guctl1_resume_quirk;
 				snps,enable_guctl1_ipd_quirk;
-				snps,resume-hs-terminations;
-				clocks = <0x04 0x22>;
-				phandle = <0x65>;
+				snps,xhci-stream-quirk;
+				/* snps,enable-hibernation; */
 			};
 		};
 
-		usb1: usb@ff9e0000 {
-			#address-cells = <0x02>;
-			#size-cells = <0x02>;
+		usb1: usb1@ff9e0000 {
+			#address-cells = <2>;
+			#size-cells = <2>;
 			status = "disabled";
 			compatible = "xlnx,zynqmp-dwc3";
-			reg = <0x00 0xff9e0000 0x00 0x100>;
-			clock-names = "bus_clk\0ref_clk";
-			power-domains = <0x12 0x17>;
-			resets = <0x11 0x3c 0x11 0x3e 0x11 0x40>;
-			reset-names = "usb_crst\0usb_hibrst\0usb_apbrst";
+			reg = <0x0 0xff9e0000 0x0 0x100>;
+			clock-names = "bus_clk", "ref_clk";
+			power-domains = <&zynqmp_firmware 23>;
 			ranges;
-			clocks = <0x04 0x21 0x04 0x22>;
-			assigned-clocks = <0x04 0x21 0x04 0x22>;
-			phandle = <0x66>;
+			nvmem-cells = <&soc_revision>;
+			nvmem-cell-names = "soc_revision";
 
-			dwc3_1: usb@fe300000 {
+			dwc3_1: dwc3@fe300000 {
 				compatible = "snps,dwc3";
 				status = "disabled";
-				reg = <0x00 0xfe300000 0x00 0x40000>;
-				interrupt-parent = <0x05>;
-				interrupt-names = "dwc_usb3\0otg\0hiber";
-				interrupts = <0x00 0x46 0x04 0x00 0x4a 0x04 0x00 0x4c 0x04>;
-				iommus = <0x13 0x861>;
+				reg = <0x0 0xfe300000 0x0 0x40000>;
+				interrupt-parent = <&gic>;
+				interrupt-names = "dwc_usb3", "otg", "hiber";
+				interrupts = <0 70 4>, <0 74 4>, <0 76 4>;
+				#stream-id-cells = <1>;
+				iommus = <&smmu 0x861>;
 				snps,quirk-frame-length-adjustment = <0x20>;
-				clock-names = "ref";
+				snps,refclk_fladj;
+				snps,enable_guctl1_resume_quirk;
 				snps,enable_guctl1_ipd_quirk;
-				snps,resume-hs-terminations;
-				clocks = <0x04 0x22>;
-				phandle = <0x67>;
+				snps,xhci-stream-quirk;
 			};
 		};
 
