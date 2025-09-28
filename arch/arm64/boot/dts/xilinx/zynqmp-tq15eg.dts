@@ -916,39 +916,40 @@
 			};
 		};
 
-		psgtr: phy@fd400000 {
-			compatible = "xlnx,zynqmp-psgtr-v1.1";
-			status = "okay";
-			reg = <0x0 0xfd400000 0x0 0x40000>,
-			      <0x0 0xfd3d0000 0x0 0x1000>;
-			reg-names = "serdes", "siou";
-			nvmem-cells = <&soc_revision>;
-			nvmem-cell-names = "soc_revision";
-			resets = <&zynqmp_reset 16>, <&zynqmp_reset 59>,
-				 <&zynqmp_reset 60>, <&zynqmp_reset 61>,
-				 <&zynqmp_reset 62>, <&zynqmp_reset 63>,
-				 <&zynqmp_reset 64>, <&zynqmp_reset 3>,
-				 <&zynqmp_reset 29>, <&zynqmp_reset 30>,
-				 <&zynqmp_reset 31>, <&zynqmp_reset 32>;
-			reset-names = "sata_rst", "usb0_crst", "usb1_crst",
-				      "usb0_hibrst", "usb1_hibrst", "usb0_apbrst",
-				      "usb1_apbrst", "dp_rst", "gem0_rst",
-				      "gem1_rst", "gem2_rst", "gem3_rst";
-			lane0: lane0 {
-				#phy-cells = <4>;
-			};
-			lane1: lane1 {
-				#phy-cells = <4>;
-			};
-			lane2: lane2 {
-				#phy-cells = <4>;
-			};
-			lane3: lane3 {
-				#phy-cells = <4>;
-			};
+        // https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18841716/Zynq+Ultrascale+MPSOC+Linux+SIOU+driver
+        refclk4:psgtr_dp_clock {
+                compatible = "fixed-clock";
+                #clock-cells = <0x00>;
+                clock-frequency = <27000000>;
+        };
+        refclk3:psgtr_usb_clock {
+                compatible = "fixed-clock";
+                #clock-cells = <0x00>;
+                clock-frequency = <26000000>;
+        };
+        refclk2:psgtr_sata_clock {
+                compatible = "fixed-clock";
+                #clock-cells = <0x00>;
+                clock-frequency = <125000000>;
+        };
+        refclk1:psgtr_pcie_clock {
+                compatible = "fixed-clock";
+                #clock-cells = <0x00>;
+                clock-frequency = <150000000>;
+        };
 
-            phandle = <0x19>;
-		};
+        psgtr: phy@fd400000 {
+                compatible = "xlnx,zynqmp-psgtr-v1.1";
+                reg = <0x00 0xfd400000 0x00 0x40000 0x00 0xfd3d0000 0x00 0x1000>;
+                reg-names = "serdes\0siou";
+                #clock-cells = <0x01>;
+                clocks = <&refclk1 &refclk2 &refclk3 &refclk4>;
+                /* ref clk instances used per lane */
+                clock-names = "ref0\0ref1\0ref2\0ref3";
+                #phy-cells = <0x04>;
+                status = "okay";
+                phandle = <0x19>;
+        };
 
 		rtc: rtc@ffa60000 {
 			compatible = "xlnx,zynqmp-rtc";
@@ -1136,7 +1137,7 @@
 		usb0: usb0@ff9d0000 {
 			#address-cells = <2>;
 			#size-cells = <2>;
-			status = "disabled";
+			status = "okay";
 			compatible = "xlnx,zynqmp-dwc3";
 			reg = <0x0 0xff9d0000 0x0 0x100>;
 			clock-names = "bus_clk", "ref_clk";
@@ -1147,7 +1148,7 @@
 
 			dwc3_0: dwc3@fe200000 {
 				compatible = "snps,dwc3";
-				status = "disabled";
+				status = "okay";
 				reg = <0x0 0xfe200000 0x0 0x40000>;
 				interrupt-parent = <&gic>;
 				interrupt-names = "dwc_usb3", "otg", "hiber";
@@ -1862,7 +1863,8 @@
 	ceva,p1-burst-params = /bits/ 8 <0x13 0x08 0x4A 0x06>;
 	ceva,p1-retry-params = /bits/ 16 <0x96A4 0x3FFC>;
 	phy-names = "sata-phy";
-	// phys = <&lane3 1 1 1 125000000>;
+    /* psgtr_phandle....lane number... controller_type...instance....refclk */
+    // phys = <&psgtr 0x3 PHY_TYPE_SATA 0x01 0x1>;
 };
 
 /* SD1 with level shifter */
@@ -1923,8 +1925,10 @@
 &dwc3_0 {
 	dr_mode = "host";
 	snps,usb3_lpm_capable;
+    maximum-speed = "super-speed";
 	phy-names = "usb3-phy";
-	phys = <&lane2 4 0 2 26000000>;
+    /* psgtr_phandle....lane number... controller_type...instance....refclk */
+    phys = <&psgtr 0x2 PHY_TYPE_USB 0x00 0x02>;
 };
 
 &zynqmp_dpsub {
