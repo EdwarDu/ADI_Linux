@@ -1928,7 +1928,7 @@
     maximum-speed = "super-speed";
 	phy-names = "usb3-phy";
     /* psgtr_phandle....lane number... controller_type...instance....refclk */
-    phys = <&psgtr 0x2 PHY_TYPE_USB 0x00 0x02>;
+    phys = <&psgtr 0x2 PHY_TYPE_USB3 0x00 0x02>;
 };
 
 &zynqmp_dpsub {
