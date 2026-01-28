@@ -173,7 +173,8 @@
                  * Disable TX cals that require ORX (TX QEC and LOL)
                  * Mask 0x01 enables ONLY RX QEC (internal)
                  */
-                adi,tracking-cal-mask = <0x01>; 
+                adi,init-cal-mask = <0x000CDFFF>;
+                adi,tracking-cal-mask = <0x0333>; 
 		adi,tx-profile-tx-fir-gain_db = <6>;
 		adi,tx-profile-tx-fir-num-fir-coefs = <40>;
 		adi,tx-profile-tx-fir-coefs = /bits/ 16  <(-14) (5) (-9) (6) (-4) (19) (-29) (27) (-30) (46) (-63) (77) (-103) (150) (-218) (337) (-599) (1266) (-2718) (19537) (-2718) (1266) (-599) (337) (-218) (150) (-103) (77) (-63) (46) (-30) (27) (-29) (19) (-4) (6) (-9) (5) (-14) (0)>;
@@ -528,7 +529,8 @@
                  * Disable TX cals that require ORX (TX QEC and LOL)
                  * Mask 0x01 enables ONLY RX QEC (internal)
                  */
-                adi,tracking-cal-mask = <0x01>; 
+                adi,init-cal-mask = <0x000CDFFF>;
+                adi,tracking-cal-mask = <0x0333>; 
 		adi,tx-profile-tx-fir-gain_db = <6>;
 		adi,tx-profile-tx-fir-num-fir-coefs = <40>;
 		adi,tx-profile-tx-fir-coefs = /bits/ 16  <(-14) (5) (-9) (6) (-4) (19) (-29) (27) (-30) (46) (-63) (77) (-103) (150) (-218) (337) (-599) (1266) (-2718) (19537) (-2718) (1266) (-599) (337) (-218) (150) (-103) (77) (-63) (46) (-30) (27) (-29) (19) (-4) (6) (-9) (5) (-14) (0)>;
@@ -1003,7 +1005,8 @@
                  * Disable TX cals that require ORX (TX QEC and LOL)
                  * Mask 0x01 enables ONLY RX QEC (internal)
                  */
-                adi,tracking-cal-mask = <0x01>; 
+                adi,init-cal-mask = <0x000CDFFF>;
+                adi,tracking-cal-mask = <0x0333>; 
 		adi,tx-profile-tx-fir-gain_db = <6>;
 		adi,tx-profile-tx-fir-num-fir-coefs = <40>;
 		adi,tx-profile-tx-fir-coefs = /bits/ 16  <(-14) (5) (-9) (6) (-4) (19) (-29) (27) (-30) (46) (-63) (77) (-103) (150) (-218) (337) (-599) (1266) (-2718) (19537) (-2718) (1266) (-599) (337) (-218) (150) (-103) (77) (-63) (46) (-30) (27) (-29) (19) (-4) (6) (-9) (5) (-14) (0)>;
@@ -1358,7 +1361,8 @@
                  * Disable TX cals that require ORX (TX QEC and LOL)
                  * Mask 0x01 enables ONLY RX QEC (internal)
                  */
-                adi,tracking-cal-mask = <0x01>; 
+                adi,init-cal-mask = <0x000CDFFF>;
+                adi,tracking-cal-mask = <0x0333>; 
 		adi,tx-profile-tx-fir-gain_db = <6>;
 		adi,tx-profile-tx-fir-num-fir-coefs = <40>;
 		adi,tx-profile-tx-fir-coefs = /bits/ 16  <(-14) (5) (-9) (6) (-4) (19) (-29) (27) (-30) (46) (-63) (77) (-103) (150) (-218) (337) (-599) (1266) (-2718) (19537) (-2718) (1266) (-599) (337) (-218) (150) (-103) (77) (-63) (46) (-30) (27) (-29) (19) (-4) (6) (-9) (5) (-14) (0)>;
