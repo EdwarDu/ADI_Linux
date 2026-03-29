@@ -194,7 +194,7 @@
 		adi,tx-profile-loop-back-adc-profile = /bits/ 16 <206 132 168 90 1280 641 1307 53 1359 28 1039 30 48 48 37 210 0 0 0 0 53 0 7 6 42 0 7 6 42 0 25 27 0 0 25 27 0 0 165 44 31 905>;
 
 		adi,tx-settings-deframer-sel = <0>;
-		adi,tx-settings-tx-channels = <3>;
+		adi,tx-settings-tx-channels = <1>;
 		adi,tx-settings-tx-atten-step-size = <0>;
 		adi,tx-settings-tx1-atten_md-b = <10000>;
 		adi,tx-settings-tx2-atten_md-b = <10000>;
@@ -550,7 +550,7 @@
 		adi,tx-profile-loop-back-adc-profile = /bits/ 16 <206 132 168 90 1280 641 1307 53 1359 28 1039 30 48 48 37 210 0 0 0 0 53 0 7 6 42 0 7 6 42 0 25 27 0 0 25 27 0 0 165 44 31 905>;
 
 		adi,tx-settings-deframer-sel = <0>;
-		adi,tx-settings-tx-channels = <3>;
+		adi,tx-settings-tx-channels = <1>;
 		adi,tx-settings-tx-atten-step-size = <0>;
 		adi,tx-settings-tx1-atten_md-b = <10000>;
 		adi,tx-settings-tx2-atten_md-b = <10000>;
@@ -1026,7 +1026,7 @@
 		adi,tx-profile-loop-back-adc-profile = /bits/ 16 <206 132 168 90 1280 641 1307 53 1359 28 1039 30 48 48 37 210 0 0 0 0 53 0 7 6 42 0 7 6 42 0 25 27 0 0 25 27 0 0 165 44 31 905>;
 
 		adi,tx-settings-deframer-sel = <0>;
-		adi,tx-settings-tx-channels = <3>;
+		adi,tx-settings-tx-channels = <1>;
 		adi,tx-settings-tx-atten-step-size = <0>;
 		adi,tx-settings-tx1-atten_md-b = <10000>;
 		adi,tx-settings-tx2-atten_md-b = <10000>;
@@ -1382,7 +1382,7 @@
 		adi,tx-profile-loop-back-adc-profile = /bits/ 16 <206 132 168 90 1280 641 1307 53 1359 28 1039 30 48 48 37 210 0 0 0 0 53 0 7 6 42 0 7 6 42 0 25 27 0 0 25 27 0 0 165 44 31 905>;
 
 		adi,tx-settings-deframer-sel = <0>;
-		adi,tx-settings-tx-channels = <3>;
+		adi,tx-settings-tx-channels = <1>;
 		adi,tx-settings-tx-atten-step-size = <0>;
 		adi,tx-settings-tx1-atten_md-b = <10000>;
 		adi,tx-settings-tx2-atten_md-b = <10000>;
