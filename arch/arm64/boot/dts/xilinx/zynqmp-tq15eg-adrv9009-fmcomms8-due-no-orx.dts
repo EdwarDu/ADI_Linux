@@ -46,7 +46,7 @@
 #define inst0_fmc_spi spi0
 #define inst1_fmc_spi spi1
 
-#include "adi-fmcomms8-due-no-orx-122.dtsi"
+#include "adi-fmcomms8-due-no-orx.dtsi"
 
 
 &inst0_hmc7044_fmc {
